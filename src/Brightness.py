@@ -16,10 +16,8 @@ class Example(wx.Frame):
         Brightness Controller
         ================
         Prepared by Amit Seal Ami. 
-        For more details, visit 
-        http://lordamit.blogspot.com
         Source code available at 
-        http://github.com/lordamit/Brightness
+        https://github.com/lordamit/Brightness
         '''
         
         self.InitUI()
