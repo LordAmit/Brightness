@@ -1,6 +1,28 @@
-Brightness
+Brightness Controller
 ==========
 
-Brigheness Controller allows you to control Brightness of your internal and external monitor with the help of xrandr in Linux. The controller is created using python, which in the backend calls os.system commands to execute system commands.
+## What is it?
 
-I wrote it because I could not find any other similar software available in Linux that provides an easy to use UI for changing brigthness. There are still rooms for improvement, specially in the coding style. I hope due to its open source nature, people will come forward and will help it become a better brightness controller.
+Brightness Controller allows you to control Brightness of your internal and external monitor with the help of *xrandr* in Linux. The controller is created using *python*, which in the back end calls *os.system* commands to execute system commands.
+
+## What good is it?
+
+It allows you to control the brightness of your monitor to a better extent. For example, my laptop's monitor brightness can be controlled using hardware keys at discrete values, such as 20%, 40%, 60% ... 100%. Brightness Controller allows you to change the brightness to a better degree of control, ranging from 1% to 100%! It should be mentioned that it changes the present brightness value set via hardware control of your monitor. For example, if you set your Monitor's brightness to 50% using hardware buttons, then that will be the 100% value in Brightness controller. 
+
+## How do I run it? 
+
+Just set the permission of the brightness.py file as executable. Double click on it, and it will run. 
+
+# Misc.
+
+Random questions that might show up here are answered here in advance.
+
+## The coding style is not exactly.. pythonlike.
+ 
+Because it is my first python code that exceeds 10 lines. I have not used Python before, but I decided to use it for this project for no particular reason.
+
+## Why is it here?
+
+I wrote it because I could not find any other similar software available **in Linux** that provides an easy to use UI for changing brightness. There are still room for improvement, specially in the coding style. I hope due to its open source nature, people will come forward and will help it become a better brightness controller.
+
+
