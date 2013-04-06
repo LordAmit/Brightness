@@ -25,4 +25,8 @@ Because it is my first python code that exceeds 10 lines. I have not used Python
 
 I wrote it because I could not find any other similar software available **in Linux** that provides an easy to use UI for changing brightness. There are still room for improvement, specially in the coding style. I hope due to its open source nature, people will come forward and will help it become a better brightness controller.
 
+## Help! It broke my computer!
+
+Erm, that's not exactly supposed to happen. Still, use at your own risk. I won't allow myself to be held responsible even if it turns your monitor into a black hole, sucks you in and kills you in the process.
+But still, let me know if something goes wrong by reporting it in the issues section.
 
