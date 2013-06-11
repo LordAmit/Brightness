@@ -13,6 +13,18 @@ It allows you to control the brightness of your monitor to a better extent. For 
 
 Just set the permission of the brightness.py file as executable. Double click on it, and it will run. 
 
+## How do I know my Monitor name?
+
+Easy, open terminal and then paste this command.
+
+> xrandr -q | grep -w connected
+
+I am given this output,
+
+> **LVDS1** connected 1366x768+0+0 (normal left inverted right x axis y axis) 309mm x 173mm
+
+So that means the name of my primary ( or connected ) monitor is **LVDS1**. In your case, it might be VGA1, HDMI1 or even DP1!
+
 # Misc.
 
 Random questions that might show up here are answered here in advance.
