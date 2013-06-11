@@ -3,7 +3,7 @@ Brightness Controller
 
 ## What is it?
 
-Brightness Controller allows you to control Brightness of your internal and external monitor with the help of *xrandr* in Linux. The controller is created using *python*, which in the back end calls *os.system* commands to execute system commands.
+Brightness Controller allows you to control Brightness of your **internal AND external monitor** with the help of *xrandr* in Linux. The controller is created using *python*, which in the back end calls *os.system* commands to execute system commands.
 
 ## What good is it?
 
