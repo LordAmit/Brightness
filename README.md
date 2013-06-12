@@ -25,6 +25,14 @@ I am given this output,
 
 So that means the name of my primary ( or connected ) monitor is **LVDS1**. In your case, it might be VGA1, HDMI1 or even DP1!
 
+## What are the requirements / dependencies / things I need to run it?
+
+I have found only three requirements till now.
+
+1. Python - Linux should have it by default)
+2. WxWidgets - the UI was written using Python WxWidgets)
+3. xrandr - that's what the program uses in the backend to control the brightness of your monitor!
+
 # Misc.
 
 Random questions that might show up here are answered here in advance.
