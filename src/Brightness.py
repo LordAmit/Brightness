@@ -7,45 +7,45 @@ import subprocess
 
 class BrightnessController(wx.Frame):
     
-    def DebugTrue(self):
+    def debug_true(self):
         return False
     
-    def DetectDisplayDevices(self):
+    def detect_display_devices(self):
     
-        connectedDevs=[]
+        connected_devs=[]
     
-        bValue = subprocess.check_output("xrandr -q", shell=True)
+        xrandr_output = subprocess.check_output("xrandr -q", shell=True)
     
-        lines = bValue.split('\n')
+        lines = xrandr_output.split('\n')
         for line in lines:
             words = line.split(' ')
             for word in words:
                 if word == 'connected':
-                    connectedDevs.append(words[0])
-        return connectedDevs
+                    connected_devs.append(words[0])
+        return connected_devs
     
     def __init__(self, parent, title):
         super(BrightnessController, self).__init__(parent, title=title, 
                                       size=(300,100))
-        self.detectedDevices = self.DetectDisplayDevices()
-        self.numberOfDetectedDevices = len(self.detectedDevices)
+        self.detected_devices = self.detect_display_devices()
+        self.no_of_detected_device = len(self.detected_devices)
         
-        if self.numberOfDetectedDevices==1 or self.numberOfDetectedDevices==2:
-            if self.DebugTrue():
+        if self.no_of_detected_device==1 or self.no_of_detected_device==2:
+            if self.debug_true():
                 print 'found one'
-            self.internalName=self.detectedDevices[0]
+            self.internal_name=self.detected_devices[0]
         else:
-            self.internalName = "Not Found!"
-        if self.numberOfDetectedDevices==2:
-            if self.DebugTrue():
+            self.internal_name = "Not Found!"
+        if self.no_of_detected_device==2:
+            if self.debug_true():
                 print 'found two'
-            self.externalName=self.detectedDevices[1]
+            self.external_name=self.detected_devices[1]
         else:
-            self.externalName="Not Found"
-        #self.internalName = "LVDS1" #change it according to xrandr output
-        #self.externalName = "VGA1" #change it according to xrandr output
+            self.external_name="Not Found"
+        #self.internal_name = "LVDS1" #change it according to xrandr output
+        #self.external_name = "VGA1" #change it according to xrandr output
         
-        self.AboutMeMessage='''
+        self.about_me_message='''
         Brightness Controller
         ================
         Prepared by Amit Seal Ami,
@@ -63,14 +63,14 @@ class BrightnessController(wx.Frame):
     def InitUI(self):
         
         panel = wx.Panel(self)
-        vbox = wx.BoxSizer(wx.VERTICAL)
+        self.vbox = wx.BoxSizer(wx.VERTICAL)
         
-        buttonAbout = wx.Button(panel, label="?", size=(25,25))
-        buttonAbout.Bind(wx.EVT_BUTTON, self.AboutDialog)
-        vbox.Add(buttonAbout, flag=wx.ALIGN_RIGHT)
+        button_about = wx.Button(panel, label="?", size=(25,25))
+        button_about.Bind(wx.EVT_BUTTON, self.AboutDialog)
+        self.vbox.Add(button_about, flag=wx.ALIGN_RIGHT)
         
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
-        if self.numberOfDetectedDevices == 1 or self.numberOfDetectedDevices==2:
+        if self.no_of_detected_device == 1 or self.no_of_detected_device==2:
             st1 = wx.StaticText(panel, label = "Internal")
             hbox1.Add(st1, flag=wx.RIGHT|wx.TOP, border = 3)
             slider1 = wx.Slider(panel, 
@@ -82,67 +82,67 @@ class BrightnessController(wx.Frame):
         
             hbox1.Add(slider1, flag = wx.LEFT|wx.RIGHT, 
                   border = 10)
-            self.internalStatus = wx.StaticText(panel, label="100")
+            self.internal_status = wx.StaticText(panel, label="100")
             slider1.Bind(wx.EVT_SCROLL, self.OnSlider1Scroll)
-            hbox1.Add(self.internalStatus, flag=wx.TOP|wx.LEFT, border=3)
+            hbox1.Add(self.internal_status, flag=wx.TOP|wx.LEFT, border=3)
         else:
             st1 = wx.StaticText(panel, label = "Internal Not Found")
             hbox1.Add(st1, flag=wx.RIGHT|wx.TOP, border = 3)
         
         
-        vbox.Add(hbox1)
+        self.vbox.Add(hbox1)
         
-        hbox2 = wx.BoxSizer(wx.HORIZONTAL)
+        self.hbox2 = wx.BoxSizer(wx.HORIZONTAL)
         
       
-        if self.numberOfDetectedDevices==2:
+        if self.no_of_detected_device==2:
             st2 = wx.StaticText(panel, label = "External")
-            hbox2.Add(st2, flag=wx.RIGHT|wx.TOP, border = 3)
+            self.hbox2.Add(st2, flag=wx.RIGHT|wx.TOP, border = 3)
             slider2 = wx.Slider(panel, 
                             value=100, 
                             minValue=0, 
                             maxValue=100, 
                             size=(200, -1), 
                             style=wx.SL_HORIZONTAL)
-            hbox2.Add(slider2, flag = wx.LEFT, 
+            self.hbox2.Add(slider2, flag = wx.LEFT, 
                   border = 7)
-            self.externalStatus = wx.StaticText(panel, label="100")
-            hbox2.Add(self.externalStatus, flag=wx.TOP|wx.LEFT, border=12)
+            self.external_status = wx.StaticText(panel, label="100")
+            self.hbox2.Add(self.external_status, flag=wx.TOP|wx.LEFT, border=12)
         
             slider2.Bind(wx.EVT_SCROLL, self.OnSlider2Scroll)
         else:
             st2 = wx.StaticText(panel, label = "External Not found")
-            hbox2.Add(st2, flag=wx.RIGHT|wx.TOP, border = 3)   
-        vbox.Add(hbox2)
+            self.hbox2.Add(st2, flag=wx.RIGHT|wx.TOP, border = 3)   
+        self.vbox.Add(self.hbox2)
         
-        panel.SetSizer(vbox)
+        panel.SetSizer(self.vbox)
         
     def OnSlider1Scroll(self, e):
         obj = e.GetEventObject()
         val = obj.GetValue()
-        self.internalStatus.SetLabel(str(val))
+        self.internal_status.SetLabel(str(val))
         if  val < 100:
-            cmdString = "xrandr --output %s --brightness .%d" % (self.internalName, val)
+            cmdString = "xrandr --output %s --brightness .%d" % (self.internal_name, val)
         else:
             val = 1.0
-            cmdString = "xrandr --output %s --brightness %d" % (self.internalName, val)
+            cmdString = "xrandr --output %s --brightness %d" % (self.internal_name, val)
         
         os.system(cmdString)
         
     def OnSlider2Scroll(self, e):
         obj = e.GetEventObject()
         val = obj.GetValue()
-        self.externalStatus.SetLabel(str(val))
+        self.external_status.SetLabel(str(val))
         if  val < 100:
-            cmdString = "xrandr --output %s --brightness .%d" % (self.externalName, val)
+            command_string = "xrandr --output %s --brightness .%d" % (self.external_name, val)
         else:
             val = 1.0
-            cmdString = "xrandr --output %s --brightness %d" % (self.externalName, val)
+            command_string = "xrandr --output %s --brightness %d" % (self.external_name, val)
         
-        os.system(cmdString)
+        os.system(command_string)
         
     def AboutDialog(self, e):
-        wx.MessageBox(self.AboutMeMessage, 'Info', 
+        wx.MessageBox(self.about_me_message, 'Info', 
             wx.OK | wx.ICON_INFORMATION)
 
 if __name__ == '__main__':
