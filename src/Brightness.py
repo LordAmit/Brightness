@@ -122,12 +122,12 @@ class BrightnessController(wx.Frame):
         val = obj.GetValue()
         self.internal_status.SetLabel(str(val))
         if  val < 100:
-            cmdString = "xrandr --output %s --brightness .%d" % (self.internal_name, val)
+            cmd_string = "xrandr --output %s --brightness .%d" % (self.internal_name, val)
         else:
             val = 1.0
-            cmdString = "xrandr --output %s --brightness %d" % (self.internal_name, val)
+            cmd_string = "xrandr --output %s --brightness %d" % (self.internal_name, val)
         
-        os.system(cmdString)
+        os.system(cmd_string)
         
     def OnSlider2Scroll(self, e):
         obj = e.GetEventObject()
