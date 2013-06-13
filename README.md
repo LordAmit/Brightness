@@ -29,7 +29,7 @@ Kindly make an issue in the github project and submit the output of this command
 
 ## I have more than two monitors, and this program only shows two. What's happening?
 
-In a word, jealousy. Yes, because I never had more than two monitors simultaneously, I decided to give support for up to two monitors only. So no, it can not support your third (or fourth, or fifth...) monitor.
+In a word, *jealousy*. Because I never had more than two monitors simultaneously, I decided to give support for up to two monitors only. So no, it can not support your third (or fourth, or fifth...) monitor.
 
 # Misc.
 
