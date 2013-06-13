@@ -3,21 +3,57 @@
 
 import wx
 import os
+import subprocess 
 
-class Example(wx.Frame):
+class BrightnessController(wx.Frame):
+    
+    def DebugTrue(self):
+        return False
+    
+    def DetectDisplayDevices(self):
+    
+        connectedDevs=[]
+    
+        bValue = subprocess.check_output("xrandr -q", shell=True)
+    
+        lines = bValue.split('\n')
+        for line in lines:
+            words = line.split(' ')
+            for word in words:
+                if word == 'connected':
+                    connectedDevs.append(words[0])
+        return connectedDevs
     
     def __init__(self, parent, title):
-        super(Example, self).__init__(parent, title=title, 
+        super(BrightnessController, self).__init__(parent, title=title, 
                                       size=(300,100))
-        self.internalName = "LVDS1" #change it according to xrandr output
-        self.externalName = "VGA1" #change it according to xrandr output
+        self.detectedDevices = self.DetectDisplayDevices()
+        self.numberOfDetectedDevices = len(self.detectedDevices)
+        
+        if self.numberOfDetectedDevices==1 or self.numberOfDetectedDevices==2:
+            if self.DebugTrue():
+                print 'found one'
+            self.internalName=self.detectedDevices[0]
+        else:
+            self.internalName = "Not Found!"
+        if self.numberOfDetectedDevices==2:
+            if self.DebugTrue():
+                print 'found two'
+            self.externalName=self.detectedDevices[1]
+        else:
+            self.externalName="Not Found"
+        #self.internalName = "LVDS1" #change it according to xrandr output
+        #self.externalName = "VGA1" #change it according to xrandr output
         
         self.AboutMeMessage='''
         Brightness Controller
         ================
-        Prepared by Amit Seal Ami. 
+        Prepared by Amit Seal Ami,
+        from Bangladesh. 
+        For more details, visit 
+        http://lordamit.blogspot.com
         Source code available at 
-        https://github.com/lordamit/Brightness
+        http://github.com/lordamit/Brightness
         '''
         
         self.InitUI()
@@ -25,6 +61,7 @@ class Example(wx.Frame):
         self.Show()
     
     def InitUI(self):
+        
         panel = wx.Panel(self)
         vbox = wx.BoxSizer(wx.VERTICAL)
         
@@ -33,37 +70,49 @@ class Example(wx.Frame):
         vbox.Add(buttonAbout, flag=wx.ALIGN_RIGHT)
         
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
-        st1 = wx.StaticText(panel, label = "Internal")
-        
-        hbox1.Add(st1, flag=wx.RIGHT|wx.TOP, border = 3)
-        slider1 = wx.Slider(panel, 
+        if self.numberOfDetectedDevices == 1 or self.numberOfDetectedDevices==2:
+            st1 = wx.StaticText(panel, label = "Internal")
+            hbox1.Add(st1, flag=wx.RIGHT|wx.TOP, border = 3)
+            slider1 = wx.Slider(panel, 
                             value=100, 
                             minValue=0, 
                             maxValue=100, 
                             size=(200, -1), 
                             style=wx.SL_HORIZONTAL)
-        hbox1.Add(slider1, flag = wx.LEFT|wx.RIGHT, 
+        
+            hbox1.Add(slider1, flag = wx.LEFT|wx.RIGHT, 
                   border = 10)
-        self.internalStatus = wx.StaticText(panel, label="100")
-        slider1.Bind(wx.EVT_SCROLL, self.OnSlider1Scroll)
-        hbox1.Add(self.internalStatus, flag=wx.TOP|wx.LEFT, border=3)
+            self.internalStatus = wx.StaticText(panel, label="100")
+            slider1.Bind(wx.EVT_SCROLL, self.OnSlider1Scroll)
+            hbox1.Add(self.internalStatus, flag=wx.TOP|wx.LEFT, border=3)
+        else:
+            st1 = wx.StaticText(panel, label = "Internal Not Found")
+            hbox1.Add(st1, flag=wx.RIGHT|wx.TOP, border = 3)
+        
         
         vbox.Add(hbox1)
         
         hbox2 = wx.BoxSizer(wx.HORIZONTAL)
-        st2 = wx.StaticText(panel, label = "External")
-        hbox2.Add(st2, flag=wx.RIGHT|wx.TOP, border = 3)
-        slider2 = wx.Slider(panel, 
+        
+      
+        if self.numberOfDetectedDevices==2:
+            st2 = wx.StaticText(panel, label = "External")
+            hbox2.Add(st2, flag=wx.RIGHT|wx.TOP, border = 3)
+            slider2 = wx.Slider(panel, 
                             value=100, 
                             minValue=0, 
                             maxValue=100, 
                             size=(200, -1), 
                             style=wx.SL_HORIZONTAL)
-        hbox2.Add(slider2, flag = wx.LEFT, 
+            hbox2.Add(slider2, flag = wx.LEFT, 
                   border = 7)
-        self.externalStatus = wx.StaticText(panel, label="100")
-        hbox2.Add(self.externalStatus, flag=wx.TOP|wx.LEFT, border=12)
-        slider2.Bind(wx.EVT_SCROLL, self.OnSlider2Scroll)
+            self.externalStatus = wx.StaticText(panel, label="100")
+            hbox2.Add(self.externalStatus, flag=wx.TOP|wx.LEFT, border=12)
+        
+            slider2.Bind(wx.EVT_SCROLL, self.OnSlider2Scroll)
+        else:
+            st2 = wx.StaticText(panel, label = "External Not found")
+            hbox2.Add(st2, flag=wx.RIGHT|wx.TOP, border = 3)   
         vbox.Add(hbox2)
         
         panel.SetSizer(vbox)
@@ -98,5 +147,5 @@ class Example(wx.Frame):
 
 if __name__ == '__main__':
     app = wx.App()
-    Example(None, title = "Brightness Controller")
+    BrightnessController(None, title = "Brightness Controller")
     app.MainLoop()

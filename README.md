@@ -11,27 +11,25 @@ It allows you to control the brightness of your monitor to a better extent. For 
 
 ## How do I run it? 
 
-Download the <a href="https://github.com/lordamit/Brightness/archive/master.zip">Master.zip</a>, extract it. In the src folder, just set the permission of the brightness.py file as executable. Double click on it, and it will run. 
-
-## How do I know my Monitor name?
-
-Easy, open terminal and then paste this command.
-
-> xrandr -q | grep -w connected
-
-I am given this output,
-
-> **LVDS1** connected 1366x768+0+0 (normal left inverted right x axis y axis) 309mm x 173mm
-
-So that means the name of my primary ( or connected ) monitor is **LVDS1**. In your case, it might be VGA1, HDMI1 or even DP1!
+Download the <a href="https://github.com/lordamit/Brightness/archive/master.zip">Latest version</a>. Extract it. In the src folder, just set the permission of the brightness.py file as executable. Double click on it, and it will run. 
 
 ## What are the requirements / dependencies / things I need to run it?
 
 I have found only three requirements till now.
 
-1. Python - Linux should have it by default)
-2. WxWidgets - the UI was written using Python WxWidgets)
+1. Python - Linux should have it by default
+2. WxWidgets - the UI was written using Python WxWidgets
 3. xrandr - that's what the program uses in the backend to control the brightness of your monitor!
+
+## It does not detect my monitors properly.
+
+Kindly make an issue in the github project and submit the output of this command:
+
+> xrandr -q
+
+## I have more than two monitors, and this program only shows two. What's happening?
+
+In a word, jealousy. Yes, because I never had more than two monitors simultaneously, I decided to give support for up to two monitors only. So no, it can not support your third (or fourth, or fifth...) monitor.
 
 # Misc.
 
@@ -49,4 +47,3 @@ I wrote it because I could not find any other similar software available **in Li
 
 Erm, that's not exactly supposed to happen. Still, use at your own risk. I won't allow myself to be held responsible even if it turns your monitor into a black hole, sucks you in and kills you in the process.
 But still, let me know if something goes wrong by reporting it in the issues section.
-
