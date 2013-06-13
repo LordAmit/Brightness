@@ -31,6 +31,10 @@ Kindly make an issue in the github project and submit the output of this command
 
 In a word, *jealousy*. Because I never had more than two monitors simultaneously, I decided to give support for up to two monitors only. So no, it can not support your third (or fourth, or fifth...) monitor.
 
+## Screenshot
+
+<a href="http://www.flickr.com/photos/lordamit/9035113863/" title="Brightness Controller_018 by lordamit, on Flickr"><img src="http://farm4.staticflickr.com/3760/9035113863_3f34176caa.jpg" width="306" height="127" alt="Brightness Controller_018"></a>
+
 # Misc.
 
 Random questions that might show up here are answered here in advance.
