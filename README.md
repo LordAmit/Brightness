@@ -18,7 +18,9 @@ Download the <a href="https://github.com/lordamit/Brightness/archive/master.zip"
 I have found only three requirements till now.
 
 1. Python - Linux should have it by default
-2. Python WxWidgets - the UI was written using Python WxWidgets
+2. Python WxWidgets
+
+    >sudo apt-get install python-wxgtk2.8
 3. xrandr - that's what the program uses in the backend to control the brightness of your monitor!
 
 ## It does not detect my monitors properly.
@@ -49,5 +51,7 @@ I wrote it because I could not find any other similar software available **in Li
 
 ## Help! It broke my computer!
 
-Erm, that's not exactly supposed to happen. Still, use at your own risk. I won't allow myself to be held responsible even if it turns your monitor into a black hole, sucks you in and kills you in the process.
-But still, let me know if something goes wrong by reporting it in the issues section.
+*Erm, that's not exactly supposed to happen. Still, use at your own risk. I won't allow myself to be held responsible even if it turns your monitor into a black hole, sucks you in and kills you in the process.
+But still, let me know if something goes wrong by reporting it in the issues section.*
+
+On a more serious note, Brightness Controller does nothing that can break your computer. It simply provides a graphical user interface you can use with a mouse to control brightness easily. It does not execute any command or does not do anything to change your system. So, feel free to use it :)
