@@ -18,7 +18,7 @@ Download the <a href="https://github.com/lordamit/Brightness/archive/master.zip"
 I have found only three requirements till now.
 
 1. Python - Linux should have it by default
-2. WxWidgets - the UI was written using Python WxWidgets
+2. Python WxWidgets - the UI was written using Python WxWidgets
 3. xrandr - that's what the program uses in the backend to control the brightness of your monitor!
 
 ## It does not detect my monitors properly.
