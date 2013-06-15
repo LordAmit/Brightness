@@ -1,5 +1,4 @@
 #!/usr/bin/python
-#
 
 import wx
 import os
@@ -153,5 +152,5 @@ class BrightnessController(wx.Frame):
 
 if __name__ == '__main__':
     app = wx.App()
-    BrightnessController(None, title="Brightness Controller")
+    BrightnessController(None, title="Brightness Controller v1.0")
     app.MainLoop()
