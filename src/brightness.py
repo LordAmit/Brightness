@@ -4,7 +4,6 @@ import wx
 import os
 import subprocess
 
-
 class BrightnessController(wx.Frame):
 
     def debug_true(self):
