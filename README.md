@@ -3,7 +3,7 @@ Brightness Controller
 
 ## What is it?
 
-Brightness Controller allows you to control Brightness of your **internal AND external monitor** with the help of *xrandr* in Linux. The controller is created using *python*, which in the back end calls *os.system* commands to execute system commands.
+Brightness Controller allows you to control Brightness of your **Primary AND Secondary Display** with the help of *xrandr* in Linux. It is a software based dimmer. The controller is created using *python*, which in the back end calls *os.system* commands to execute system commands.
 
 ## What good is it?
 
@@ -30,15 +30,15 @@ I have found only three requirements till now.
     >sudo apt-get install python-wxgtk2.8
 3. xrandr - that's what the program uses in the backend to control the brightness of your monitor!
 
-## It does not detect my monitors properly.
+## It does not detect my displays properly.
 
 Kindly make an issue in the github project and submit the output of this command:
 
 > xrandr -q
 
-## I have more than two monitors, and this program only shows two. What's happening?
+## I have more than two displays, and this program only shows two. What's happening?
 
-In a word, *jealousy*. Because I never had more than two monitors simultaneously, I decided to give support for up to two monitors only. So no, it can not support your third (or fourth, or fifth...) monitor.
+In a word, *jealousy*. Because I never had more than two displays simultaneously, I decided to give support for up to two displays only. So no, it can not support your third (or fourth, or fifth...) display.
 
 ## Screenshot
 
@@ -58,7 +58,13 @@ I wrote it because I could not find any other similar software available **in Li
 
 ## Help! It broke my computer!
 
-*Erm, that's not exactly supposed to happen. Still, use at your own risk. I won't allow myself to be held responsible even if it turns your monitor into a black hole, sucks you in and kills you in the process.
+*Erm, that's not exactly supposed to happen. Still, use at your own risk. I won't allow myself to be held responsible even if it turns your display into a black hole, sucks you in and kills you in the process.
 But still, let me know if something goes wrong by reporting it in the issues section.*
 
 On a more serious note, Brightness Controller does nothing that can break your computer. It simply provides a graphical user interface you can use with a mouse to control brightness easily. It does not execute any command or does not do anything to change your system. So, feel free to use it :)
+
+# Contributors
+
+- Archisman Panigrahi (https://twitter.com/apandada1)
+- Ashikur Noor
+- istocko
