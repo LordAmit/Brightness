@@ -13,7 +13,7 @@ It allows you to control the brightness of your monitor to a better extent. For 
 - Download the <a href="https://github.com/lordamit/Brightness/archive/master.zip">Latest version</a> to your home folder.
 - Extract it.
 - Find the brightness.desktop in the src folder and open it with gedit text editor.
-- Replace `path/to...` with the original path of `brightness.py` in line 4 and `brightness.desktop` in line 7.
+- Replace `path/to...` with the original path of `brightness.py` in line 4 and `brightness.svg` in line 7.
 - Now `brightness.desktop` looks like 'Brightness Controller' and should have an icon.
 - Double-click Brightness Controller and the app should run. 
 
@@ -65,7 +65,7 @@ On a more serious note, Brightness Controller does nothing that can break your c
 
 # Contributors
 
-- Archisman Panigrahi (https://twitter.com/apandada1)
+- <a href="https://twitter.com/apandada1">Archisman Panigrahi</a>
 - Ashikur Noor
 - istocko
 - ZDroid
