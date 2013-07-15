@@ -1,23 +1,20 @@
-Brightness Controller
-==========
+# Brightness Controller
 
 ## What is it?
 
-Brightness Controller allows you to control Brightness of your **Primary AND Secondary Display** with the help of *xrandr* in Linux. It is a software based dimmer. The controller is created using *python*, which in the back end calls *os.system* commands to execute system commands.
+Brightness Controller allows you to control Brightness of your **Primary and Secondary Display** with the help of `xrandr` in Linux. It is a software based dimmer. The controller is created using Python, which in the back end calls `os.system` commands to execute system commands.
 
 ## What good is it?
 
-It allows you to control the brightness of your monitor to a better extent. For example, my laptop's monitor brightness can be controlled using hardware keys at discrete values, such as 20%, 40%, 60% ... 100%. Brightness Controller allows you to change the brightness to a better degree of control, ranging from 1% to 100%! It should be mentioned that it changes the present brightness value set via hardware control of your monitor. For example, if you set your Monitor's brightness to 50% using hardware buttons, then that will be the 100% value in Brightness controller. 
+It allows you to control the brightness of your monitor to a better extent. For example, my laptop's monitor brightness can be controlled using hardware keys at discrete values, such as 20%, 40%, 60%, ... 100%. Brightness Controller allows you to change the brightness to a better degree of control, ranging from 1% to 100%! It should be mentioned that it changes the present brightness value set via hardware control of your monitor. For example, if you set your Monitor's brightness to 50% using hardware buttons, then that will be the 100% value in Brightness controller. 
 
 ## How do I run it? 
 
-- Download the <a href="https://github.com/lordamit/Brightness/archive/master.zip">Latest version</a> to your home folder. 
-- Extract it. 
-- In the src folder, set the permission of the brightness.py file as executable. 
+- Download the <a href="https://github.com/lordamit/Brightness/archive/master.zip">Latest version</a> to your home folder.
+- Extract it.
 - Find the brightness.desktop in the src folder and open it with gedit text editor.
-- Replace 'path/to' with the original path of brightness.py in line 4 and brightness.desktop in line 7.
-- Mark brightness.desktop as executable.
-- Now brightness.desktop would turn into 'Brightness Controller' and would have an icon.
+- Replace `path/to...` with the original path of `brightness.py` in line 4 and `brightness.desktop` in line 7.
+- Now `brightness.desktop` looks like 'Brightness Controller' and would have an icon.
 - Double-click Brightness Controller and the app would run. You can even pin it to Unity launcher.
 
 ## What are the requirements / dependencies / things I need to run it?
@@ -25,16 +22,19 @@ It allows you to control the brightness of your monitor to a better extent. For 
 I have found only three requirements till now.
 
 1. Python - Linux should have it by default
+
 2. Python WxWidgets
+```bash
+$ sudo apt-get install python-wxgtk2.8
+```
+3. `xrandr` - that's what the program uses in the backend to control the brightness of your monitor!
 
-    >sudo apt-get install python-wxgtk2.8
-3. xrandr - that's what the program uses in the backend to control the brightness of your monitor!
+## It doesn't detect my displays properly
 
-## It does not detect my displays properly.
-
-Kindly make an issue in the github project and submit the output of this command:
-
-> xrandr -q
+Kindly make an issue in the GitHub project and submit the output of this command:
+```bash
+$ xrandr -q
+```
 
 ## I have more than two displays, and this program only shows two. What's happening?
 
@@ -43,13 +43,14 @@ In a word, *jealousy*. Because I never had more than two displays simultaneously
 ## Screenshot
 
 <a href="http://www.flickr.com/photos/lordamit/9290314985/" title="brightness controller by lordamit, on Flickr"><img src="http://farm3.staticflickr.com/2829/9290314985_725f94cb98.jpg" width="325" height="123" alt="brightness controller"></a>
-# Misc.
+
+# Misc
 
 Random questions that might show up here are answered here in advance.
 
-## The coding style is not exactly.. pythonlike.
+## The coding style is not exactly... Python-like
  
-Because it is my first python code that exceeds 10 lines. I have not used Python before, but I decided to use it for this project for no particular reason.
+Because it is my first Python code that exceeds 10 lines. I have not used Python before, but I decided to use it for this project for no particular reason.
 
 ## Why is it here?
 
@@ -57,10 +58,10 @@ I wrote it because I could not find any other similar software available **in Li
 
 ## Help! It broke my computer!
 
-*Erm, that's not exactly supposed to happen. Still, use at your own risk. I won't allow myself to be held responsible even if it turns your display into a black hole, sucks you in and kills you in the process.
+*Erm, that's not exactly supposed to happen. Still, use at your own risk. I won't allow myself to be held responsible even if it turns your display into a black hole, sucks you in and kills you in the process.  
 But still, let me know if something goes wrong by reporting it in the issues section.*
 
-On a more serious note, Brightness Controller does nothing that can break your computer. It simply provides a graphical user interface you can use with a mouse to control brightness easily. It does not execute any command or does not do anything to change your system. So, feel free to use it :)
+On a more serious note, Brightness Controller does nothing that can break your computer. It simply provides a graphical user interface you can use with a mouse to control brightness easily. It does not execute any command or does not do anything to change your system. So, feel free to use it. :)
 
 # Contributors
 
