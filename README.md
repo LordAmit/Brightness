@@ -68,3 +68,7 @@ On a more serious note, Brightness Controller does nothing that can break your c
 - Archisman Panigrahi (https://twitter.com/apandada1)
 - Ashikur Noor
 - istocko
+<<<<<<< HEAD
+=======
+- ZDroid
+>>>>>>> 798fe6af518a77073c34f9240b39f85df69500e1
