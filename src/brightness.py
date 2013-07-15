@@ -75,7 +75,7 @@ class BrightnessController(wx.Frame):
 
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
         if self.no_of_detected_device == 1 or self.no_of_detected_device == 2:
-            st1 = wx.StaticText(panel, label='Primary')
+            st1 = wx.StaticText(panel, label='Internal')
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
             slider1 = wx.Slider(panel,
                             value=100,
@@ -90,7 +90,7 @@ class BrightnessController(wx.Frame):
             slider1.Bind(wx.EVT_SCROLL, self.OnSlider1Scroll)
             hbox1.Add(self.primary_status, flag=wx.TOP | wx.LEFT, border=3)
         else:
-            st1 = wx.StaticText(panel, label='Primary Not Found')
+            st1 = wx.StaticText(panel, label='Internal Not Found')
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
 
         self.vbox.Add(hbox1)
@@ -98,7 +98,7 @@ class BrightnessController(wx.Frame):
         self.hbox2 = wx.BoxSizer(wx.HORIZONTAL)
 
         if self.no_of_detected_device == 2:
-            st2 = wx.StaticText(panel, label='Secondary')
+            st2 = wx.StaticText(panel, label='External')
             self.hbox2.Add(st2, flag=wx.RIGHT | wx.TOP, border=3)
             slider2 = wx.Slider(panel,
                             value=100,
@@ -114,7 +114,7 @@ class BrightnessController(wx.Frame):
 
             slider2.Bind(wx.EVT_SCROLL, self.OnSlider2Scroll)
         else:
-            st2 = wx.StaticText(panel, label='Secondary Not found')
+            st2 = wx.StaticText(panel, label='External Not found')
             self.hbox2.Add(st2, flag=wx.RIGHT | wx.TOP, border=3)
         self.vbox.Add(self.hbox2)
 
