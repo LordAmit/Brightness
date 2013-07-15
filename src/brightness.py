@@ -14,7 +14,7 @@ class BrightnessController(wx.Frame):
 
         connected_devs = []
 
-        xrandr_output = subprocess.check_output("xrandr -q", shell=True)
+        xrandr_output = subprocess.check_output('xrandr -q', shell=True)
 
         lines = xrandr_output.split('\n')
         for line in lines:
@@ -26,34 +26,38 @@ class BrightnessController(wx.Frame):
 
     def __init__(self, parent, title):
         super(BrightnessController, self).__init__(parent, title=title,
-                                                   size=(300, 100))
+                                                   size=(325, 100))
         self.detected_devices = self.detect_display_devices()
         self.no_of_detected_device = len(self.detected_devices)
 
         if self.no_of_detected_device == 1 or self.no_of_detected_device == 2:
             if self.debug_true():
                 print 'found one'
-            self.internal_name = self.detected_devices[0]
+            self.primary_name = self.detected_devices[0]
         else:
-            self.internal_name = "Not Found!"
+            self.primary_name = 'Not Found!'
         if self.no_of_detected_device == 2:
             if self.debug_true():
                 print 'found two'
-            self.external_name = self.detected_devices[1]
+            self.secondary_name = self.detected_devices[1]
         else:
-            self.external_name = "Not Found"
-        # self.internal_name = "LVDS1" #change it according to xrandr output
-        # self.external_name = "VGA1" #change it according to xrandr output
+            self.secondary_name = 'Not Found'
+        # self.primary_name = 'LVDS1' #change it according to xrandr output
+        # self.secondary_name = 'VGA1' #change it according to xrandr output
 
         self.about_me_message = '''
         Brightness Controller
-        ================
-        Prepared by Amit Seal Ami,
+        ==================
+        Designed and developed by Amit Seal Ami,
         from Bangladesh.
         For more details, visit
         http://lordamit.blogspot.com
         Source code available at
         http://github.com/lordamit/Brightness
+        
+        Contributors
+        ===========
+        Archisman Panigrahi (https://twitter.com/apandada1) 
         '''
 
         self.InitUI()
@@ -65,13 +69,13 @@ class BrightnessController(wx.Frame):
         panel = wx.Panel(self)
         self.vbox = wx.BoxSizer(wx.VERTICAL)
 
-        button_about = wx.Button(panel, label="?", size=(25, 25))
+        button_about = wx.Button(panel, label='?', size=(25, 25))
         button_about.Bind(wx.EVT_BUTTON, self.AboutDialog)
         self.vbox.Add(button_about, flag=wx.ALIGN_RIGHT)
 
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
         if self.no_of_detected_device == 1 or self.no_of_detected_device == 2:
-            st1 = wx.StaticText(panel, label="Internal")
+            st1 = wx.StaticText(panel, label='Primary')
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
             slider1 = wx.Slider(panel,
                             value=100,
@@ -82,11 +86,11 @@ class BrightnessController(wx.Frame):
 
             hbox1.Add(slider1, flag=wx.LEFT | wx.RIGHT,
                   border=10)
-            self.internal_status = wx.StaticText(panel, label="100")
+            self.primary_status = wx.StaticText(panel, label='100')
             slider1.Bind(wx.EVT_SCROLL, self.OnSlider1Scroll)
-            hbox1.Add(self.internal_status, flag=wx.TOP | wx.LEFT, border=3)
+            hbox1.Add(self.primary_status, flag=wx.TOP | wx.LEFT, border=3)
         else:
-            st1 = wx.StaticText(panel, label="Internal Not Found")
+            st1 = wx.StaticText(panel, label='Primary Not Found')
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
 
         self.vbox.Add(hbox1)
@@ -94,7 +98,7 @@ class BrightnessController(wx.Frame):
         self.hbox2 = wx.BoxSizer(wx.HORIZONTAL)
 
         if self.no_of_detected_device == 2:
-            st2 = wx.StaticText(panel, label="External")
+            st2 = wx.StaticText(panel, label='Secondary')
             self.hbox2.Add(st2, flag=wx.RIGHT | wx.TOP, border=3)
             slider2 = wx.Slider(panel,
                             value=100,
@@ -104,45 +108,45 @@ class BrightnessController(wx.Frame):
                             style=wx.SL_HORIZONTAL)
             self.hbox2.Add(slider2, flag=wx.LEFT,
                   border=7)
-            self.external_status = wx.StaticText(panel, label="100")
-            self.hbox2.Add(self.external_status,
+            self.secondary_status = wx.StaticText(panel, label='100')
+            self.hbox2.Add(self.secondary_status,
                            flag=wx.TOP | wx.LEFT, border=12)
 
             slider2.Bind(wx.EVT_SCROLL, self.OnSlider2Scroll)
         else:
-            st2 = wx.StaticText(panel, label="External Not found")
+            st2 = wx.StaticText(panel, label='Secondary Not found')
             self.hbox2.Add(st2, flag=wx.RIGHT | wx.TOP, border=3)
         self.vbox.Add(self.hbox2)
 
         panel.SetSizer(self.vbox)
 
     def OnSlider1Scroll(self, e):
-        cmd_string = ""
+        cmd_string = ''
         obj = e.GetEventObject()
         val = obj.GetValue()
-        self.internal_status.SetLabel(str(val))
+        self.primary_status.SetLabel(str(val))
         if val < 100:
-            cmd_string = "xrandr --output \
-            %s --brightness .%d" % (self.internal_name, val)
+            cmd_string = 'xrandr --output \
+            %s --brightness .%d' % (self.primary_name, val)
         else:
             val = 1.0
-            cmd_string = "xrandr --output %s \
-            --brightness %d" % (self.internal_name, val)
+            cmd_string = 'xrandr --output %s \
+            --brightness %d' % (self.primary_name, val)
 
         os.system(cmd_string)
 
     def OnSlider2Scroll(self, e):
-        command_string = ""
+        command_string = ''
         obj = e.GetEventObject()
         val = obj.GetValue()
-        self.external_status.SetLabel(str(val))
+        self.secondary_status.SetLabel(str(val))
         if val < 100:
-            command_string = "xrandr --output %s \
-            --brightness .%d" % (self.external_name, val)
+            command_string = 'xrandr --output %s \
+            --brightness .%d' % (self.secondary_name, val)
         else:
             val = 1.0
-            command_string = "xrandr --output %s \
-            --brightness %d" % (self.external_name, val)
+            command_string = 'xrandr --output %s \
+            --brightness %d' % (self.secondary_name, val)
 
         os.system(command_string)
 
@@ -152,5 +156,5 @@ class BrightnessController(wx.Frame):
 
 if __name__ == '__main__':
     app = wx.App()
-    BrightnessController(None, title="Brightness Controller v1.0")
+    BrightnessController(None, title='Brightness Controller v1.0')
     app.MainLoop()
