@@ -42,8 +42,7 @@ In a word, *jealousy*. Because I never had more than two displays simultaneously
 
 ## Screenshot
 
-<a href="http://www.flickr.com/photos/lordamit/9035113863/" title="Brightness Controller_018 by lordamit, on Flickr"><img src="http://farm4.staticflickr.com/3760/9035113863_3f34176caa.jpg" width="306" height="127" alt="Brightness Controller_018"></a>
-
+<a href="http://www.flickr.com/photos/lordamit/9290314985/" title="brightness controller by lordamit, on Flickr"><img src="http://farm3.staticflickr.com/2829/9290314985_725f94cb98.jpg" width="325" height="123" alt="brightness controller"></a>
 # Misc.
 
 Random questions that might show up here are answered here in advance.
