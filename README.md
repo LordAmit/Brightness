@@ -14,8 +14,8 @@ It allows you to control the brightness of your monitor to a better extent. For 
 - Extract it.
 - Find the brightness.desktop in the src folder and open it with gedit text editor.
 - Replace `path/to...` with the original path of `brightness.py` in line 4 and `brightness.desktop` in line 7.
-- Now `brightness.desktop` looks like 'Brightness Controller' and would have an icon.
-- Double-click Brightness Controller and the app would run. You can even pin it to Unity launcher.
+- Now `brightness.desktop` looks like 'Brightness Controller' and should have an icon.
+- Double-click Brightness Controller and the app should run. 
 
 ## What are the requirements / dependencies / things I need to run it?
 
@@ -68,7 +68,4 @@ On a more serious note, Brightness Controller does nothing that can break your c
 - Archisman Panigrahi (https://twitter.com/apandada1)
 - Ashikur Noor
 - istocko
-<<<<<<< HEAD
-=======
 - ZDroid
->>>>>>> 798fe6af518a77073c34f9240b39f85df69500e1
