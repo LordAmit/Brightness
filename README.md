@@ -10,12 +10,12 @@ It allows you to control the brightness of your monitor to a better extent. For 
 
 ## How do I run it? 
 
-- Download the <a href="https://github.com/lordamit/Brightness/archive/master.zip">Latest version</a> to your home folder.
+- Download the [Latest version](https://github.com/lordamit/Brightness/archive/master.zip) to your home folder.
 - Extract it.
-- Find the brightness.desktop in the src folder and open it with gedit text editor.
+- Open the `src/brightness.desktop` with your favourite text editor.
 - Replace `path/to...` with the original path of `brightness.py` in line 4 and `brightness.svg` in line 7.
 - Now `brightness.desktop` looks like 'Brightness Controller' and should have an icon.
-- Double-click Brightness Controller and the app should run. 
+- Double-click Brightness Controller and the app should run.
 
 ## What are the requirements / dependencies / things I need to run it?
 
@@ -42,7 +42,7 @@ In a word, *jealousy*. Because I never had more than two displays simultaneously
 
 ## Screenshot
 
-<a href="http://www.flickr.com/photos/lordamit/9290314985/" title="brightness controller by lordamit, on Flickr"><img src="http://farm3.staticflickr.com/2829/9290314985_725f94cb98.jpg" width="325" height="123" alt="brightness controller"></a>
+![Brightness Controler screenshot](http://farm3.staticflickr.com/2829/9290314985_725f94cb98.jpg)
 
 # Misc
 
@@ -65,7 +65,7 @@ On a more serious note, Brightness Controller does nothing that can break your c
 
 # Contributors
 
-- <a href="https://twitter.com/apandada1">Archisman Panigrahi</a>
+- [Archisman Panigrahi](https://twitter.com/apandada1)
 - Ashikur Noor
 - istocko
-- ZDroid
+- [Zlatan Vasović](https://twitter.com/ZXeDroid)
