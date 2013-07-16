@@ -42,7 +42,7 @@ In a word, *jealousy*. Because I never had more than two displays simultaneously
 
 ## Screenshot
 
-![Brightness Controler screenshot](http://farm3.staticflickr.com/2829/9290314985_725f94cb98.jpg)
+![Brightness Controller screenshot](http://farm3.staticflickr.com/2829/9290314985_725f94cb98.jpg)
 
 # Misc
 
