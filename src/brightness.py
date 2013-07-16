@@ -100,8 +100,8 @@ class BrightnessController(wx.Frame):
                             style=wx.SL_HORIZONTAL)
             self.hbox2.Add(slider2, flag=wx.LEFT,
                   border=7)
-            #self.secondary_status = wx.StaticText(panel, label='100')
-            #self.hbox2.Add(self.secondary_status,
+            # self.secondary_status = wx.StaticText(panel, label='100')
+            # self.hbox2.Add(self.secondary_status,
             #  flag=wx.TOP | wx.LEFT, border=12)
 
             slider2.Bind(wx.EVT_SCROLL, self.OnSlider2Scroll)
