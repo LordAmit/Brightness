@@ -67,8 +67,7 @@ On a more serious note, Brightness Controller does nothing that can break your c
 
 - Initially designed and developed by [Amit Seal](http://www.linkedin.com/in/amitseal)
 
-Contributors
--------------
+## Contributors
 
 - [Archisman Panigrahi](https://twitter.com/apandada1)
 - Ashikur Noor
