@@ -63,7 +63,12 @@ But still, let me know if something goes wrong by reporting it in the issues sec
 
 On a more serious note, Brightness Controller does nothing that can break your computer. It simply provides a graphical user interface you can use with a mouse to control brightness easily. It does not execute any command or does not do anything to change your system. So, feel free to use it. :)
 
-# Contributors
+# Credits
+
+- Initially designed and developed by [Amit Seal](http://www.linkedin.com/in/amitseal)
+
+Contributors
+-------------
 
 - [Archisman Panigrahi](https://twitter.com/apandada1)
 - Ashikur Noor
