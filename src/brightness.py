@@ -59,7 +59,7 @@ class BrightnessController(wx.Frame):
             self.secondary_name = 'Not Found'
 
         self.about_me_message = '''
-        Brightness Controller
+        Brightness Controller v 1.0
         ==================
         This application provides a GUI to
         change brightness of Primary and Secondary
