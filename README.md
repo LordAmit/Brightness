@@ -10,6 +10,9 @@ It allows you to control the brightness of your monitor to a better extent. For 
 
 ## How do I run it? 
 
+Binary packages for [Ubuntu/Linux Mint](https://dl-web.dropbox.com/get/brightness_1.0_all.deb?w=AACghuGBHKdubl0-3npV9RphiYyiMhNGyy-vA5ZBeadXlQ&dl=1) and [Fedora](https://dl-web.dropbox.com/get/brightness-1.0-2.noarch.rpm?w=AABT4bXl_KuZxAVrMx2xEduZuk1GSjGR5t_9dNTsyEDFSA&dl=1) are available.
+The package for Fedora is experimental and not tested. **Please let us know if it is working correctly.**
+### You may also want to run it the hard way ###
 - Download the [Latest version](https://github.com/lordamit/Brightness/archive/master.zip) to your home folder.
 - Extract it.
 - Open the `src/brightness.desktop` with your favourite text editor.
