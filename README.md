@@ -10,9 +10,11 @@ It allows you to control the brightness of your monitor to a better extent. For 
 
 ## How do I run it? 
 
-Binary packages for [Ubuntu/Linux Mint](https://dl-web.dropbox.com/get/brightness_1.0_all.deb?w=AACghuGBHKdubl0-3npV9RphiYyiMhNGyy-vA5ZBeadXlQ&dl=1) and [Fedora](https://dl-web.dropbox.com/get/brightness-1.0-2.noarch.rpm?w=AABT4bXl_KuZxAVrMx2xEduZuk1GSjGR5t_9dNTsyEDFSA&dl=1) are available.
-The package for Fedora is experimental and not tested. **Please let us know if it is working correctly.**
-### You may also want to run it the hard way ###
+Installer packages for [Debian](https://dl-web.dropbox.com/get/brightness_1.0_all.deb?w=AACghuGBHKdubl0-3npV9RphiYyiMhNGyy-vA5ZBeadXlQ&dl=1) and [RPM](https://dl-web.dropbox.com/get/brightness-1.0-2.noarch.rpm?w=AABT4bXl_KuZxAVrMx2xEduZuk1GSjGR5t_9dNTsyEDFSA&dl=1) are available.
+The RPM package is experimental and not tested. Please let us know if it is working correctly.
+
+You can also run it directly using the source code.
+
 - Download the [Latest version](https://github.com/lordamit/Brightness/archive/master.zip) to your home folder.
 - Extract it.
 - Open the `src/brightness.desktop` with your favourite text editor.
@@ -65,10 +67,3 @@ I wrote it because I could not find any other similar software available **in Li
 But still, let me know if something goes wrong by reporting it in the issues section.*
 
 On a more serious note, Brightness Controller does nothing that can break your computer. It simply provides a graphical user interface you can use with a mouse to control brightness easily. It does not execute any command or does not do anything to change your system. So, feel free to use it. :)
-
-# Contributors
-
-- [Archisman Panigrahi](https://twitter.com/apandada1)
-- Ashikur Noor
-- istocko
-- [Zlatan Vasović](https://twitter.com/ZXeDroid)
