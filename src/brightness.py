@@ -16,8 +16,8 @@
 ### END LICENSE
 
 import wx
-import os
 import subprocess
+from os import system
 
 
 class BrightnessController(wx.Frame):
@@ -59,8 +59,9 @@ class BrightnessController(wx.Frame):
             self.secondary_name = 'Not Found'
 
         self.about_me_message = '''
-        Brightness Controller v 1.0
-        ==================
+        Brightness Controller v1.0
+        ==========================
+
         This application provides a GUI to
         change brightness of Primary and Secondary
         Display.
