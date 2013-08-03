@@ -8,12 +8,13 @@ Brightness Controller allows you to control Brightness of your **Primary and Sec
 
 It allows you to control the brightness of your monitor to a better extent. For example, my laptop's monitor brightness can be controlled using hardware keys at discrete values, such as 20%, 40%, 60%, ... 100%. Brightness Controller allows you to change the brightness to a better degree of control, ranging from 1% to 100%! It should be mentioned that it changes the present brightness value set via hardware control of your monitor. For example, if you set your Monitor's brightness to 50% using hardware buttons, then that will be the 100% value in Brightness controller. 
 
-## How do I run it? 
+## Installation 
+- [Ubuntu Software Center](https://apps.ubuntu.com/cat/applications/brightness-controller/)
+- [Debian](https://dl-web.dropbox.com/get/brightness_1.0_all.deb?w=AACghuGBHKdubl0-3npV9RphiYyiMhNGyy-vA5ZBeadXlQ&dl=1)
+- [Experimental RPM](https://dl-web.dropbox.com/get/brightness-1.0-2.noarch.rpm?w=AABT4bXl_KuZxAVrMx2xEduZuk1GSjGR5t_9dNTsyEDFSA&dl=1)
+- [Good old bash script](https://gist.github.com/lordamit/6134441)
 
-Installer packages for [Debian](https://dl-web.dropbox.com/get/brightness_1.0_all.deb?w=AACghuGBHKdubl0-3npV9RphiYyiMhNGyy-vA5ZBeadXlQ&dl=1) and [RPM](https://dl-web.dropbox.com/get/brightness-1.0-2.noarch.rpm?w=AABT4bXl_KuZxAVrMx2xEduZuk1GSjGR5t_9dNTsyEDFSA&dl=1) are available.
-The RPM package is experimental and not tested. Please let us know if it is working correctly.
-
-You can also run it directly using the source code.
+You can also run it directly by downloading the source code.
 
 - Download the [Latest version](https://github.com/lordamit/Brightness/archive/master.zip) to your home folder.
 - Extract it.
@@ -24,7 +25,7 @@ You can also run it directly using the source code.
 
 ## What are the requirements / dependencies / things I need to run it?
 
-I have found only three requirements till now.
+Three dependencies only.
 
 1. Python - Linux should have it by default
 
