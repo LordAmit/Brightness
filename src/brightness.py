@@ -147,7 +147,7 @@ class BrightnessController(wx.Frame):
             cmd_string = 'xrandr --output %s \
             --brightness %d' % (self.primary_name, val)
 
-        os.system(cmd_string)
+        system(cmd_string)
 
     def OnSlider2Scroll(self, e):
         command_string = ''
@@ -167,7 +167,7 @@ class BrightnessController(wx.Frame):
             command_string = 'xrandr --output %s \
             --brightness %d' % (self.secondary_name, val)
 
-        os.system(command_string)
+        system(command_string)
 
     def AboutDialog(self, e):
         wx.MessageBox(self.about_me_message, 'Info',
