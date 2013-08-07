@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Brightness by lordamit</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/lordamit/Brightness">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Brightness</h1>
+            <h2>Brightness Controller</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/lordamit/Brightness/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/lordamit/Brightness/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a name="brightness-controller" class="anchor" href="#brightness-controller"><span class="octicon octicon-link"></span></a>Brightness Controller</h1>
+
+<h2>
+<a name="what-is-it" class="anchor" href="#what-is-it"><span class="octicon octicon-link"></span></a>What is it?</h2>
+
+<p>Brightness Controller allows you to control Brightness of your <strong>Primary and Secondary Display</strong> with the help of <code>xrandr</code> in Linux. It is a software based dimmer. The controller is created using Python, which in the back end calls <code>os.system</code> commands to execute system commands.</p>
+
+<h2>
+<a name="what-good-is-it" class="anchor" href="#what-good-is-it"><span class="octicon octicon-link"></span></a>What good is it?</h2>
+
+<p>It allows you to control the brightness of your monitor to a better extent. For example, my laptop's monitor brightness can be controlled using hardware keys at discrete values, such as 20%, 40%, 60%, ... 100%. Brightness Controller allows you to change the brightness to a better degree of control, ranging from 1% to 100%! It should be mentioned that it changes the present brightness value set via hardware control of your monitor. For example, if you set your Monitor's brightness to 50% using hardware buttons, then that will be the 100% value in Brightness controller. </p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>There are various options available.
+The Debian, RPM and Ubuntu Software Center method gives you the last updated packages, whereas the bash script and the source method gives you the latest stable version of Brightnes Controller.</p>
+
+<ul>
+<li><a href="https://apps.ubuntu.com/cat/applications/brightness-controller/">Ubuntu Software Center</a></li>
+<li><a href="https://dl-web.dropbox.com/get/brightness_1.0_all.deb?w=AACghuGBHKdubl0-3npV9RphiYyiMhNGyy-vA5ZBeadXlQ&amp;dl=1">Debian</a></li>
+<li><a href="https://dl-web.dropbox.com/get/brightness-1.0-2.noarch.rpm?w=AABT4bXl_KuZxAVrMx2xEduZuk1GSjGR5t_9dNTsyEDFSA&amp;dl=1">Experimental RPM</a></li>
+<li><a href="https://gist.github.com/lordamit/6134441">Good old bash script</a></li>
+</ul><p>You can also run it directly by downloading the source code.</p>
+
+<ul>
+<li>Download the <a href="https://github.com/lordamit/Brightness/archive/master.zip">Latest version</a> to your home folder.</li>
+<li>Extract it.</li>
+<li>Open the <code>src/brightness.desktop</code> with your favourite text editor.</li>
+<li>Replace <code>path/to...</code> with the original path of <code>brightness.py</code> in line 4 and <code>brightness.svg</code> in line 7.</li>
+<li>Now <code>brightness.desktop</code> looks like 'Brightness Controller' and should have an icon.</li>
+<li>Double-click Brightness Controller and the app should run.</li>
+</ul><h2>
+<a name="what-are-the-requirements--dependencies--things-i-need-to-run-it" class="anchor" href="#what-are-the-requirements--dependencies--things-i-need-to-run-it"><span class="octicon octicon-link"></span></a>What are the requirements / dependencies / things I need to run it?</h2>
+
+<p>Three dependencies only.</p>
+
+<ol>
+<li><p>Python - Linux should have it by default</p></li>
+<li>
+<p>Python WxWidgets</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-wxgtk2.8
+</pre></div>
+</li>
+<li><p><code>xrandr</code> - that's what the program uses in the backend to control the brightness of your monitor!</p></li>
+</ol><h2>
+<a name="it-doesnt-detect-my-displays-properly" class="anchor" href="#it-doesnt-detect-my-displays-properly"><span class="octicon octicon-link"></span></a>It doesn't detect my displays properly</h2>
+
+<p>Kindly make an issue in the GitHub project and submit the output of this command:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>xrandr -q
+</pre></div>
+
+<h2>
+<a name="i-have-more-than-two-displays-and-this-program-only-shows-two-whats-happening" class="anchor" href="#i-have-more-than-two-displays-and-this-program-only-shows-two-whats-happening"><span class="octicon octicon-link"></span></a>I have more than two displays, and this program only shows two. What's happening?</h2>
+
+<p>In a word, <em>jealousy</em>. Because I never had more than two displays simultaneously, I decided to give support for up to two displays only. So no, it can not support your third (or fourth, or fifth...) display.</p>
+
+<h2>
+<a name="screenshot" class="anchor" href="#screenshot"><span class="octicon octicon-link"></span></a>Screenshot</h2>
+
+<p><img src="http://farm3.staticflickr.com/2829/9290314985_725f94cb98.jpg" alt="Brightness Controller screenshot"></p>
+
+<h1>
+<a name="misc" class="anchor" href="#misc"><span class="octicon octicon-link"></span></a>Misc</h1>
+
+<p>Random questions that might show up here are answered here in advance.</p>
+
+<h2>
+<a name="the-coding-style-is-not-exactly-python-like" class="anchor" href="#the-coding-style-is-not-exactly-python-like"><span class="octicon octicon-link"></span></a>The coding style is not exactly... Python-like</h2>
+
+<p>Because it is my first Python code that exceeds 10 lines. I have not used Python before, but I decided to use it for this project for no particular reason.</p>
+
+<h2>
+<a name="why-is-it-here" class="anchor" href="#why-is-it-here"><span class="octicon octicon-link"></span></a>Why is it here?</h2>
+
+<p>I wrote it because I could not find any other similar software available <strong>in Linux</strong> that provides an easy to use UI for changing brightness. There are still room for improvement, specially in the coding style. I hope due to its open source nature, people will come forward and will help it become a better brightness controller.</p>
+
+<h2>
+<a name="help-it-broke-my-computer" class="anchor" href="#help-it-broke-my-computer"><span class="octicon octicon-link"></span></a>Help! It broke my computer!</h2>
+
+<p><em>Erm, that's not exactly supposed to happen. Still, use at your own risk. I won't allow myself to be held responsible even if it turns your display into a black hole, sucks you in and kills you in the process.<br>
+But still, let me know if something goes wrong by reporting it in the issues section.</em></p>
+
+<p>On a more serious note, Brightness Controller does nothing that can break your computer. It simply provides a graphical user interface you can use with a mouse to control brightness easily. It does not execute any command or does not do anything to change your system. So, feel free to use it. :)</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/lordamit">lordamit</a> can be found on <a href="https://github.com/lordamit/Brightness">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
