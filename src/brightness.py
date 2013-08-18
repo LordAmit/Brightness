@@ -18,7 +18,8 @@
 import wx
 import subprocess
 from os import system
-
+import shlex
+from os import popen
 
 class BrightnessController(wx.Frame):
 
@@ -57,6 +58,19 @@ class BrightnessController(wx.Frame):
             self.secondary_name = self.detected_devices[1]
         else:
             self.secondary_name = 'Not Found'
+
+        self.array_value = 0.00
+        self.cmds_primary_display = []
+        self.cmds_secondary_display = []
+
+        for i in xrange(0, 101):
+            cmd_primary_display = "xrandr --output \
+                %s --brightness %s" % (self.primary_name, self.array_value)
+            cmd_secondary_display="xrandr --output \
+                %s --brightness %s" % (self.secondary_name, self.array_value)
+            self.cmds_primary_display.append(cmd_primary_display)
+            self.cmds_secondary_display.append(cmd_secondary_display)
+            self.array_value += 0.01
 
         self.about_me_message = '''
         Brightness Controller v1.0
@@ -130,44 +144,15 @@ class BrightnessController(wx.Frame):
         panel.SetSizer(self.vbox)
 
     def OnSlider1Scroll(self, e):
-        cmd_string = ''
         obj = e.GetEventObject()
         val = obj.GetValue()
-        #self.primary_status.SetLabel(str(val))
-        if val < 100:
-            if val < 10:
-                # Fix for values 0-9
-                cmd_string = "xrandr --output \
-                %s --brightness .0%d" % (self.primary_name, val)
-            else:
-                cmd_string = "xrandr --output \
-                %s --brightness .%d" % (self.primary_name, val)
-        else:
-            val = 1.0
-            cmd_string = 'xrandr --output %s \
-            --brightness %d' % (self.primary_name, val)
 
-        system(cmd_string)
+        system(self.cmds_primary_display[val])
 
     def OnSlider2Scroll(self, e):
-        command_string = ''
         obj = e.GetEventObject()
         val = obj.GetValue()
-        #self.secondary_status.SetLabel(str(val))
-        if val < 100:
-            if val < 10:
-                # Fix for values 0-9
-                command_string = "xrandr --output \
-                %s --brightness .0%d" % (self.secondary_name, val)
-            else:
-                command_string = "xrandr --output %s \
-                --brightness .%d" % (self.secondary_name, val)
-        else:
-            val = 1.0
-            command_string = 'xrandr --output %s \
-            --brightness %d' % (self.secondary_name, val)
-
-        system(command_string)
+        system(self.cmds_secondary_display[val])
 
     def AboutDialog(self, e):
         wx.MessageBox(self.about_me_message, 'Info',

@@ -10,21 +10,22 @@ It allows you to control the brightness of your monitor to a better extent. For 
 
 ## Installation 
 
-There are various options available.
-The Debian, RPM and Ubuntu Software Center methods are for easy installing, whereas the bash script and the source method gives you a geeky feeling and the latest version of Brightnes Controller.
+There are mainly two options available. One is the easy installation method, involving installers designed for your distro, or a bash script based installer for all platforms. The other one is to compile it from source.
+
+### Easy Installers
 
 - [Ubuntu Software Center](https://apps.ubuntu.com/cat/applications/brightness-controller/)
 - [Debian](https://dl-web.dropbox.com/get/brightness_1.0_all.deb?w=AACghuGBHKdubl0-3npV9RphiYyiMhNGyy-vA5ZBeadXlQ&dl=1)
 - [Experimental RPM](https://dl-web.dropbox.com/get/brightness-1.0-2.noarch.rpm?w=AABT4bXl_KuZxAVrMx2xEduZuk1GSjGR5t_9dNTsyEDFSA&dl=1)
 - [Good old bash script](https://gist.github.com/lordamit/6134441)
 
-<h3>Instructions for compiling from the source code.</h3>
+### Compiling from source code
 
 - Download the [Latest version](https://github.com/lordamit/Brightness/archive/master.zip) to your home folder.
 - Extract it.
 - Open the `src/brightness.desktop` with your favourite text editor.
 - Replace `path/to...` with the original path of `brightness.py` in line 4 and `brightness.svg` in line 7.
-- Now `brightness.desktop` looks like 'Brightness Controller' and should have an icon.
+- Now `brightness.desktop` should look like 'Brightness Controller' and should have an icon.
 - Double-click Brightness Controller and the app should run.
 
 ## What are the requirements / dependencies / things I need to run it?
@@ -51,6 +52,7 @@ $ xrandr -q
 In a word, *jealousy*. Because I never had more than two displays simultaneously, I decided to give support for up to two displays only. So no, it can not support your third (or fourth, or fifth...) display.
 
 ## Screenshot
+Apperance is subject to change based on the theme you are using. This screenshot was taken in Linux Mint environment.
 
 ![Brightness Controller screenshot](https://raw.github.com/apandada1/Brightness/master/img/screenshot-1.png)
 
