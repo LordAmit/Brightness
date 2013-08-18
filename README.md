@@ -11,14 +11,14 @@ It allows you to control the brightness of your monitor to a better extent. For 
 ## Installation 
 
 There are various options available.
-The Debian, RPM and Ubuntu Software Center method gives you the last updated packages, whereas the bash script and the source method gives you the latest stable version of Brightnes Controller.
+The Debian, RPM and Ubuntu Software Center methods are for easy installing, whereas the bash script and the source method gives you a geeky feeling and the latest version of Brightnes Controller.
 
 - [Ubuntu Software Center](https://apps.ubuntu.com/cat/applications/brightness-controller/)
 - [Debian](https://dl-web.dropbox.com/get/brightness_1.0_all.deb?w=AACghuGBHKdubl0-3npV9RphiYyiMhNGyy-vA5ZBeadXlQ&dl=1)
 - [Experimental RPM](https://dl-web.dropbox.com/get/brightness-1.0-2.noarch.rpm?w=AABT4bXl_KuZxAVrMx2xEduZuk1GSjGR5t_9dNTsyEDFSA&dl=1)
 - [Good old bash script](https://gist.github.com/lordamit/6134441)
 
-You can also run it directly by downloading the source code.
+<h3>Instructions for compiling from the source code.</h3>
 
 - Download the [Latest version](https://github.com/lordamit/Brightness/archive/master.zip) to your home folder.
 - Extract it.
