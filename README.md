@@ -28,6 +28,8 @@ There are mainly two options available. One is the easy installation method, inv
 - Now `brightness.desktop` should look like 'Brightness Controller' and should have an icon.
 - Double-click Brightness Controller and the app should run.
 
+It should be mentioned that bash script and compiling from source code gives you the latest Brightness Controller.
+
 ## What are the requirements / dependencies / things I need to run it?
 
 Three dependencies only.
