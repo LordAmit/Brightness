@@ -1,25 +1,11 @@
 #!/usr/bin/python
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-### BEGIN LICENSE
-# Copyright (C) 2013 Amit Seal <amitseal@outlook.com>
-# This program is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License version 3, as published
-# by the Free Software Foundation.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranties of
-# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
-# PURPOSE.  See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program.  If not, see <http://www.gnu.org/licenses/>.
-### END LICENSE
 
 import wx
 import subprocess
 from os import system
-import shlex
 from os import popen
+import shlex
 
 class BrightnessController(wx.Frame):
 
@@ -102,16 +88,14 @@ class BrightnessController(wx.Frame):
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
             slider1 = wx.Slider(panel,
                             value=100,
-                            minValue=0,
+                            minValue=1,
                             maxValue=100,
                             size=(200, -1),
                             style=wx.SL_HORIZONTAL)
 
             hbox1.Add(slider1, flag=wx.LEFT | wx.RIGHT,
                   border=25)
-            #self.primary_status = wx.StaticText(panel, label='100')
             slider1.Bind(wx.EVT_SCROLL, self.OnSlider1Scroll)
-            #hbox1.Add(self.primary_status, flag=wx.TOP | wx.LEFT, border=3)
         else:
             st1 = wx.StaticText(panel, label='   Primary Not Found')
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
@@ -125,15 +109,12 @@ class BrightnessController(wx.Frame):
             self.hbox2.Add(st2, flag=wx.RIGHT | wx.TOP, border=3)
             slider2 = wx.Slider(panel,
                             value=100,
-                            minValue=0,
+                            minValue=1,
                             maxValue=100,
                             size=(200, -1),
                             style=wx.SL_HORIZONTAL)
             self.hbox2.Add(slider2, flag=wx.LEFT,
                   border=7)
-            # self.secondary_status = wx.StaticText(panel, label='100')
-            # self.hbox2.Add(self.secondary_status,
-            #  flag=wx.TOP | wx.LEFT, border=12)
 
             slider2.Bind(wx.EVT_SCROLL, self.OnSlider2Scroll)
         else:
