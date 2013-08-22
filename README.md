@@ -15,8 +15,8 @@ There are mainly two options available. One is the easy installation method, inv
 ### Easy Installers
 
 - [Ubuntu Software Center](https://apps.ubuntu.com/cat/applications/brightness-controller/)
-- [Debian](https://dl-web.dropbox.com/get/brightness_1.0_all.deb?w=AACghuGBHKdubl0-3npV9RphiYyiMhNGyy-vA5ZBeadXlQ&dl=1)
-- [Experimental RPM](https://dl-web.dropbox.com/get/brightness-1.0-2.noarch.rpm?w=AABT4bXl_KuZxAVrMx2xEduZuk1GSjGR5t_9dNTsyEDFSA&dl=1)
+- [Debian](https://dl.dropboxusercontent.com/u/84627545/brightness_1.0_all.deb)
+- [Experimental RPM](https://dl.dropboxusercontent.com/u/84627545/brightness-1.0-2.noarch.rpm)
 - [Good old bash script](https://gist.github.com/lordamit/6134441)
 
 ### Compiling from source code
