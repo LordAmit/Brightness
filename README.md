@@ -44,7 +44,7 @@ $ sudo apt-get install python-wxgtk2.8
 
 ## Screenshots
 
-Apperance is subject to change based on the theme you are using. This screenshots was taken in Linux Mint environment.
+Apperance is subject to change based on the theme you are using. These screenshots were taken in Linux Mint environment.
 
 ![Screenshot 1](https://raw.github.com/lordamit/Brightness/master/img/screenshot-1.png)
 
