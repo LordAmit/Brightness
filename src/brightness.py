@@ -1,5 +1,5 @@
-#!/usr/bin/python
-# -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
 
 import wx
 import subprocess
@@ -32,13 +32,13 @@ class BrightnessController(wx.Frame):
 
         if self.no_of_detected_device == 1 or self.no_of_detected_device == 2:
             if self.debug_true():
-                print 'found one'
+                print 'Found one'
             self.primary_name = self.detected_devices[0]
         else:
             self.primary_name = 'Not Found!'
         if self.no_of_detected_device == 2:
             if self.debug_true():
-                print 'found two'
+                print 'Found two'
             self.secondary_name = self.detected_devices[1]
         else:
             self.secondary_name = 'Not Found'
@@ -58,13 +58,13 @@ class BrightnessController(wx.Frame):
 
         self.about_me_message = '''
         Brightness Controller v1.0.1
-        ==========================
+        ============================
 
         This application provides a GUI to
         change brightness of Primary and Secondary
         Display.
         Source available at
-        http://github.com/lordamit/Brightness
+        http://github.com/lordamit/Brightness.
         '''
 
         self.InitUI()
@@ -136,7 +136,7 @@ class BrightnessController(wx.Frame):
         system(self.cmds_secondary_display[val])
 
     def about_dialog(self, event):
-        """shows the about message of Brightness Controller"""
+        """Shows the about message of Brightness Controller"""
         wx.MessageBox(self.about_me_message, 'About',
             wx.OK | wx.ICON_INFORMATION)
 
