@@ -4,8 +4,6 @@
 import wx
 import subprocess
 from os import system
-from os import popen
-import shlex
 
 class BrightnessController(wx.Frame):
 
@@ -13,7 +11,7 @@ class BrightnessController(wx.Frame):
         return False
 
     def detect_display_devices(self):
-
+        """Detects available displays"""
         connected_devs = []
 
         xrandr_output = subprocess.check_output('xrandr -q', shell=True)
@@ -59,7 +57,7 @@ class BrightnessController(wx.Frame):
             self.array_value += 0.01
 
         self.about_me_message = '''
-        Brightness Controller v1.0
+        Brightness Controller v1.0.1
         ==========================
 
         This application provides a GUI to
@@ -79,7 +77,7 @@ class BrightnessController(wx.Frame):
         self.vbox = wx.BoxSizer(wx.VERTICAL)
 
         button_about = wx.Button(panel, label='?', size=(25, 25))
-        button_about.Bind(wx.EVT_BUTTON, self.AboutDialog)
+        button_about.Bind(wx.EVT_BUTTON, self.about_dialog)
         self.vbox.Add(button_about, flag=wx.ALIGN_RIGHT)
 
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
@@ -95,7 +93,7 @@ class BrightnessController(wx.Frame):
 
             hbox1.Add(slider1, flag=wx.LEFT | wx.RIGHT,
                   border=25)
-            slider1.Bind(wx.EVT_SCROLL, self.OnSlider1Scroll)
+            slider1.Bind(wx.EVT_SCROLL, self.primary_scroll)
         else:
             st1 = wx.StaticText(panel, label='   Primary Not Found')
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
@@ -116,7 +114,7 @@ class BrightnessController(wx.Frame):
             self.hbox2.Add(slider2, flag=wx.LEFT,
                   border=7)
 
-            slider2.Bind(wx.EVT_SCROLL, self.OnSlider2Scroll)
+            slider2.Bind(wx.EVT_SCROLL, self.secondary_scroll)
         else:
             st2 = wx.StaticText(panel, label='   Secondary Not found')
             self.hbox2.Add(st2, flag=wx.RIGHT | wx.TOP, border=3)
@@ -124,19 +122,22 @@ class BrightnessController(wx.Frame):
 
         panel.SetSizer(self.vbox)
 
-    def OnSlider1Scroll(self, e):
-        obj = e.GetEventObject()
+    def primary_scroll(self, event):
+        """Controls the brightness of primary monitor"""
+        obj = event.GetEventObject()
         val = obj.GetValue()
 
         system(self.cmds_primary_display[val])
 
-    def OnSlider2Scroll(self, e):
-        obj = e.GetEventObject()
+    def secondary_scroll(self, event):
+        """Controls the brightness of secondary monitor"""
+        obj = event.GetEventObject()
         val = obj.GetValue()
         system(self.cmds_secondary_display[val])
 
-    def AboutDialog(self, e):
-        wx.MessageBox(self.about_me_message, 'Info',
+    def about_dialog(self, event):
+        """shows the about message of Brightness Controller"""
+        wx.MessageBox(self.about_me_message, 'About',
             wx.OK | wx.ICON_INFORMATION)
 
 if __name__ == '__main__':
