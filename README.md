@@ -8,9 +8,8 @@ It allows you to control the brightness of your monitor to a better extent. For 
 
 There are mainly two options available. One is for users, involving installers designed for your distro, or a bash script based installer for all platforms. The other is for developers, involving a git clone based script.
 
-### Installers
-
 **For users:**
+
 - [Ubuntu Software Center](https://apps.ubuntu.com/cat/applications/brightness-controller/)
 - [Debian](https://dl.dropboxusercontent.com/u/84627545/brightness_1.0_all.deb)
 - [Experimental RPM](https://dl.dropboxusercontent.com/u/84627545/brightness-1.0-2.noarch.rpm)
@@ -19,6 +18,7 @@ There are mainly two options available. One is for users, involving installers d
 Script gives you the latest changes made in the repository. You can execute it to even update your Brightness Controller.
 
 **For developers:**
+
 - [Git clone Bash script](https://gist.github.com/ZDroid/d2cfb2c26be2dd1a706c/download)
 
 It should be mentioned that Script gives you the latest Brightness Controller.
