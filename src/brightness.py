@@ -57,14 +57,13 @@ class BrightnessController(wx.Frame):
             self.array_value += 0.01
 
         self.about_me_message = '''
-        Brightness Controller v1.0.1
-        ============================
+        # Brightness Controller v1.0.1
 
         This application provides a GUI to
         change brightness of Primary and Secondary
         Display.
         Source available at
-        http://github.com/lordamit/Brightness.
+        https://github.com/lordamit/Brightness.
         '''
 
         self.InitUI()
