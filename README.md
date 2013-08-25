@@ -19,16 +19,7 @@ There are mainly two options available. One is the easy installation method, inv
 **For developers:**
 - [Good old Bash script](https://gist.github.com/ZDroid/d2cfb2c26be2dd1a706c/download)
 
-### Compiling from source code
-
-- Download the [Latest version](https://github.com/lordamit/Brightness/archive/master.zip) to your home folder.
-- Extract it.
-- Open the `src/brightness.desktop` with your favourite text editor.
-- Replace `path/to...` with the original path of `brightness.py` in line 4 and `brightness.svg` in line 7.
-- Now `brightness.desktop` should look like *Brightness Controller* and should have an icon.
-- Double-click *Brightness Controller* and the app should run.
-
-It should be mentioned that bash script and compiling from source code gives you the latest Brightness Controller.
+It should be mentioned that Script gives you the latest Brightness Controller.
 
 ## Dependencies
 
