@@ -1,8 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Name=Brightness Controller
-Exec=/path/to/src/brightness.py
-Terminal=false
-Type=Application
-Icon=/path/to/img/brightness.svg
-Categories=Application;
