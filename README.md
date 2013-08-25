@@ -6,9 +6,9 @@ It allows you to control the brightness of your monitor to a better extent. For 
 
 ## Installation 
 
-There are mainly two options available. One is the easy installation method, involving installers designed for your distro, or a bash script based installer for all platforms. 
+There are mainly two options available. One is for users, involving installers designed for your distro, or a bash script based installer for all platforms. The other is for developers, involving a git clone based script.
 
-### Easy Installers
+### Installers
 
 **For users:**
 - [Ubuntu Software Center](https://apps.ubuntu.com/cat/applications/brightness-controller/)
