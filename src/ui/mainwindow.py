@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Tue Sep 17 11:56:47 2013
+# Created: Tue Sep 17 15:56:54 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -158,6 +158,7 @@ class Ui_MainWindow(object):
         self.actionLoad = QtGui.QAction(MainWindow)
         self.actionLoad.setObjectName("actionLoad")
         self.actionCheck_for_update = QtGui.QAction(MainWindow)
+        self.actionCheck_for_update.setEnabled(False)
         self.actionCheck_for_update.setObjectName("actionCheck_for_update")
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionLoad)
