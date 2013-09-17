@@ -359,13 +359,11 @@ class MyApplication(QtGui.QMainWindow):
         file_path = QtGui.QFileDialog.getSaveFileName()[0]
         if path.exists(file_path):
             if self.no_of_connected_dev == 1:
-                print 'here I am in primary'
                 w_config.write_primary_display(
                 self.return_current_primary_settings(),
                 file_path
                 )
             elif self.no_of_connected_dev == 2:
-                print 'here I am in secondary'
                 w_config.write_both_display(
                     self.return_current_primary_settings(),
                     self.return_current_secondary_settings(),
