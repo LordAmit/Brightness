@@ -401,12 +401,12 @@
   </action>
   <action name="actionSave">
    <property name="text">
-    <string>Save Color Profile</string>
+    <string>&amp;Save current settings</string>
    </property>
   </action>
   <action name="actionLoad">
    <property name="text">
-    <string>Load Color Profile</string>
+    <string>&amp;Load settings</string>
    </property>
   </action>
   <action name="actionCheck_for_update">
