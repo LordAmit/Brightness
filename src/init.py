@@ -9,7 +9,10 @@ from ui.about import Ui_Form as About_Ui_Form
 from ui.help import Ui_Form as Help_Ui_Form
 import util.executor as executor
 import util.check_displays as cdisplay
+import util.write_config as w_config
+import util.read_config as r_config
 import sys
+from os import path as path
 
 class MyApplication(QtGui.QMainWindow):
     
@@ -87,6 +90,8 @@ class MyApplication(QtGui.QMainWindow):
         user_interface.actionExit.triggered.connect(self.close)
         user_interface.actionHelp.triggered.connect(self.show_help)
         user_interface.actionLicense.triggered.connect(self.show_license)
+        user_interface.actionSave.triggered.connect(self.save_settings)
+        user_interface.actionLoad.triggered.connect(self.load_settings)
     
     def enable_secondary_widgets(self, boolean):
         '''
@@ -241,8 +246,6 @@ class MyApplication(QtGui.QMainWindow):
             self.change_primary_sliders(rgb)
             if self.no_of_connected_dev == 2:
                 self.change_secondary_sliders(rgb)
-            #time.sleep(5)
-            #executor.execute_command('eog troll_face_problem-2555px_2.png')
         elif text == '2600K 40W Tungsten':
             rgb = [255, 197, 143]
             self.change_primary_sliders(rgb)
@@ -301,6 +304,7 @@ class MyApplication(QtGui.QMainWindow):
         '''
         rgb - based on the rgb array, assign values to
         secondary display sliders and in turn changes secondary display color
+        rgb is given in array from a range of 0 to 255
         '''
         slider_r = int((rgb[0] * 100 ) / 255)
         slider_g = int((rgb[1] * 100 ) / 255)
@@ -310,6 +314,36 @@ class MyApplication(QtGui.QMainWindow):
         self.ui.secondary_green.setValue(slider_g)
         self.ui.secondary_blue.setValue(slider_b)
     
+    def change_secondary_sliders_in_rgb_0_99(self, br_rgb):
+        '''
+        change slider values in rgb from a range of 0 to 99 value
+        for secondary monitor slider
+        '''
+        self.ui.secondary_brightness.setValue(br_rgb[0])
+        self.ui.secondary_red.setValue(br_rgb[1])
+        self.ui.secondary_green.setValue(br_rgb[2])
+        self.ui.secondary_blue.setValue(br_rgb[3])
+
+    def primary_sliders_in_rgb_0_99(self, br_rgb):
+        '''
+        change slider values in rgb from a range of 0 to 99 value
+        for primary monitor sliders
+        '''
+        self.ui.primary_brightness.setValue(br_rgb[0])
+        self.ui.primary_red.setValue(br_rgb[1])
+        self.ui.primary_green.setValue(br_rgb[2])
+        self.ui.primary_blue.setValue(br_rgb[3])
+        
+    def secondary_sliders_in_rgb_0_99(self, br_rgb):
+        '''
+        change slider values in rgb from a range of 0 to 99 value
+        for primary monitor sliders
+        '''
+        self.ui.secondary_brightness.setValue(br_rgb[0])
+        self.ui.secondary_red.setValue(br_rgb[1])
+        self.ui.secondary_green.setValue(br_rgb[2])
+        self.ui.secondary_blue.setValue(br_rgb[3])
+
     def show_about(self):
         ''' Shows the About widget'''
         self.about_widget.show()
@@ -319,6 +353,78 @@ class MyApplication(QtGui.QMainWindow):
     def show_help(self):
         ''' Shows the Help Widget'''
         self.help_widget.show()
+
+    def save_settings(self):
+        ''' save current primary and secondary display settings'''
+        file_path = QtGui.QFileDialog.getSaveFileName()[0]
+        if path.exists(file_path):
+            if self.no_of_connected_dev == 1:
+                print 'here I am in primary'
+                w_config.write_primary_display(
+                self.return_current_primary_settings(),
+                file_path
+                )
+            elif self.no_of_connected_dev == 2:
+                print 'here I am in secondary'
+                w_config.write_both_display(
+                    self.return_current_primary_settings(),
+                    self.return_current_secondary_settings(),
+                    self.ui.checkBox.isChecked(),
+                    file_path
+                )
+
+    def load_settings(self):
+        '''
+        Load current primary and secondary display settings
+        '''
+        file_path = QtGui.QFileDialog.getOpenFileName()[0]
+        if path.exists(file_path):
+            loaded_settings = r_config.read_configuration(file_path)
+            if len(loaded_settings) == 4:
+                self.primary_sliders_in_rgb_0_99(loaded_settings)
+            elif len(loaded_settings) == 9:
+                # checks just in case saved settings are for two displays,
+                # but loads when only one display is connected
+                if self.no_of_connected_dev == 1:
+                
+                    self.primary_sliders_in_rgb_0_99((loaded_settings[0],
+                                                 loaded_settings[1],
+                                                 loaded_settings[2],
+                                                 loaded_settings[3]))
+                    return 
+                # sets reverse control
+                self.ui.checkBox.setChecked(loaded_settings[8])
+                self.primary_sliders_in_rgb_0_99((loaded_settings[0],
+                                                 loaded_settings[1],
+                                                 loaded_settings[2],
+                                                 loaded_settings[3]))
+                self.secondary_sliders_in_rgb_0_99((loaded_settings[4],
+                                                 loaded_settings[5],
+                                                 loaded_settings[6],
+                                                 loaded_settings[7]))
+
+    def return_current_primary_settings(self):
+        '''
+        return p_br_rgb(primary_brightness,
+        primary_red, primary_green, primary_blue)
+        '''
+        p_br_rgb = []
+        p_br_rgb.append(self.ui.primary_brightness.value())
+        p_br_rgb.append(self.ui.primary_red.value())
+        p_br_rgb.append(self.ui.primary_green.value())
+        p_br_rgb.append(self.ui.primary_blue.value())
+        return p_br_rgb
+    def return_current_secondary_settings(self):
+        '''
+        return s_br_rgb(secondary_brightness,
+        secondary_red, secondary_green, secondary_blue)
+        '''
+        s_br_rgb = []
+        s_br_rgb.append(self.ui.secondary_brightness.value())
+        s_br_rgb.append(self.ui.secondary_red.value())
+        s_br_rgb.append(self.ui.secondary_green.value())
+        s_br_rgb.append(self.ui.secondary_blue.value())
+        return s_br_rgb
 
 class LicenseForm(QtGui.QWidget):
     '''License Form widget initialization'''

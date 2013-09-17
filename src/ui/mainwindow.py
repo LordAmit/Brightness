@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Wed Aug 28 19:24:43 2013
+# Created: Tue Sep 17 11:56:47 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -204,7 +204,7 @@ class Ui_MainWindow(object):
         self.actionHelp.setText(QtGui.QApplication.translate("MainWindow", "&Help", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout.setText(QtGui.QApplication.translate("MainWindow", "&About", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLicense.setText(QtGui.QApplication.translate("MainWindow", "&License", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionSave.setText(QtGui.QApplication.translate("MainWindow", "Save Color Profile", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionLoad.setText(QtGui.QApplication.translate("MainWindow", "Load Color Profile", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSave.setText(QtGui.QApplication.translate("MainWindow", "&Save current settings", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionLoad.setText(QtGui.QApplication.translate("MainWindow", "&Load settings", None, QtGui.QApplication.UnicodeUTF8))
         self.actionCheck_for_update.setText(QtGui.QApplication.translate("MainWindow", "&Check for Update", None, QtGui.QApplication.UnicodeUTF8))
 
