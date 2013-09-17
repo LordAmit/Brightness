@@ -24,8 +24,6 @@ def read_configuration(file_path):
         s_green = config.getint('secondary', 'green')
         s_blue = config.getint('secondary', 'blue')
         s_reversed = config.getboolean('secondary', 'reversed')
-        print (p_brightness, p_red, p_green, p_blue,
-                       s_brightness, s_red, s_green, s_blue, s_reversed)
         return (p_brightness, p_red, p_green, p_blue,
                        s_brightness, s_red, s_green, s_blue, s_reversed)
     else:
