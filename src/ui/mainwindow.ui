@@ -410,6 +410,9 @@
    </property>
   </action>
   <action name="actionCheck_for_update">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Check for Update</string>
    </property>
