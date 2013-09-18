@@ -27,7 +27,7 @@ import util.check_displays as cdisplay
 import util.write_config as w_config
 import util.read_config as r_config
 import sys
-from os import path as path
+from os import path
 
 class MyApplication(QtGui.QMainWindow):
     
@@ -372,7 +372,8 @@ class MyApplication(QtGui.QMainWindow):
     def save_settings(self):
         ''' save current primary and secondary display settings'''
         file_path = QtGui.QFileDialog.getSaveFileName()[0]
-        if path.exists(file_path):
+        # just a number. path.exists won't work in case it is a new file.
+        if len(file_path) > 5:
             if self.no_of_connected_dev == 1:
                 w_config.write_primary_display(
                 self.return_current_primary_settings(),

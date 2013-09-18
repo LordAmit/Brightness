@@ -17,7 +17,7 @@
 
 import ConfigParser
 
-def write_primary_display(p_br_rgb, path):
+def write_primary_display(p_br_rgb, file_path):
     '''
     writes the configuration file as set in brightness controller
     p_br_rgb - (int primary_brightness, int primary_red,
@@ -37,10 +37,10 @@ def write_primary_display(p_br_rgb, path):
         config.set('primary', 'green', p_br_rgb[2])
         config.set('primary', 'blue', p_br_rgb[3])
     
-    with open(path, 'wb') as configfile:
+    with open(file_path, 'wb') as configfile:
         config.write(configfile)
 
-def write_both_display(p_br_rgb, s_br_rgb, is_control_reversed, path):
+def write_both_display(p_br_rgb, s_br_rgb, is_control_reversed, file_path):
     '''
     writes the configuration file as set in brightness controller
     p_br_rgb - (int primary_brightness, int primary_red,
@@ -48,7 +48,7 @@ def write_both_display(p_br_rgb, s_br_rgb, is_control_reversed, path):
     s_br_rgb - (int secondary_brightness, int secondary_red,
     int secondary_green, int secondary_blue)
     is_control_reversed - returns if reverse control was checked
-    path - the save file path
+    file_path - the save file path
     '''
     config = ConfigParser.RawConfigParser()
     config.add_section('primary')
@@ -75,6 +75,6 @@ def write_both_display(p_br_rgb, s_br_rgb, is_control_reversed, path):
         config.set('secondary', 'green', s_br_rgb[2])
         config.set('secondary', 'blue', s_br_rgb[3])
     config.set('secondary', 'reversed', is_control_reversed)
-    with open(path, 'wb') as configfile:
+    with open(file_path, 'wb') as configfile:
         config.write(configfile)
     
