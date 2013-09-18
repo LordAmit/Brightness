@@ -386,7 +386,6 @@ class MyApplication(QtGui.QMainWindow):
                     self.ui.checkBox.isChecked(),
                     file_path
                 )
-
     def load_settings(self):
         '''
         Load current primary and secondary display settings
