@@ -17,15 +17,16 @@
 
 import ConfigParser
 
+
 def read_configuration(file_path):
-    '''
+    """
     reads configuration from given file path
     For two displays:
     return (p_brightness, p_red, p_green, p_blue,
                        s_brightness, s_red, s_green, s_blue, s_reversed)
     for one display:
     return (p_brightness, p_red, p_green, p_blue)
-    '''
+    """
     config = ConfigParser.RawConfigParser()
     config.read(file_path)
     p_brightness = config.getint('primary', 'brightness')
@@ -40,7 +41,6 @@ def read_configuration(file_path):
         s_blue = config.getint('secondary', 'blue')
         s_reversed = config.getboolean('secondary', 'reversed')
         return (p_brightness, p_red, p_green, p_blue,
-                       s_brightness, s_red, s_green, s_blue, s_reversed)
+                s_brightness, s_red, s_green, s_blue, s_reversed)
     else:
-        return (p_brightness, p_red, p_green, p_blue)
-    
+        return p_brightness, p_red, p_green, p_blue
