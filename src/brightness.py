@@ -1,28 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding:utf-8 -*-
 
 import wx
 import subprocess
 from os import system
+import sys
 
 class BrightnessController(wx.Frame):
 
     def debug_true(self):
         return False
-
-    def detect_display_devices(self):
-        """Detects available displays"""
-        connected_devs = []
-
-        xrandr_output = subprocess.check_output('xrandr -q', shell=True)
-
-        lines = xrandr_output.split('\n')
-        for line in lines:
-            words = line.split(' ')
-            for word in words:
-                if word == 'connected':
-                    connected_devs.append(words[0])
-        return connected_devs
 
     def __init__(self, parent, title):
         super(BrightnessController, self).__init__(parent, title=title,
@@ -63,13 +50,27 @@ class BrightnessController(wx.Frame):
         change brightness of Primary and Secondary
         Display.
         Source available at
-        https://github.com/lordamit/Brightness.
+        https://github.com/lordamit/Brightness
         '''
 
         self.InitUI()
         self.Center()
         self.Show()
+        
+    @classmethod
+    def detect_display_devices(self):
+            """Detects available displays"""
+            connected_devs = []
 
+            xrandr_output = subprocess.check_output('xrandr -q', shell=True)
+
+            lines = xrandr_output.split('\n')
+            for line in lines:
+                words = line.split(' ')
+                for word in words:
+                    if word == 'connected':
+                        connected_devs.append(words[0])
+            return connected_devs
     def InitUI(self):
 
         panel = wx.Panel(self)
@@ -85,7 +86,7 @@ class BrightnessController(wx.Frame):
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
             slider1 = wx.Slider(panel,
                             value=100,
-                            minValue=1,
+                            minValue=50,
                             maxValue=100,
                             size=(200, -1),
                             style=wx.SL_HORIZONTAL)
@@ -133,6 +134,17 @@ class BrightnessController(wx.Frame):
         obj = event.GetEventObject()
         val = obj.GetValue()
         system(self.cmds_secondary_display[val])
+        
+    @classmethod  
+    def getCurrentBrightness(self):
+        #Find current brightness
+        brightness_l = subprocess.check_output("xrandr --verbose | grep -i brightness | cut -f2 -d ' '", shell=True)
+        if(brightness_l != ""):
+            brightness_l = brightness_l.split('\n')[0]
+            brightness_l = int(float(brightness_l) * 100)
+        else:
+            brightness_l = ""
+        return brightness_l
 
     def about_dialog(self, event):
         """Shows the about message of Brightness Controller"""
@@ -140,6 +152,24 @@ class BrightnessController(wx.Frame):
             wx.OK | wx.ICON_INFORMATION)
 
 if __name__ == '__main__':
-    app = wx.App()
-    BrightnessController(None, title='Brightness Controller')
-    app.MainLoop()
+    if len(sys.argv) == 1:
+        app = wx.App()
+        BrightnessController(None, title='Brightness Controller')
+        app.MainLoop()
+    else:
+        level = sys.argv[1]
+        currentB = BrightnessController.getCurrentBrightness()
+        detected = BrightnessController.detect_display_devices()
+        if level == 'down':
+            if currentB <= 0:
+                exit
+            else:
+                currentB -= 5
+        elif level == 'up':
+            if currentB >= 100:
+                exit
+            else:
+                currentB += 5     
+        brightness_l = (float(currentB)/100)
+        cmd = "xrandr --output %s --brightness %s" % (detected[0], brightness_l)
+        system(cmd)
