@@ -76,6 +76,13 @@ class BrightnessController(wx.Frame):
         panel = wx.Panel(self)
         self.vbox = wx.BoxSizer(wx.VERTICAL)
 
+        menubar = wx.MenuBar()
+        help = wx.Menu()
+        help.Append(100, '&About')
+        self.Bind(wx.EVT_MENU, self.OnAboutBox, id=100)
+        menubar.Append(help, '&Help')
+        self.SetMenuBar(menubar)
+
         button_about = wx.Button(panel, label='?', size=(25, 25))
         button_about.Bind(wx.EVT_BUTTON, self.about_dialog)
         self.vbox.Add(button_about, flag=wx.ALIGN_RIGHT)
@@ -144,6 +151,43 @@ class BrightnessController(wx.Frame):
         """Shows the about message of Brightness Controller"""
         wx.MessageBox(self.about_me_message, 'About',
             wx.OK | wx.ICON_INFORMATION)
+    
+    def OnAboutBox(self, e):
+        
+        description = """Brightness Controller is the only GUI application for 
+GNU/Linux that allows you to control brightness of your primary and secondary display from the same place. It is a software based dimmer.
+"""
+
+        licence = """Brightness Controller is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Brightness Controller is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+See the GNU General Public License for more details. You should have 
+received a copy of the GNU General Public License along with Brightness Controller; 
+if not, see http://www.gnu.org/licenses/gpl.html or write to 
+the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"""
+
+
+        info = wx.AboutDialogInfo()
+
+        info.SetIcon(wx.Icon('Brightness/img/brightness.png', wx.BITMAP_TYPE_PNG))
+        info.SetName('Brightness Controller')
+        info.SetVersion('1.0.2')
+        info.SetDescription(description)
+        info.SetCopyright('(C) 2013 - 2014 Amit Seal')
+        info.SetWebSite('http://lordamit.github.io/Brightness/')
+        info.SetLicence(licence)
+        info.AddDeveloper('Amit Seal <https://twitter.com/LordAmit>')
+	info.AddDocWriter('Amit Seal <https://twitter.com/LordAmit>')
+        info.AddDocWriter('Zlatan Vasović <https://twitter.com/zdr0id>')
+	info.AddDocWriter('Archisman Panigrahi <https://twitter.com/apandada1>')
+        info.AddArtist('Archisman Panigrahi <https://twitter.com/apandada1>')
+
+        wx.AboutBox(info)
 
 if __name__ == '__main__':
     app = wx.App()
