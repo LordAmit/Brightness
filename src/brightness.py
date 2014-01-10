@@ -26,7 +26,7 @@ class BrightnessController(wx.Frame):
 
     def __init__(self, parent, title):
         super(BrightnessController, self).__init__(parent, title=title,
-                                                   size=(325, 100))
+                                                   size=(330, 100))
         self.detected_devices = self.detect_display_devices()
         self.no_of_detected_device = len(self.detected_devices)
 
@@ -57,13 +57,14 @@ class BrightnessController(wx.Frame):
             self.array_value += 0.01
 
         self.about_me_message = '''
-        # Brightness Controller v1.0.1
+        # Brightness Controller v1.0.2
 
         This application provides a GUI to
         change brightness of Primary and Secondary
         Display.
+	Homepage: http://lordamit.github.io/Brightness/
         Source available at
-        https://github.com/lordamit/Brightness.
+        https://github.com/lordamit/Brightness
         '''
 
         self.InitUI()
@@ -91,8 +92,10 @@ class BrightnessController(wx.Frame):
                             style=wx.SL_HORIZONTAL)
 
             hbox1.Add(slider1, flag=wx.LEFT | wx.RIGHT,
-                  border=25)
+                  border=15)
+	    self.primary_status = wx.StaticText(panel, label='100')
             slider1.Bind(wx.EVT_SCROLL, self.primary_scroll)
+	    hbox1.Add(self.primary_status, flag=wx.TOP | wx.LEFT, border=3)
         else:
             st1 = wx.StaticText(panel, label='   Primary Not Found')
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
@@ -111,8 +114,10 @@ class BrightnessController(wx.Frame):
                             size=(200, -1),
                             style=wx.SL_HORIZONTAL)
             self.hbox2.Add(slider2, flag=wx.LEFT,
-                  border=7)
-
+                  border=15)
+	    self.secondary_status = wx.StaticText(panel, label='100')
+	    self.hbox2.Add(self.secondary_status,
+	      flag=wx.TOP | wx.LEFT, border=12)
             slider2.Bind(wx.EVT_SCROLL, self.secondary_scroll)
         else:
             st2 = wx.StaticText(panel, label='   Secondary Not found')
@@ -125,13 +130,14 @@ class BrightnessController(wx.Frame):
         """Controls the brightness of primary monitor"""
         obj = event.GetEventObject()
         val = obj.GetValue()
-
+	self.primary_status.SetLabel(str(val))
         system(self.cmds_primary_display[val])
 
     def secondary_scroll(self, event):
         """Controls the brightness of secondary monitor"""
         obj = event.GetEventObject()
         val = obj.GetValue()
+	self.secondary_status.SetLabel(str(val))
         system(self.cmds_secondary_display[val])
 
     def about_dialog(self, event):
