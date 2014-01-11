@@ -174,7 +174,7 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
 
         info = wx.AboutDialogInfo()
 
-        info.SetIcon(wx.Icon('Brightness/img/brightness.png', wx.BITMAP_TYPE_PNG))
+        info.SetIcon(wx.Icon('Brightness/img/brightness.png', wx.BITMAP_TYPE_PNG)) #Edit if not working for you
         info.SetName('Brightness Controller')
         info.SetVersion('1.0.2')
         info.SetDescription(description)
