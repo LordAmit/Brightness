@@ -26,7 +26,7 @@ class BrightnessController(wx.Frame):
 
     def __init__(self, parent, title):
         super(BrightnessController, self).__init__(parent, title=title,
-                                                   size=(325, 100))
+                                                   size=(330, 100))
         self.detected_devices = self.detect_display_devices()
         self.no_of_detected_device = len(self.detected_devices)
 
@@ -57,13 +57,14 @@ class BrightnessController(wx.Frame):
             self.array_value += 0.01
 
         self.about_me_message = '''
-        # Brightness Controller v1.0.1
+        # Brightness Controller v1.0.2
 
         This application provides a GUI to
         change brightness of Primary and Secondary
         Display.
+	Homepage: http://lordamit.github.io/Brightness/
         Source available at
-        https://github.com/lordamit/Brightness.
+        https://github.com/lordamit/Brightness
         '''
 
         self.InitUI()
@@ -74,6 +75,13 @@ class BrightnessController(wx.Frame):
 
         panel = wx.Panel(self)
         self.vbox = wx.BoxSizer(wx.VERTICAL)
+
+        menubar = wx.MenuBar()
+        help = wx.Menu()
+        help.Append(100, '&About')
+        self.Bind(wx.EVT_MENU, self.OnAboutBox, id=100)
+        menubar.Append(help, '&Help')
+        self.SetMenuBar(menubar)
 
         button_about = wx.Button(panel, label='?', size=(25, 25))
         button_about.Bind(wx.EVT_BUTTON, self.about_dialog)
@@ -91,8 +99,10 @@ class BrightnessController(wx.Frame):
                             style=wx.SL_HORIZONTAL)
 
             hbox1.Add(slider1, flag=wx.LEFT | wx.RIGHT,
-                  border=25)
+                  border=15)
+	    self.primary_status = wx.StaticText(panel, label='100')
             slider1.Bind(wx.EVT_SCROLL, self.primary_scroll)
+	    hbox1.Add(self.primary_status, flag=wx.TOP | wx.LEFT, border=3)
         else:
             st1 = wx.StaticText(panel, label='   Primary Not Found')
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
@@ -111,8 +121,10 @@ class BrightnessController(wx.Frame):
                             size=(200, -1),
                             style=wx.SL_HORIZONTAL)
             self.hbox2.Add(slider2, flag=wx.LEFT,
-                  border=7)
-
+                  border=15)
+	    self.secondary_status = wx.StaticText(panel, label='100')
+	    self.hbox2.Add(self.secondary_status,
+	      flag=wx.TOP | wx.LEFT, border=12)
             slider2.Bind(wx.EVT_SCROLL, self.secondary_scroll)
         else:
             st2 = wx.StaticText(panel, label='   Secondary Not found')
@@ -125,19 +137,57 @@ class BrightnessController(wx.Frame):
         """Controls the brightness of primary monitor"""
         obj = event.GetEventObject()
         val = obj.GetValue()
-
+	self.primary_status.SetLabel(str(val))
         system(self.cmds_primary_display[val])
 
     def secondary_scroll(self, event):
         """Controls the brightness of secondary monitor"""
         obj = event.GetEventObject()
         val = obj.GetValue()
+	self.secondary_status.SetLabel(str(val))
         system(self.cmds_secondary_display[val])
 
     def about_dialog(self, event):
         """Shows the about message of Brightness Controller"""
         wx.MessageBox(self.about_me_message, 'About',
             wx.OK | wx.ICON_INFORMATION)
+    
+    def OnAboutBox(self, e):
+        
+        description = """Brightness Controller is the only GUI application for 
+GNU/Linux that allows you to control brightness of your primary and secondary display from the same place. It is a software based dimmer.
+"""
+
+        licence = """Brightness Controller is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Brightness Controller is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+See the GNU General Public License for more details. You should have 
+received a copy of the GNU General Public License along with Brightness Controller; 
+if not, see http://www.gnu.org/licenses/gpl.html or write to 
+the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"""
+
+
+        info = wx.AboutDialogInfo()
+
+        info.SetIcon(wx.Icon('Brightness/img/brightness.png', wx.BITMAP_TYPE_PNG)) #Edit if not working for you
+        info.SetName('Brightness Controller')
+        info.SetVersion('1.0.2')
+        info.SetDescription(description)
+        info.SetCopyright('(C) 2013 - 2014 Amit Seal')
+        info.SetWebSite('http://lordamit.github.io/Brightness/')
+        info.SetLicence(licence)
+        info.AddDeveloper('Amit Seal <https://twitter.com/LordAmit>')
+	info.AddDocWriter('Amit Seal <https://twitter.com/LordAmit>')
+        info.AddDocWriter('Zlatan Vasović <https://twitter.com/zdr0id>')
+	info.AddDocWriter('Archisman Panigrahi <https://twitter.com/apandada1>')
+        info.AddArtist('Archisman Panigrahi <https://twitter.com/apandada1>')
+
+        wx.AboutBox(info)
 
 if __name__ == '__main__':
     app = wx.App()
