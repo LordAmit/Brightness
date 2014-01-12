@@ -57,7 +57,7 @@ class BrightnessController(wx.Frame):
             self.array_value += 0.01
 
         self.about_me_message = '''
-        # Brightness Controller v1.0.2
+        Brightness Controller v1.0.2
 
         This application provides a GUI to
         change brightness of Primary and Secondary
@@ -182,9 +182,9 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
         info.SetWebSite('http://lordamit.github.io/Brightness/')
         info.SetLicence(licence)
         info.AddDeveloper('Amit Seal <https://twitter.com/LordAmit>')
-	info.AddDocWriter('Amit Seal <https://twitter.com/LordAmit>')
+        info.AddDocWriter('Amit Seal <https://twitter.com/LordAmit>')
         info.AddDocWriter('Zlatan Vasović <https://twitter.com/zdr0id>')
-	info.AddDocWriter('Archisman Panigrahi <https://twitter.com/apandada1>')
+        info.AddDocWriter('Archisman Panigrahi <https://twitter.com/apandada1>')
         info.AddArtist('Archisman Panigrahi <https://twitter.com/apandada1>')
 
         wx.AboutBox(info)
