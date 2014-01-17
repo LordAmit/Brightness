@@ -1,6 +1,6 @@
 # Brightness Controller
 
-his is version 2 of Brightness Controller. It's only for testing.
+This is version 2 of Brightness Controller. It's only for testing.
 
 ## Dependencies
 
