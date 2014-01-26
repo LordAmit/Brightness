@@ -27,6 +27,8 @@ class BrightnessController(wx.Frame):
     def __init__(self, parent, title):
         super(BrightnessController, self).__init__(parent, title=title,
                                                    size=(325, 100))
+        self.SetMinSize((325, 100))
+        self.SetMaxSize((325, 100))
         self.detected_devices = self.detect_display_devices()
         self.no_of_detected_device = len(self.detected_devices)
 
@@ -160,14 +162,14 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
         info.SetName('Brightness Controller')
         info.SetVersion('1.1')
         info.SetDescription(description)
-        info.SetCopyright('(C) 2013 - 2014 Amit Seal')
+        info.SetCopyright('(C) 2013 - 2014 Amit Seal Ami')
         info.SetWebSite('http://lordamit.github.io/Brightness/')
         info.SetLicence(licence)
-        info.AddDeveloper('Amit Seal <https://twitter.com/LordAmit>')
-        info.AddDocWriter('Amit Seal <https://twitter.com/LordAmit>')
-        info.AddDocWriter('Zlatan Vasović <https://twitter.com/zdr0id>')
-        info.AddDocWriter('Archisman Panigrahi <https://twitter.com/apandada1>')
-        info.AddArtist('Archisman Panigrahi <https://twitter.com/apandada1>')
+        info.AddDeveloper('Amit Seal Ami <amitseal@outlook.com>')
+        info.AddDocWriter('Amit Seal Ami <amitseal@outlook.com>')
+        info.AddDocWriter('Zlatan Vasović <zdroid@pulsir.eu>')
+        info.AddDocWriter('Archisman Panigrahi <apandada1@gmail.com>')
+        info.AddArtist('Archisman Panigrahi <apandada1@gmail.com>')
 
         wx.AboutBox(info)
 
