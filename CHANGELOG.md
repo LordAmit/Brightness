@@ -2,6 +2,10 @@
 
 This log file contains significant change descriptions, started from 15 July, 2013. The change log contents will be sorted to keep the latest ones at top.
 
+## 24 January, 2014
+- Version 1.1
+- Inclusion of Credits
+- Return of brightness status values
 ## 25 August, 2013
 
 Pulled in changes from apandada1, ZDroid, sazid and lordamit
