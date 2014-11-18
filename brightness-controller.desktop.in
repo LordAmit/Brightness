@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=Brightness Controller
+_Comment=BrightnessController application
+Categories=GNOME;Utility;
+Exec=brightness-controller
+Icon=brightness-controller
+Terminal=false
+Type=Application

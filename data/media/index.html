@@ -1,0 +1,44 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="close">&#10005;</div>
+	<div class="minimize">&#150;</div>
+
+	<div id="slider1">
+		"Display 1"
+		<select onchange="DropDown1(this.value)">
+			<option value="VGA1">VGA</option>
+			<option value="LDVS1">LDVS</option>
+			<option value="DVI1">DVI</option>
+			<option value="HDMI1">HDMI</option>
+			<option value="DP1">DP</option>
+		</select>
+		<input id="slider1" type="range" min="0.0" max="1.0" step="0.01" onchange="updateTitle1(this.value);" />
+		<div id="slider1value">
+		</div>
+	</div>
+
+	<div id="slider2">
+		"Display 2"
+		<select onchange="DropDown2(this.value)">
+			<option value="VGA2">VGA</option>
+			<option value="LDVS2">LDVS</option>
+			<option value="DVI2">DVI</option>
+			<option value="HDMI2">HDMI</option>
+			<option value="DP2">DP</option>
+		</select>
+		<input id="slider2" type="range" min="0.0" max="1.0" step="0.01" onchange="updateTitle2(this.value);" />
+		<div id="slider2value">
+		</div>
+	</div>
+
+	<script src="jquery.min.js"></script>
+	<script src="script.js"></script>
+</body>
+
+</html>
