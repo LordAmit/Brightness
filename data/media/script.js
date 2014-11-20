@@ -20,6 +20,13 @@ function updateTitle2(val) {
 	$("#slider2value").html(Math.round(val * 100))
 }
 
+function MasterControl() {
+	var number = $('input[name=number]').val()
+	var type = $('input[name=type]').val()
+	var value = $('input[name=value]').val()
+	document.title = "xrandr --output " + type + number + " --brightness " + (value / 100)
+}
+
 $(document).ready(function () {
 	//On first run, brightness will be 1
 	if (localStorage.getItem("BrightnessController_brightness1") === null) {
