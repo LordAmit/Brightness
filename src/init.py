@@ -28,6 +28,7 @@ import util.read_config as ReadConfig
 import sys
 from os import path
 
+import systray_rc
 
 class MyApplication(QtGui.QMainWindow):
 
@@ -58,16 +59,69 @@ class MyApplication(QtGui.QMainWindow):
         self.no_of_connected_dev = 0
         self.__assign_displays()
 
+        self.createActions()
+        self.createTrayIcon()
+        
+        self.setIcon(1)
+        self.trayIcon.activated.connect(self.iconActivated)        
+        
         self.values = []
         self.array_value = 0.01
         for i in xrange(0, 100):
             self.values.append(self.array_value)
             self.array_value += 0.01
 
+        self.trayIcon.show()
+
         self.connect_handlers()
 
         self.setup_widgets()
 
+    def closeEvent(self, event):
+        if self.trayIcon.isVisible():
+            #QtGui.QMessageBox.information(self, "Systray",
+                    #"The program will keep running in the system tray. To "
+                    #"terminate the program, choose <b>Quit</b> in the "
+                    #"context menu of the system tray entry.")
+            self.hide()
+            event.ignore()
+
+    def createActions(self):
+        self.minimizeAction = QtGui.QAction("Mi&nimize", self,
+                triggered=self.hide)
+
+        self.maximizeAction = QtGui.QAction("Ma&ximize", self,
+                triggered=self.showMaximized)
+
+        self.restoreAction = QtGui.QAction("&Restore", self,
+                triggered=self.showNormal)
+
+        self.quitAction = QtGui.QAction("&Quit", self,
+                triggered=QtGui.qApp.quit)
+
+    def createTrayIcon(self):
+         self.trayIconMenu = QtGui.QMenu(self)
+         self.trayIconMenu.addAction(self.minimizeAction)
+         self.trayIconMenu.addAction(self.maximizeAction)
+         self.trayIconMenu.addAction(self.restoreAction)
+         self.trayIconMenu.addSeparator()
+         self.trayIconMenu.addAction(self.quitAction)
+         
+         self.trayIcon = QtGui.QSystemTrayIcon(self)
+         #self.trayIcon.Trigger(self.restoreAction)
+         self.trayIcon.setContextMenu(self.trayIconMenu)
+
+    def setIcon(self, index):
+        print index
+        icon = QtGui.QIcon(':/images/heart.svg')
+        self.trayIcon.setIcon(icon)
+        self.setWindowIcon(icon)
+
+    def iconActivated(self, reason):
+        if reason == QtGui.QSystemTrayIcon.Trigger:
+            self.showNormal()
+        elif reason == QtGui.QSystemTrayIcon.MiddleClick:
+            self.hide()
 
     def setup_widgets(self):
         """connects the form widgets with functions"""
@@ -102,7 +156,7 @@ class MyApplication(QtGui.QMainWindow):
 
         user_interface.comboBox.activated[str].connect(self.combo_activated)
         user_interface.actionAbout.triggered.connect(self.show_about)
-        user_interface.actionExit.triggered.connect(self.close)
+        #user_interface.actionExit.triggered.connect(self.close)
         user_interface.actionHelp.triggered.connect(self.show_help)
         user_interface.actionLicense.triggered.connect(self.show_license)
         user_interface.actionSave.triggered.connect(self.save_settings)
