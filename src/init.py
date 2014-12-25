@@ -61,7 +61,6 @@ class MyApplication(QtGui.QMainWindow):
 
         self.createActions()
         self.createTrayIcon()
-        
         self.setIcon(1)
         self.trayIcon.activated.connect(self.iconActivated)        
         
