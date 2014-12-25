@@ -15,3 +15,5 @@ $ quickly run
 ```
 ------------------
 **Please note that CSS has not been added yet.**
+
+<a href="https://dl.dropboxusercontent.com/u/84627545/brightness-controller_0.1_all.deb">.Deb installer</a>
