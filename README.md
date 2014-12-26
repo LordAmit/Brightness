@@ -9,6 +9,9 @@ Dependency for running from source : **`quickly`**
 ------------------
 
 1. Install **`quickly`**
+```bash
+$ sudo apt-get install quickly
+```
 2. Enter the directory and run it with the following command.
 ```bash
 $ quickly run
@@ -16,4 +19,4 @@ $ quickly run
 ------------------
 **Please note that CSS has not been added yet.**
 
-<a href="https://dl.dropboxusercontent.com/u/84627545/brightness-controller_0.1_all.deb">.Deb installer</a>
+<a href="https://dl.dropboxusercontent.com/u/84627545/brightness-controller_0.1_all.deb">.Deb installer</a> (not updated frequently)
