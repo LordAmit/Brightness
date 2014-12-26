@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="brightness-controller">
+  <schema id="net.launchpad.brightness-controller" path="/net/launchpad/brightness-controller/">
+    <key name="example" type="s">
+      <default>''</default>
+      <summary>Sample setting</summary>
+      <description>Longer description of this sample setting.  Talk about allowed values and what it does.</description>
+    </key>
+  </schema>
+</schemalist>
