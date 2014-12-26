@@ -12,6 +12,7 @@ Dependency for running from source : **`quickly`**
 ```bash
 $ sudo apt-get install quickly
 ```
+
 2. Enter the directory and run it with the following command.
 ```bash
 $ quickly run
