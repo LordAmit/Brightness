@@ -8,15 +8,16 @@ Dependency for running from source : **`quickly`**
 ### How to run it?
 ------------------
 
-1. Install **`quickly`**
+<li> 1. Install **`quickly`**
 ```bash
 $ sudo apt-get install quickly
 ```
-
-2. Enter the directory and run it with the following command.
+</li>
+<li> 2. Enter the directory and run it with the following command.
 ```bash
 $ quickly run
 ```
+</li>
 ------------------
 **Please note that CSS has not been added yet.**
 
