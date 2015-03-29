@@ -30,8 +30,14 @@ Three dependencies only.
 1. **Python** - Linux should have it by default
 
 2. **Python WxWidgets**
+
+For Debian package manager (usually the default with most Ubuntu flavors):
 ```bash
 $ sudo apt-get install python-wxgtk2.8
+```
+For Yum package manager (Fedora):
+```bash
+$ sudo yum install wxPython-devel
 ```
 3. **`xrandr`** - that's what the program uses in the backend to control the brightness of your monitor!
 
