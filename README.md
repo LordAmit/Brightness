@@ -1,13 +1,13 @@
 # Brightness Controller
 
-This is version 2 of Brightness Controller. It's only for testing.
+This is version 2 of Brightness Controller. It's only for testing. You can find details and installers of Brightness Controller Stable version 1.2.2 from [here](http://lordamit.github.io/Brightness/).
 
 ## Dependencies
 
 Not sure about all dependencies, but this is one of them:
 
 - python-pyside
- 
+
 ## Features
 
 v2 is very stable so far, but there are some features that aren't finished.
