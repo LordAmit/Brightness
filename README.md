@@ -11,8 +11,8 @@ There are mainly two options available. One is for users, involving installers d
 **For users:**
 
 - [Ubuntu Software Center](https://apps.ubuntu.com/cat/applications/brightness-controller/)
-- [Debian](https://dl.dropboxusercontent.com/u/84627545/brightness_1.0.1_all.deb)
-- [Experimental RPM](https://dl.dropboxusercontent.com/u/84627545/brightness-1.0.1-2.noarch.rpm)
+- [PPA](https://launchpad.net/~apandada1/+archive/ubuntu/brightness-controller/)
+- [Experimental RPM](https://db.tt/GjUYWFDH)
 - [Script*](https://gist.github.com/lordamit/6134441/download)
 
 Script gives you the latest changes made in the repository. You can execute it to even update your Brightness Controller.
