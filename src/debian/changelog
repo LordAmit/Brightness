@@ -1,4 +1,10 @@
-brightness-controller (1.2.2ubuntu3) xenial trusty; urgency=medium
+brightness-controller (1.2.2ubuntu5) xenial; urgency=medium
+
+  * Fixed dependency error in Xenial
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 26 Apr 2016 09:48:44 +0530
+ 
+brightness-controller (1.2.2ubuntu4) xenial; urgency=medium
 
   * Fixed dependency error in Xenial
 
