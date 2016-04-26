@@ -139,8 +139,13 @@ class BrightnessController(wx.Frame):
 
     def OnAboutBox(self, event):
         
-        description = """Brightness Controller is the only GUI application for 
-GNU/Linux that allows you to control brightness of your primary and secondary display from the same place. It is a software based dimmer.
+        description = """Brightness Controller allows you to control Brightness of your Primary and Secondary Display in Linux. It is a software based dimmer.
+
+It allows you to control the brightness of your monitor to a better extent. For example, laptop's monitor brightness can be controlled using hardware keys at discrete values, such as 20%, 40%, 60%, ... 100%. Brightness Controller allows you to change the brightness to a better degree of control, ranging from 1% to 100%! It should be mentioned that it changes the present brightness value set via hardware control of your monitor. For example, if you set your Monitor's brightness to 50% using hardware buttons, then that will be the 100% value in Brightness controller.
+
+Want to show appreciation for what we have done? Tell your friends about it.
+
+Have troubles? Report an issue.
 """
 
         licence = """Brightness Controller is free software: you can redistribute it and/or modify
@@ -160,9 +165,9 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
         info = wx.AboutDialogInfo()
 
         info.SetName('Brightness Controller')
-        info.SetVersion('1.1')
+        info.SetVersion('1.2.2')
         info.SetDescription(description)
-        info.SetCopyright('(C) 2013 - 2014 Amit Seal Ami')
+        info.SetCopyright('(C) 2013 - 2016 Amit Seal Ami')
         info.SetWebSite('http://lordamit.github.io/Brightness/')
         info.SetLicence(licence)
         info.AddDeveloper('Amit Seal Ami <amitseal@outlook.com>')
