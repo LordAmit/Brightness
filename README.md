@@ -13,7 +13,7 @@ There are mainly two options available. One is for users, involving installers d
 - [Ubuntu Software Center](https://apps.ubuntu.com/cat/applications/brightness-controller/)
 - [PPA](https://launchpad.net/~apandada1/+archive/ubuntu/brightness-controller/)
 - [Experimental RPM](https://db.tt/GjUYWFDH)
-- [Script*](https://gist.github.com/lordamit/6134441/download)
+- [Script*](https://gist.github.com/apandada1/3d81bc68ffc87cb5ceaba6ae78206f0a/archive/d0f35dbdf260d4041e667e565d251d3d1027a4e5.zip)
 
 Script gives you the latest changes made in the repository. You can execute it to even update your Brightness Controller.
 
@@ -35,6 +35,12 @@ For Debian package manager (usually the default with most Ubuntu flavors):
 ```bash
 $ sudo apt-get install python-wxgtk2.8
 ```
+or,
+```bash
+$ sudo apt-get install python-wxgtk3.0
+```
+which is available in your system.
+
 For Yum package manager (Fedora):
 ```bash
 $ sudo yum install wxPython-devel

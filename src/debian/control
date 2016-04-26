@@ -1,0 +1,31 @@
+Source: brightness-controller
+Maintainer: Archisman Panigrahi <apandada1@gmail.com>
+Section: utils
+Standards-Version: 3.9.5
+Build-depends: debhelper,
+	       python | python-all | python-dev | python-all-dev
+Homepage: http://lordamit.github.io/Brightness/
+Priority: optional
+
+Package: brightness-controller
+Architecture: all
+Depends: x11-xserver-utils,
+	 python-wxgtk3.0 | python-wxgtk2.8 | python-wxgtk2.6,
+	 python
+Section: utils
+Description: Easily adjust your display brightness
+ Brightness Controller is the only GUI application 
+ for Linux that allows you to control brightness of
+ your primary and secondary display from the same place. 
+ It is a software based dimmer. 
+ Released under GPL-3, Brightness Controller's source code 
+ is available at
+ .
+ https://github.com/lordamit/Brightness
+ .
+ If you encounter any problem you can open an issue 
+ in the GitHub project. 
+ .
+ Kindly review and let your friends know if this application 
+ made your display more friendly to your eyes.
+

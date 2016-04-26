@@ -2,6 +2,10 @@
 
 This log file contains significant change descriptions, started from 15 July, 2013. The change log contents will be sorted to keep the latest ones at top.
 
+## 25 April, 2016
+- Version 1.2.3
+- Almost nothing changed. Had to Change version number for launchpad PPA.
+
 ## 24 January, 2014
 - Version 1.1
 - Inclusion of Credits
