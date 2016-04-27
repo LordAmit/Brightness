@@ -26,8 +26,7 @@ The following features are implemented:
 
 We are working on the following features:
 
-1. Auto-loading of color and brightness settings
-2. Checking for update
+- Saving and auto-loading of color and brightness settings
 
 It should be mentioned that through color profile, the Red, Green and Blue color ratios  are changed in the screen.
 
