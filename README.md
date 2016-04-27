@@ -8,6 +8,12 @@ First, install pyside.
 ```bash
 sudo apt-get install python-pyside
 ```
+Somtimes it is not enough to install and integrate pyside, so you might also try installing pyside using pip.
+
+```bash
+pip install pyside
+```
+
 Next, download the latest zip file from [here](https://github.com/lordamit/Brightness/archive/develop.zip).
 
 Extract it and open a terminal. Change directory to the `Brightness` folder. Next type this command:
@@ -33,6 +39,7 @@ It should be mentioned that through color profile, the Red, Green and Blue color
 
 ## Dependencies
 There are several dependencies:
+
 1. python-pyside
 2. xrandr suppport in your system
 
