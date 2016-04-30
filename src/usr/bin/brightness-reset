@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import wx
 import subprocess
 from os import system
 
-class BrightnessRestore(wx.Frame):
+class BrightnessRestore():
 
     def detect_display_devices(self):
         """Detects available displays"""
@@ -28,6 +27,4 @@ class BrightnessRestore(wx.Frame):
 
 
 if __name__ == '__main__':
-    app = wx.App()
     BrightnessRestore()
-    app.MainLoop()
