@@ -25,6 +25,7 @@ python src/init.py
 ## Features
 
 The following features are implemented:
+
 1. Brightness Control
 2. Reversing Brightness control for primary and secondary monitor in case you want to flip the controls.
 1. Saving color profile
@@ -35,13 +36,13 @@ We are working on the following features:
 1. Auto-loading of color and brightness settings
 2. Checking for update
 
-It should be mentioned that through color profile, the Red, Green and Blue color ratios  are changed in the screen.
+It should be mentioned that through color profile Red, Green and Blue color ratios are changed in the screen.
 
 ## Dependencies
 There are several dependencies:
 
 1. python-pyside
-2. xrandr suppport in your system
+2. xrandr support in your system
 
 ## Bugs
 
