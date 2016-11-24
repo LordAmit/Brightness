@@ -14,7 +14,7 @@ Somtimes it is not enough to install and integrate pyside, so you might also try
 pip install pyside
 ```
 
-Next, download the latest zip file from [here](https://github.com/lordamit/Brightness/archive/develop.zip).
+Next, download the latest zip file from [here](https://github.com/lordamit/Brightness/archive/master.zip).
 
 Extract it and open a terminal. Change directory to the `Brightness` folder. Next type this command:
 
