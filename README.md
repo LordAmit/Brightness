@@ -1,6 +1,6 @@
 # Brightness Controller
 
-This is version 2 of Brightness Controller (beta). It is completely stable and we are working on some more features to be integrated before release.
+This is version 2 of Brightness Controller (beta). It is completely stable and we are working on some more features to be integrated before release. Please note that it is compatible with python2 only. We are facing issues converting it to python3 due to PySide integration issues.
 
 ## Installation
 First, install pyside.
