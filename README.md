@@ -1,6 +1,6 @@
 # Brightness Controller
 
-This is version 2 of Brightness Controller (beta). It is completely stable and we are working on some more features to be integrated before release. Please note that it is compatible with python2 only.
+This is version 2 of Brightness Controller (beta). It is completely stable and we are working on some more features to be integrated before release. Please note that it is compatible with python2 only.It also supports arbitary number of displays!
 
 ![](img/BrightnessController.gif)
 
@@ -29,9 +29,10 @@ python src/init.py
 The following features are implemented:
 
 1. Brightness Control
-2. Reversing Brightness control for primary and secondary monitor in case you want to flip the controls.
+1. Reversing Brightness control for primary and secondary monitor in case you want to flip the controls.
 1. Saving color profile
-2. Loading color profile
+1. Loading color profile
+
 
 We are working on the following features:
 
