@@ -43,7 +43,7 @@ def write_primary_display(p_br_rgb, file_path):
         config.write(configfile)
 
 
-def write_both_display(p_br_rgb, s_br_rgb, is_control_reversed, file_path):
+def write_both_display(p_br_rgb, s_br_rgb, file_path):
     """
     writes the configuration file as set in brightness controller
     p_br_rgb - (int primary_brightness, int primary_red,
@@ -77,6 +77,5 @@ def write_both_display(p_br_rgb, s_br_rgb, is_control_reversed, file_path):
         config.set('secondary', 'red', s_br_rgb[1])
         config.set('secondary', 'green', s_br_rgb[2])
         config.set('secondary', 'blue', s_br_rgb[3])
-    config.set('secondary', 'reversed', is_control_reversed)
     with open(file_path, 'wb') as configfile:
         config.write(configfile)
