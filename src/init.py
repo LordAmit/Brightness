@@ -384,6 +384,7 @@ class MyApplication(QtGui.QMainWindow):
         change slider values in rgb from a range of 0 to 99 value
         for primary monitor sliders
         """
+        print(br_rgb)
         self.ui.secondary_brightness.setValue(br_rgb[0])
         self.ui.secondary_red.setValue(br_rgb[1])
         self.ui.secondary_green.setValue(br_rgb[2])
@@ -414,7 +415,8 @@ class MyApplication(QtGui.QMainWindow):
             elif self.no_of_connected_dev >= 2:
                 WriteConfig.write_both_display(
                     self.return_current_primary_settings(),
-                    self.return_current_secondary_settings()
+                    self.return_current_secondary_settings(),
+                    file_path
 
                 )
 
@@ -425,18 +427,19 @@ class MyApplication(QtGui.QMainWindow):
         file_path = QtGui.QFileDialog.getOpenFileName()[0]
         if path.exists(file_path):
             loaded_settings = ReadConfig.read_configuration(file_path)
+            print(loaded_settings)
             if len(loaded_settings) == 4:
                 self.primary_sliders_in_rgb_0_99(loaded_settings)
-            elif len(loaded_settings) == 9:
+            elif len(loaded_settings) == 8:
                 # checks just in case saved settings are for two displays,
                 # but loads when only one display is connected
                 if self.no_of_connected_dev == 1:
 
                     self.primary_sliders_in_rgb_0_99(
                         (loaded_settings[0],
-                            loaded_settings[1],
-                            loaded_settings[2],
-                            loaded_settings[3]))
+                        loaded_settings[1],
+                        loaded_settings[2],
+                        loaded_settings[3]))
                     return
                 # sets reverse control
 
