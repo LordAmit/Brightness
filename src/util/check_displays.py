@@ -22,10 +22,10 @@ import subprocess
 def detect_display_devices():
     """
     Detects available displays.
-    returns connected_devs
+    returns connected_displays
     This contains the available device names compatible with xrandr
     """
-    connected_devs = []
+    connected_displays = []
 
     xrandr_output = subprocess.check_output('xrandr -q', shell=True)
 
@@ -34,5 +34,5 @@ def detect_display_devices():
         words = line.split(' ')
         for word in words:
             if word == 'connected':
-                connected_devs.append(words[0])
-    return connected_devs
+                connected_displays.append(words[0])
+    return connected_displays
