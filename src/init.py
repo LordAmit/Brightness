@@ -14,7 +14,8 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Brightness Controller.  If not, see <http://www.gnu.org/licenses/>.
+# along with Brightness Controller.  If not, see
+# <http://www.gnu.org/licenses/>.
 
 from PySide import QtGui, QtCore
 from ui.mainwindow import Ui_MainWindow
@@ -33,18 +34,17 @@ class MyApplication(QtGui.QMainWindow):
 
     def __assign_displays(self):
         """assigns display name """
-        displays = CDisplay.detect_display_devices()
-        no_of_displays = len(displays)
-        self.no_of_connected_dev = no_of_displays
-        if no_of_displays == 1:
-            self.display1 = displays[0]
-        elif no_of_displays == 2:
-            if True:
-                self.display1 = displays[0]
-                self.display2 = displays[1]
-            else:
-                self.display1 = displays[1]
-                self.display2 = displays[0]
+        self.displays = CDisplay.detect_display_devices()
+        self.no_of_displays = len(self.displays)
+        self.no_of_connected_dev = self.no_of_displays
+
+        if self.no_of_displays is 1:
+
+            self.display1 = self.displays[0]
+        elif self.no_of_displays is 2:
+
+            self.display1 = self.displays[0]
+            self.display2 = self.displays[1]
 
     def __init__(self, parent=None):
         """Initializes"""
@@ -57,17 +57,14 @@ class MyApplication(QtGui.QMainWindow):
         self.display2 = None
         self.no_of_connected_dev = 0
         self.__assign_displays()
-
+        self.generate_dynamic_items()
         self.values = []
         self.array_value = 0.01
         for i in xrange(0, 100):
             self.values.append(self.array_value)
             self.array_value += 0.01
-
         self.connect_handlers()
-
         self.setup_widgets()
-
 
     def setup_widgets(self):
         """connects the form widgets with functions"""
@@ -83,6 +80,29 @@ class MyApplication(QtGui.QMainWindow):
         self.help_widget.set_main_window(self)
         self.help_widget.hide()
 
+    def generate_dynamic_items(self):
+        '''
+        manages widgets that may contain dynamic items.
+        '''
+        self.generate_brightness_sources()
+
+    def generate_brightness_sources(self):
+        '''
+        generates assigns display sources to combo boxes
+        '''
+        user_interface = self.ui
+        if self.no_of_connected_dev < 2:
+            user_interface.secondary_combo.addItem("Disabled")
+            user_interface.secondary_combo.setEnabled(False)
+            user_interface.primary_combobox.addItem("Disabled")
+            user_interface.primary_combobox.setEnabled(False)
+            return
+        
+        for display in self.displays:
+            user_interface.secondary_combo.addItem(display)
+            user_interface.primary_combobox.addItem(display)
+         
+
     def connect_handlers(self):
         """Connects the handlers of GUI widgets"""
         user_interface = self.ui
@@ -96,11 +116,15 @@ class MyApplication(QtGui.QMainWindow):
             connect(self.change_value_pg)
         self.enable_secondary_widgets(False)
 
-        if self.no_of_connected_dev == 2:
+        if self.no_of_connected_dev >= 2:
             self.enable_secondary_widgets(True)
             self.connect_secondary_widgets()
 
         user_interface.comboBox.activated[str].connect(self.combo_activated)
+        user_interface.primary_combobox.activated[
+            str].connect(self.primary_source_combo_activated)
+        user_interface.secondary_combo.activated[
+            str].connect(self.secondary_source_combo_activated)
         user_interface.actionAbout.triggered.connect(self.show_about)
         user_interface.actionExit.triggered.connect(self.close)
         user_interface.actionHelp.triggered.connect(self.show_help)
@@ -112,7 +136,6 @@ class MyApplication(QtGui.QMainWindow):
         """
         boolean - assigns boolean value to setEnabled(boolean)
         """
-        self.ui.checkBox.setEnabled(boolean)
         self.ui.secondary_brightness.setEnabled(boolean)
         self.ui.secondary_blue.setEnabled(boolean)
         self.ui.secondary_red.setEnabled(boolean)
@@ -130,7 +153,6 @@ class MyApplication(QtGui.QMainWindow):
             connect(self.change_value_sb)
         self.ui.secondary_green.valueChanged[int].\
             connect(self.change_value_sg)
-        self.ui.checkBox.stateChanged.connect(self.changed_state)
 
     def change_value_pbr(self, value):
         """Changes Primary Display Brightness"""
@@ -152,10 +174,10 @@ class MyApplication(QtGui.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
             (self.display1,
-                self.values[self.ui.primary_brightness.value()],
-                self.values[value],
-                self.values[self.ui.primary_green.value()],
-                self.values[self.ui.primary_blue.value()])
+             self.values[self.ui.primary_brightness.value()],
+             self.values[value],
+             self.values[self.ui.primary_green.value()],
+             self.values[self.ui.primary_blue.value()])
         Executor.execute_command(cmd_value)
 
     def change_value_pg(self, value):
@@ -165,10 +187,10 @@ class MyApplication(QtGui.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
             (self.display1,
-                self.values[self.ui.primary_brightness.value()],
-                self.values[self.ui.primary_red.value()],
-                self.values[value],
-                self.values[self.ui.primary_blue.value()])
+             self.values[self.ui.primary_brightness.value()],
+             self.values[self.ui.primary_red.value()],
+             self.values[value],
+             self.values[self.ui.primary_blue.value()])
 
         Executor.execute_command(cmd_value)
 
@@ -249,6 +271,12 @@ class MyApplication(QtGui.QMainWindow):
             temp = self.display1
             self.display1 = self.display2
             self.display2 = temp
+
+    def secondary_source_combo_activated(self, text):
+        self.display2 = text
+
+    def primary_source_combo_activated(self, text):
+        self.display1 = text
 
     def combo_activated(self, text):
         """ Designates values to display and to sliders """
@@ -383,12 +411,11 @@ class MyApplication(QtGui.QMainWindow):
                     self.return_current_primary_settings(),
                     file_path
                 )
-            elif self.no_of_connected_dev == 2:
+            elif self.no_of_connected_dev >= 2:
                 WriteConfig.write_both_display(
                     self.return_current_primary_settings(),
-                    self.return_current_secondary_settings(),
-                    self.ui.checkBox.isChecked(),
-                    file_path
+                    self.return_current_secondary_settings()
+
                 )
 
     def load_settings(self):
@@ -412,7 +439,7 @@ class MyApplication(QtGui.QMainWindow):
                             loaded_settings[3]))
                     return
                 # sets reverse control
-                self.ui.checkBox.setChecked(loaded_settings[8])
+
                 self.primary_sliders_in_rgb_0_99(
                     (loaded_settings[0],
                      loaded_settings[1],
@@ -429,17 +456,17 @@ class MyApplication(QtGui.QMainWindow):
         return p_br_rgb(primary_brightness,
         primary_red, primary_green, primary_blue)
         """
-        #p_br_rgb = []
+        # p_br_rgb = []
         p_br_rgb = [
             self.ui.primary_brightness.value(),
             self.ui.primary_red.value(),
             self.ui.primary_green.value(),
             self.ui.primary_blue.value(),
         ]
-        #p_br_rgb.append(self.ui.primary_brightness.value())
-        #p_br_rgb.append(self.ui.primary_red.value())
-        #p_br_rgb.append(self.ui.primary_green.value())
-        #p_br_rgb.append(self.ui.primary_blue.value())
+        # p_br_rgb.append(self.ui.primary_brightness.value())
+        # p_br_rgb.append(self.ui.primary_red.value())
+        # p_br_rgb.append(self.ui.primary_green.value())
+        # p_br_rgb.append(self.ui.primary_blue.value())
         return p_br_rgb
 
     def return_current_secondary_settings(self):
@@ -453,21 +480,23 @@ class MyApplication(QtGui.QMainWindow):
             self.ui.secondary_green.value(),
             self.ui.secondary_blue.value()
         ]
-        #s_br_rgb = []
-        #s_br_rgb.append(self.ui.secondary_brightness.value())
-        #s_br_rgb.append(self.ui.secondary_red.value())
-        #s_br_rgb.append(self.ui.secondary_green.value())
-        #s_br_rgb.append(self.ui.secondary_blue.value())
+        # s_br_rgb = []
+        # s_br_rgb.append(self.ui.secondary_brightness.value())
+        # s_br_rgb.append(self.ui.secondary_red.value())
+        # s_br_rgb.append(self.ui.secondary_green.value())
+        # s_br_rgb.append(self.ui.secondary_blue.value())
         return s_br_rgb
 
 
 class LicenseForm(QtGui.QWidget):
+
     """License Form widget initialization"""
+
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
         self.ui = License_Ui_Form()
         self.ui.setupUi(self)
-        #self.connect_handlers()
+        # self.connect_handlers()
         self.main_window = None
         self.entry_id = None
 
@@ -477,7 +506,9 @@ class LicenseForm(QtGui.QWidget):
 
 
 class AboutForm(QtGui.QWidget):
+
     """About Form widget initialization"""
+
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
         self.ui = About_Ui_Form()
@@ -491,7 +522,9 @@ class AboutForm(QtGui.QWidget):
 
 
 class HelpForm(QtGui.QWidget):
+
     """Help Form widget initialization"""
+
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
         self.ui = Help_Ui_Form()
