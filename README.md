@@ -1,6 +1,6 @@
 # Brightness Controller
 
-This is version 2 of Brightness Controller (beta). It is completely stable and we are working on some more features to be integrated before release. Please note that it is compatible with python2 only.It also supports arbitary number of displays!
+This is version 2 of Brightness Controller. It is completely stable and we are working on some more features to be integrated before release. Please note that it is compatible with python2 only. It supports arbitary number of displays!
 
 ![](img/BrightnessController.gif)
 
