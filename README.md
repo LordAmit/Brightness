@@ -29,7 +29,6 @@ python src/init.py
 The following features are implemented:
 
 1. Brightness Control
-1. Reversing Brightness control for primary and secondary monitor in case you want to flip the controls.
 1. Saving color profile
 1. Loading color profile
 
