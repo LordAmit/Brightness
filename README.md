@@ -1,6 +1,8 @@
 # Brightness Controller
 
-This is version 2 of Brightness Controller (beta). It is completely stable and we are working on some more features to be integrated before release. Please note that it is compatible with python2 only. We are facing issues converting it to python3 due to PySide integration issues.
+This is version 2 of Brightness Controller (beta). It is completely stable and we are working on some more features to be integrated before release. Please note that it is compatible with python2 only.
+
+![](img/BrightnessController.gif)
 
 ## Installation
 First, install pyside.
@@ -43,6 +45,7 @@ There are several dependencies:
 
 1. python-pyside
 2. xrandr support in your system
+3. python2
 
 ## Bugs
 
