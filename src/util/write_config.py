@@ -26,6 +26,7 @@ def write_primary_display(p_br_rgb, file_path):
     @rtype : object
     """
     config = ConfigParser.RawConfigParser()
+    config.add_section('type')
     config.add_section('primary')
     config.set('primary', 'has_secondary', False)
     if p_br_rgb is None:
@@ -38,7 +39,7 @@ def write_primary_display(p_br_rgb, file_path):
         config.set('primary', 'red', p_br_rgb[1])
         config.set('primary', 'green', p_br_rgb[2])
         config.set('primary', 'blue', p_br_rgb[3])
-    
+
     with open(file_path, 'wb') as configfile:
         config.write(configfile)
 
@@ -46,11 +47,10 @@ def write_primary_display(p_br_rgb, file_path):
 def write_both_display(p_br_rgb, s_br_rgb, file_path):
     """
     writes the configuration file as set in brightness controller
-    p_br_rgb - (int primary_brightness, int primary_red,
-    int primary_green, int primary_blue)
+    `p_br_rgb` - (int primary_brightness, int primary_red,
+    int primary_green, int primary_blue, source)
     s_br_rgb - (int secondary_brightness, int secondary_red,
-    int secondary_green, int secondary_blue)
-    is_control_reversed - returns if reverse control was checked
+    int secondary_green, int secondary_blue, source)
     file_path - the save file path
     """
     config = ConfigParser.RawConfigParser()
@@ -66,6 +66,7 @@ def write_both_display(p_br_rgb, s_br_rgb, file_path):
         config.set('primary', 'red', p_br_rgb[1])
         config.set('primary', 'green', p_br_rgb[2])
         config.set('primary', 'blue', p_br_rgb[3])
+        config.set('primary', 'source', p_br_rgb[4])
     config.add_section('secondary')
     if s_br_rgb is None:
         config.set('secondary', 'brightness', 99)
@@ -77,5 +78,6 @@ def write_both_display(p_br_rgb, s_br_rgb, file_path):
         config.set('secondary', 'red', s_br_rgb[1])
         config.set('secondary', 'green', s_br_rgb[2])
         config.set('secondary', 'blue', s_br_rgb[3])
+        config.set('secondary', 'source', s_br_rgb[4])
     with open(file_path, 'wb') as configfile:
         config.write(configfile)

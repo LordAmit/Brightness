@@ -16,7 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Brightness Controller.  If not, see
 # <http://www.gnu.org/licenses/>.
-
+import sys
+from os import path
 from PySide import QtGui, QtCore
 from ui.mainwindow import Ui_MainWindow
 from ui.license import Ui_Form as License_Ui_Form
@@ -26,8 +27,7 @@ import util.executor as Executor
 import util.check_displays as CDisplay
 import util.write_config as WriteConfig
 import util.read_config as ReadConfig
-import sys
-from os import path
+
 
 
 class MyApplication(QtGui.QMainWindow):
@@ -97,11 +97,11 @@ class MyApplication(QtGui.QMainWindow):
             user_interface.primary_combobox.addItem("Disabled")
             user_interface.primary_combobox.setEnabled(False)
             return
-        
+
         for display in self.displays:
             user_interface.secondary_combo.addItem(display)
             user_interface.primary_combobox.addItem(display)
-         
+
 
     def connect_handlers(self):
         """Connects the handlers of GUI widgets"""
@@ -201,10 +201,10 @@ class MyApplication(QtGui.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
             (self.display1,
-                self.values[self.ui.primary_brightness.value()],
-                self.values[self.ui.primary_red.value()],
-                self.values[self.ui.primary_green.value()],
-                self.values[value])
+             self.values[self.ui.primary_brightness.value()],
+             self.values[self.ui.primary_red.value()],
+             self.values[self.ui.primary_green.value()],
+             self.values[value])
         Executor.execute_command(cmd_value)
 
     def change_value_sbr(self, value):
@@ -216,10 +216,10 @@ class MyApplication(QtGui.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
             (self.display2,
-                self.values[value],
-                self.values[self.ui.secondary_red.value()],
-                self.values[self.ui.secondary_green.value()],
-                self.values[self.ui.secondary_blue.value()])
+             self.values[value],
+             self.values[self.ui.secondary_red.value()],
+             self.values[self.ui.secondary_green.value()],
+             self.values[self.ui.secondary_blue.value()])
         Executor.execute_command(cmd_value)
 
     def change_value_sr(self, value):
@@ -229,10 +229,10 @@ class MyApplication(QtGui.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
             (self.display2,
-                self.values[self.ui.secondary_brightness.value()],
-                self.values[value],
-                self.values[self.ui.secondary_green.value()],
-                self.values[self.ui.secondary_blue.value()])
+             self.values[self.ui.secondary_brightness.value()],
+             self.values[value],
+             self.values[self.ui.secondary_green.value()],
+             self.values[self.ui.secondary_blue.value()])
         Executor.execute_command(cmd_value)
 
     def change_value_sg(self, value):
@@ -256,10 +256,10 @@ class MyApplication(QtGui.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
             (self.display2,
-                self.values[self.ui.secondary_brightness.value()],
-                self.values[self.ui.secondary_red.value()],
-                self.values[self.ui.secondary_green.value()],
-                self.values[value])
+             self.values[self.ui.secondary_brightness.value()],
+             self.values[self.ui.secondary_red.value()],
+             self.values[self.ui.secondary_green.value()],
+             self.values[value])
         Executor.execute_command(cmd_value)
 
     def changed_state(self, state):
@@ -430,29 +430,44 @@ class MyApplication(QtGui.QMainWindow):
             print(loaded_settings)
             if len(loaded_settings) == 4:
                 self.primary_sliders_in_rgb_0_99(loaded_settings)
-            elif len(loaded_settings) == 8:
+            elif len(loaded_settings) == 10:
                 # checks just in case saved settings are for two displays,
                 # but loads when only one display is connected
                 if self.no_of_connected_dev == 1:
 
                     self.primary_sliders_in_rgb_0_99(
                         (loaded_settings[0],
-                        loaded_settings[1],
-                        loaded_settings[2],
-                        loaded_settings[3]))
+                         loaded_settings[1],
+                         loaded_settings[2],
+                         loaded_settings[3]))
                     return
                 # sets reverse control
-
+                primary_source = loaded_settings[4]
+                secondary_source = loaded_settings[9]
+                primary_combo_index = self.ui.primary_combobox.findText(
+                    primary_source, QtCore.Qt.MatchFixedString)
+                second_combo_index = self.ui.secondary_combo.findText(
+                    secondary_source, QtCore.Qt.MatchFixedString)
+                if primary_combo_index >= 0:
+                    self.ui.primary_combobox.setCurrentIndex(primary_combo_index)
+                    self.primary_source_combo_activated(primary_source)
+                if second_combo_index >= 0:
+                    self.ui.secondary_combo.setCurrentIndex(second_combo_index)
+                    self.secondary_source_combo_activated(secondary_source)
                 self.primary_sliders_in_rgb_0_99(
                     (loaded_settings[0],
                      loaded_settings[1],
                      loaded_settings[2],
                      loaded_settings[3]))
+                # (99, 99, 99, 99, 'LVDS-1', 99, 38, 99, 99, 'VGA-1')
+
                 self.secondary_sliders_in_rgb_0_99(
-                    (loaded_settings[4],
-                     loaded_settings[5],
+                    (loaded_settings[5],
                      loaded_settings[6],
-                     loaded_settings[7]))
+                     loaded_settings[7],
+                     loaded_settings[8]))
+
+
 
     def return_current_primary_settings(self):
         """
@@ -465,11 +480,9 @@ class MyApplication(QtGui.QMainWindow):
             self.ui.primary_red.value(),
             self.ui.primary_green.value(),
             self.ui.primary_blue.value(),
+            self.display1
         ]
-        # p_br_rgb.append(self.ui.primary_brightness.value())
-        # p_br_rgb.append(self.ui.primary_red.value())
-        # p_br_rgb.append(self.ui.primary_green.value())
-        # p_br_rgb.append(self.ui.primary_blue.value())
+
         return p_br_rgb
 
     def return_current_secondary_settings(self):
@@ -481,7 +494,8 @@ class MyApplication(QtGui.QMainWindow):
             self.ui.secondary_brightness.value(),
             self.ui.secondary_red.value(),
             self.ui.secondary_green.value(),
-            self.ui.secondary_blue.value()
+            self.ui.secondary_blue.value(),
+            self.display2
         ]
         # s_br_rgb = []
         # s_br_rgb.append(self.ui.secondary_brightness.value())
