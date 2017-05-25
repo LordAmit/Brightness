@@ -250,9 +250,9 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
         info = wx.AboutDialogInfo()
 
         info.SetName('Brightness Controller')
-        info.SetVersion('1.2.2')
+        info.SetVersion('1.2.3')
         info.SetDescription(description)
-        info.SetCopyright('(C) 2013 - 2016 Amit Seal Ami')
+        info.SetCopyright('(C) 2013 - 2017 Amit Seal Ami')
         info.SetWebSite('http://lordamit.github.io/Brightness/')
         info.SetLicence(licence)
         info.AddDeveloper('Amit Seal Ami <amitseal@outlook.com>')
