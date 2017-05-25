@@ -97,3 +97,6 @@ ENV/
 
 # mkdocs documentation
 /site
+
+#vscode
+.vscode/
