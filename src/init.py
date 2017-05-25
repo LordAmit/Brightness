@@ -273,9 +273,13 @@ class MyApplication(QtGui.QMainWindow):
             self.display2 = temp
 
     def secondary_source_combo_activated(self, text):
+        '''
+        assigns combo value to display
+        '''
         self.display2 = text
 
     def primary_source_combo_activated(self, text):
+        '''assigns combo value to display'''
         self.display1 = text
 
     def combo_activated(self, text):
