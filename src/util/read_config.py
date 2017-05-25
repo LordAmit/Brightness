@@ -35,11 +35,14 @@ def read_configuration(file_path):
     p_blue = config.getint('primary', 'blue')
 
     if config.getboolean('primary', 'has_secondary'):
+        p_source = config.get('primary', 'source')
         s_brightness = config.getint('secondary', 'brightness')
         s_red = config.getint('secondary', 'red')
         s_green = config.getint('secondary', 'green')
         s_blue = config.getint('secondary', 'blue')
-        return (p_brightness, p_red, p_green, p_blue,
-                s_brightness, s_red, s_green, s_blue)
+        s_source = config.get('secondary', 'source')
+        return (p_brightness, p_red, p_green, p_blue, p_source,
+                s_brightness, s_red, s_green, s_blue, s_source)
     else:
         return p_brightness, p_red, p_green, p_blue
+        
