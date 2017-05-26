@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Brightness Controller</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg</normaloff>../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
