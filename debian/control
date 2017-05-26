@@ -4,7 +4,7 @@ Section: utils
 Standards-Version: 3.9.5
 Build-depends: debhelper,
 	       python | python-all | python-dev | python-all-dev
-Homepage: http://lordamit.github.io/Brightness/
+Homepage: https://github.com/lordamit/Brightness
 Priority: optional
 
 Package: brightness-controller
