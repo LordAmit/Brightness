@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Wed May 24 14:00:15 2017
+# Created: Fri May 26 20:03:45 2017
 #      by: pyside-uic 0.2.15 running on PySide 1.2.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,6 +15,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(701, 333)
         MainWindow.setMinimumSize(QtCore.QSize(701, 333))
         MainWindow.setMaximumSize(QtCore.QSize(701, 333))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
         self.horizontalLayoutWidget = QtGui.QWidget(self.centralWidget)
