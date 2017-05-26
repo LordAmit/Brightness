@@ -6,7 +6,7 @@ brightness-controller (2.0.1) artful; urgency=medium
 
 brightness-controller (2.0) xenial; urgency=medium
 
-  * New Version with lots of features
+  * Version 2.0 introduces support of an arbinaty number of displays, color temperature control and saving/loading of configurations
 
  -- Archisman Panigrahi <apandada1@gmail.com>  Thu, 25 May 2017 11:38:25 +0530
 
