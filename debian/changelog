@@ -1,0 +1,47 @@
+brightness-controller (2.0) xenial; urgency=medium
+
+  * New Version with lots of features
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Thu, 25 May 2017 11:38:25 +0530
+
+brightness-controller (1.2.2ubuntu5) xenial; urgency=medium
+
+  * Fixed dependency error in Xenial
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 26 Apr 2016 09:48:44 +0530
+ 
+brightness-controller (1.2.2ubuntu4) xenial; urgency=medium
+
+  * Fixed dependency error in Xenial
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 26 Apr 2016 09:48:44 +0530
+
+brightness-controller (1.2.2ubuntu2) xenial; urgency=medium
+
+  * Fixed dependency error in Xenial
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 26 Apr 2016 08:42:43 +0530
+
+brightness-controller (1.2.2ubuntu1) trusty; urgency=medium
+
+  * Fixed dependency error in Xenial
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Mon, 25 Apr 2016 14:16:50 +0530
+
+brightness-controller (1.2.2) trusty; urgency=medium
+
+  * Fixed xdg-open error.
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Fri, 08 Apr 2016 16:48:54 +0530
+
+brightness-controller (1.2.1) trusty; urgency=medium
+
+  * Fixed icon problem.
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Fri, 08 Apr 2016 16:41:32 +0530
+
+brightness-controller (1.2) trusty; urgency=medium
+
+  * New release.
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Thu, 07 Apr 2016 21:58:52 +0530
