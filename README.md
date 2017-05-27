@@ -5,11 +5,8 @@ This is version 2 of Brightness Controller. It is completely stable and we are w
 ![](img/BrightnessController.gif)
 
 ## Installation via PPA
-PPA is available for Ubuntu and likewise users:
 
-https://launchpad.net/~apandada1/+archive/ubuntu/brightness-controller/
-
-For installation, use the following commands:
+For Ubuntu and likewise users:
 
 ```bash
 sudo add-apt-repository ppa:apandada1/brightness-controller
