@@ -4,7 +4,12 @@ This is version 2 of Brightness Controller. It is completely stable and we are w
 
 ![](img/BrightnessController.gif)
 
-## Installation
+## Installation via PPA
+PPA is available for Ubuntu and likewise users:
+
+https://launchpad.net/~apandada1/+archive/ubuntu/brightness-controller/
+
+## Manual Installation
 First, install pyside.
 
 ```bash
