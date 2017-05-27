@@ -9,6 +9,14 @@ PPA is available for Ubuntu and likewise users:
 
 https://launchpad.net/~apandada1/+archive/ubuntu/brightness-controller/
 
+For installation, use the following commands:
+
+```bash
+sudo add-apt-repository ppa:apandada1/brightness-controller
+sudo apt-get update
+sudo apt-get install brightness-controller
+```
+
 ## Manual Installation
 First, install pyside.
 
