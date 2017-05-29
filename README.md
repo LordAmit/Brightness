@@ -1,6 +1,8 @@
 # Brightness Controller
 
-This is version 2 of Brightness Controller. It is completely stable and we are working on some more features to be integrated before release. Please note that it is compatible with python2 only. It supports arbitary number of displays!
+This is version 2 of Brightness Controller. It is completely stable and we are working on some more features to be integrated before release. Please note that it is compatible with python2 only. It supports an arbitary number of displays!
+
+If you like this, do not forget to give us a <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"></path></svg> !
 
 ![](img/BrightnessController.gif)
 
