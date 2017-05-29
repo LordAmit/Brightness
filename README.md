@@ -2,7 +2,7 @@
 
 This is version 2 of Brightness Controller. Please note that it is compatible with python2 only. It supports an arbitary number of displays!
 
-If you like this, do not forget to give us a Star!
+If you like this, do not forget to give us a Star![](img/star.svg)!
 
 ![](img/BrightnessController.gif)
 
