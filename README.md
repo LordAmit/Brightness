@@ -1,8 +1,8 @@
 # Brightness Controller
 
-This is version 2 of Brightness Controller. Please note that it is compatible with python2 only. It supports an arbitary number of displays!
+This is version 2 of Brightness Controller. Please note that it is compatible with python2 only. It supports an arbitrary number of displays!
 
-If you like this, do not forget to give us a Star![](img/star.svg)!
+If you like this, do not forget to give us a Star!  [![GitHub stars](https://img.shields.io/github/stars/lordamit/brightness.svg?style=flat-square)](https://github.com/lordamit/brightness/stargazers) People already did!
 
 ![](img/BrightnessController.gif)
 
