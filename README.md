@@ -1,27 +1,5 @@
 # Brightness Controller
 
-<svg height='20' width='80' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
-  <linearGradient id='a' x2='0' y2='100%'>
-    <stop offset='0' stop-color='#fff' stop-opacity='.7'></stop>
-    <stop offset='.1' stop-color='#aaa' stop-opacity='.1'></stop>
-    <stop offset='1' stop-opacity='.5'></stop>
-  </linearGradient>
-  <rect fill='#555' height='20' rx='3' width='80'></rect>
-  <rect fill='#4c1' height='20' rx='3' width='43' x='37'></rect>
-  <path d='M37 0h4v20h-4z' fill='#4c1'></path>
-  <rect fill='url(#a)' height='20' rx='3' width='80'></rect>
-  <g fill='#fff' font-family='DejaVu Sans,Verdana,Geneva,sans-serif' font-size='11' text-anchor='middle'>
-    <a id='link' target='_new' xlink:href='https://github.com/lordamit/Brightness'>
-      <text fill-opacity='.3' fill='#010101' x='19.5' y='15'>star</text>
-      <text fill='#fff' x='19.5' y='14'>star</text>
-    </a>
-    <a id='count-link' target='_new' xlink:href='https://github.com/lordamit/Brightness/stargazers'>
-      <text fill-opacity='.3' fill='#010101' id='count' x='57.5' y='15'>128</text>
-      <text fill='#fff' id='count' x='57.5' y='14'>128</text>
-    </a>
-  </g>
-</svg>
-
 This is version 2 of Brightness Controller. Please note that it is compatible with python2 only. It supports an arbitary number of displays!
 
 If you like this, do not forget to give us a Star!
