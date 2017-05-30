@@ -63,6 +63,12 @@ There are several dependencies:
 
 Please test v2. Reporting bugs is appreciated.
 
-## Version 1
+## Can I have just brightness sliders - For Four displays?
+We got you covered! Try version 1.2.2/simpler version of Brightness Controller. :smile:
 
-You can find details and installers of the publicly released Brightness Controller version 1.2.2 from [here](http://lordamit.github.io/Brightness/)
+```bash
+sudo add-apt-repository ppa:apandada1/brightness-controller
+sudo apt-get update
+sudo apt-get install brightness-controller-simple
+```
+Further details are available [here](http://lordamit.github.io/Brightness/)
