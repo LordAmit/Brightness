@@ -64,7 +64,7 @@ There are several dependencies:
 Please test v2. Reporting bugs is appreciated.
 
 ## Can I have just brightness sliders - For Four displays?
-We got you covered! Try version 1.2.2/simpler version of Brightness Controller.
+We got you covered! Try version 1.2.3/simpler version of Brightness Controller.
 ![](img/brightness-controller-1.png)
 
 To install, simply do this:
