@@ -36,6 +36,8 @@ Extract it and open a terminal. Change directory to the `Brightness` folder. Nex
 python src/init.py
 ```
 
+Achean also created a detailed tutorial on how to install it in Debian based on his experience. You can find it [here](https://github.com/LordAmit/Brightness/issues/98#event-1218811468).
+
 ## Features
 
 The following features are implemented:
