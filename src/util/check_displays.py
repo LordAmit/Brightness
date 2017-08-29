@@ -19,6 +19,69 @@
 import subprocess
 
 
+class Display(object):
+    xrandr_cmd = "xrandr --output {name} --brightness {brightness} --gamma {red}:{green}:{blue}"
+
+    def __init__(self, name, brightness=99, red=99, green=99, blue=99):
+        self.name = name
+        self.brightness = brightness
+        self.red = red
+        self.green = green
+        self.blue = blue
+
+    @property
+    def brightness(self):
+        return self._brightness
+
+    @brightness.setter
+    def brightness(self, value):
+        if self.valid_value(value):
+            self._brightness = value
+            self.run_xrandr_cmd()
+
+    @property
+    def red(self):
+        return self._red
+
+    @red.setter
+    def red(self, value):
+        if self.valid_value(value):
+            self._red = value
+            self.run_xrandr_cmd()
+
+    @property
+    def green(self):
+        return self._green
+
+    @green.setter
+    def green(self, value):
+        if self.valid_value(value):
+            self._green = value
+            self.run_xrandr_cmd()
+
+    @property
+    def blue(self):
+        return self._blue
+
+    @blue.setter
+    def blue(self, value):
+        if self.valid_value(value):
+            self._blue = value
+            self.run_xrandr_cmd()
+
+    @staticmethod
+    def valid_value(value):
+        return 0 <= value <= 99
+
+    def run_xrandr_cmd(self):
+        cmd = self.xrandr_cmd.format(name=self.name,
+                                     brightness=self.brightness,
+                                     red=self.red,
+                                     green=self.green,
+                                     blue=self.blue)
+        subprocess.check_call(cmd, shell=True)
+
+
 def detect_display_devices():
     """
     Detects available displays.
