@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'mainwindow.ui'
+# Form implementation generated from reading ui file 'src/ui/mainwindow.ui'
 #
-# Created: Fri May 26 20:03:45 2017
-#      by: pyside-uic 0.2.15 running on PySide 1.2.2
+# Created: Sat Dec  8 20:45:45 2018
+#      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,12 +12,13 @@ from PySide import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(701, 333)
-        MainWindow.setMinimumSize(QtCore.QSize(701, 333))
-        MainWindow.setMaximumSize(QtCore.QSize(701, 333))
+        MainWindow.resize(701, 340)
+        MainWindow.setMinimumSize(QtCore.QSize(701, 340))
+        MainWindow.setMaximumSize(QtCore.QSize(701, 340))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
+        MainWindow.setDocumentMode(True)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
         self.horizontalLayoutWidget = QtGui.QWidget(self.centralWidget)
@@ -69,6 +70,7 @@ class Ui_MainWindow(object):
         self.secondary_brightness.setObjectName("secondary_brightness")
         self.horizontalLayout_3.addWidget(self.secondary_brightness)
         self.secondary_red = QtGui.QSlider(self.horizontalLayoutWidget_3)
+        self.secondary_red.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.secondary_red.setProperty("value", 99)
         self.secondary_red.setOrientation(QtCore.Qt.Vertical)
         self.secondary_red.setObjectName("secondary_red")
@@ -109,7 +111,7 @@ class Ui_MainWindow(object):
         self.label_8.setGeometry(QtCore.QRect(470, 260, 16, 16))
         self.label_8.setObjectName("label_8")
         self.verticalLayoutWidget = QtGui.QWidget(self.centralWidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(529, 0, 213, 204))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(529, 0, 213, 218))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtGui.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setSizeConstraint(QtGui.QLayout.SetDefaultConstraint)
@@ -164,7 +166,7 @@ class Ui_MainWindow(object):
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtGui.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 701, 26))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 701, 38))
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtGui.QMenu(self.menuBar)
         self.menuFile.setObjectName("menuFile")
@@ -180,13 +182,22 @@ class Ui_MainWindow(object):
         self.actionLicense = QtGui.QAction(MainWindow)
         self.actionLicense.setObjectName("actionLicense")
         self.actionSave = QtGui.QAction(MainWindow)
+        self.actionSave.setVisible(True)
         self.actionSave.setObjectName("actionSave")
         self.actionLoad = QtGui.QAction(MainWindow)
+        self.actionLoad.setVisible(True)
         self.actionLoad.setObjectName("actionLoad")
         self.actionCheck_for_update = QtGui.QAction(MainWindow)
         self.actionCheck_for_update.setEnabled(False)
         self.actionCheck_for_update.setObjectName("actionCheck_for_update")
+        self.actionDefault = QtGui.QAction(MainWindow)
+        self.actionDefault.setObjectName("actionDefault")
+        self.actionClearDefault = QtGui.QAction(MainWindow)
+        self.actionClearDefault.setVisible(False)
+        self.actionClearDefault.setObjectName("actionClearDefault")
         self.menuFile.addAction(self.actionSave)
+        self.menuFile.addAction(self.actionDefault)
+        self.menuFile.addAction(self.actionClearDefault)
         self.menuFile.addAction(self.actionLoad)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
@@ -236,4 +247,6 @@ class Ui_MainWindow(object):
         self.actionSave.setText(QtGui.QApplication.translate("MainWindow", "&Save current settings", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLoad.setText(QtGui.QApplication.translate("MainWindow", "&Load settings", None, QtGui.QApplication.UnicodeUTF8))
         self.actionCheck_for_update.setText(QtGui.QApplication.translate("MainWindow", "&Check for Update", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionDefault.setText(QtGui.QApplication.translate("MainWindow", "Save current as default", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionClearDefault.setText(QtGui.QApplication.translate("MainWindow", "&Clear default settings", None, QtGui.QApplication.UnicodeUTF8))
 

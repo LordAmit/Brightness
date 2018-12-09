@@ -17,7 +17,8 @@
 # along with Brightness Controller.  If not, see
 # <http://www.gnu.org/licenses/>.
 import sys
-from os import path
+import getpass
+from os import path, remove, makedirs
 from PySide import QtGui, QtCore
 from ui.mainwindow import Ui_MainWindow
 from ui.license import Ui_Form as License_Ui_Form
@@ -27,8 +28,6 @@ import util.executor as Executor
 import util.check_displays as CDisplay
 import util.write_config as WriteConfig
 import util.read_config as ReadConfig
-
-
 
 class MyApplication(QtGui.QMainWindow):
 
@@ -49,15 +48,18 @@ class MyApplication(QtGui.QMainWindow):
     def __init__(self, parent=None):
         """Initializes"""
         QtGui.QMainWindow.__init__(self, parent)
-
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
         self.display1 = None
         self.display2 = None
+        self.temperature = 'Default'
         self.no_of_connected_dev = 0
         self.__assign_displays()
+        self.setup_default_directory()
         self.generate_dynamic_items()
+        self.default_config = '/home/{}/.config/' \
+            'brightness_controller/settings'      \
+            .format(getpass.getuser())
         self.values = []
         self.array_value = 0.01
         for i in xrange(0, 100):
@@ -65,6 +67,49 @@ class MyApplication(QtGui.QMainWindow):
             self.array_value += 0.01
         self.connect_handlers()
         self.setup_widgets()
+        if path.exists(self.default_config):
+            self.load_settings(self.default_config)
+
+        # self.setup_tray(parent)
+
+    def setup_default_directory(self):
+        directory = '/home/{}/.config/' \
+            'brightness_controller/'    \
+            .format(getpass.getuser())
+        if not path.exists(directory):
+            try:
+                makedirs(directory)
+            except error as e:
+                self._show_error(str(e))
+
+
+    # def closeEvent(self, event):
+    #     reply = QtGui.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtGui.QMessageBox.Yes |
+    #                                        QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+    #     if reply == QtGui.QMessageBox.Yes:
+    #         event.accept()
+    #     else:
+    #         self.tray_icon.show()
+    #         self.hide()
+    #         event.ignore()
+
+    # def setup_tray(self, parent):
+    #     self.tray_menu = QtGui.QMenu(parent)
+    #     self.tray_menu.addAction(QtGui.QAction("Quit ...", self,
+    #             statusTip="Quit",
+    #             triggered=self.close))  
+    #     icon = self.style().standardIcon(QtGui.QStyle.SP_ComputerIcon)
+    #     print icon
+    #     self.tray_icon = QtGui.QSystemTrayIcon(icon, self)
+    #     self.tray_icon.connect(
+    #         QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self.__icon_activated)
+    #     self.tray_icon.setContextMenu(self.tray_menu)
+    #     self.tray_icon.show()
+
+
+    # def __icon_activated(self, reason):
+    #     if reason == QtGui.QSystemTrayIcon.DoubleClick:
+    #         self.show()        
 
     def setup_widgets(self):
         """connects the form widgets with functions"""
@@ -90,47 +135,50 @@ class MyApplication(QtGui.QMainWindow):
         '''
         generates assigns display sources to combo boxes
         '''
-        user_interface = self.ui
         if self.no_of_connected_dev < 2:
-            user_interface.secondary_combo.addItem("Disabled")
-            user_interface.secondary_combo.setEnabled(False)
-            user_interface.primary_combobox.addItem("Disabled")
-            user_interface.primary_combobox.setEnabled(False)
+            self.ui.secondary_combo.addItem("Disabled")
+            self.ui.secondary_combo.setEnabled(False)
+            self.ui.primary_combobox.addItem("Disabled")
+            self.ui.primary_combobox.setEnabled(False)
             return
 
         for display in self.displays:
-            user_interface.secondary_combo.addItem(display)
-            user_interface.primary_combobox.addItem(display)
+            self.ui.secondary_combo.addItem(display)
+            self.ui.primary_combobox.addItem(display)
 
 
     def connect_handlers(self):
         """Connects the handlers of GUI widgets"""
-        user_interface = self.ui
-        user_interface.primary_brightness.valueChanged[int].\
+        self.ui.primary_brightness.valueChanged[int].\
             connect(self.change_value_pbr)
-        user_interface.primary_red.valueChanged[int].\
+        self.ui.primary_red.valueChanged[int].\
             connect(self.change_value_pr)
-        user_interface.primary_blue.valueChanged[int].\
+        self.ui.primary_blue.valueChanged[int].\
             connect(self.change_value_pb)
-        user_interface.primary_green.valueChanged[int].\
+        self.ui.primary_green.valueChanged[int].\
             connect(self.change_value_pg)
         self.enable_secondary_widgets(False)
 
         if self.no_of_connected_dev >= 2:
             self.enable_secondary_widgets(True)
             self.connect_secondary_widgets()
+        
+        if path.exists(self.default_config):
+            self.ui.actionClearDefault.setVisible(True)
+            self.ui.actionClearDefault.triggered.connect(self.delete_default_settings)
 
-        user_interface.comboBox.activated[str].connect(self.combo_activated)
-        user_interface.primary_combobox.activated[
+        self.ui.actionDefault.triggered.connect(lambda: self.save_settings(True))
+        self.ui.comboBox.activated[str].connect(self.combo_activated)
+        self.ui.primary_combobox.activated[
             str].connect(self.primary_source_combo_activated)
-        user_interface.secondary_combo.activated[
+        self.ui.secondary_combo.activated[
             str].connect(self.secondary_source_combo_activated)
-        user_interface.actionAbout.triggered.connect(self.show_about)
-        user_interface.actionExit.triggered.connect(self.close)
-        user_interface.actionHelp.triggered.connect(self.show_help)
-        user_interface.actionLicense.triggered.connect(self.show_license)
-        user_interface.actionSave.triggered.connect(self.save_settings)
-        user_interface.actionLoad.triggered.connect(self.load_settings)
+        self.ui.actionAbout.triggered.connect(self.show_about)
+        self.ui.actionExit.triggered.connect(self.close)
+        self.ui.actionHelp.triggered.connect(self.show_help)
+        self.ui.actionLicense.triggered.connect(self.show_license)
+        self.ui.actionSave.triggered.connect(self.save_settings)
+        self.ui.actionLoad.triggered.connect(self.load_settings)
 
     def enable_secondary_widgets(self, boolean):
         """
@@ -284,6 +332,7 @@ class MyApplication(QtGui.QMainWindow):
 
     def combo_activated(self, text):
         """ Designates values to display and to sliders """
+        self.temperature = text
         if text == 'Default':
             rgb = [255, 255, 255]
             self.change_primary_sliders(rgb)
@@ -388,7 +437,6 @@ class MyApplication(QtGui.QMainWindow):
         change slider values in rgb from a range of 0 to 99 value
         for primary monitor sliders
         """
-        print(br_rgb)
         self.ui.secondary_brightness.setValue(br_rgb[0])
         self.ui.secondary_red.setValue(br_rgb[1])
         self.ui.secondary_green.setValue(br_rgb[2])
@@ -406,11 +454,14 @@ class MyApplication(QtGui.QMainWindow):
         """ Shows the Help Widget"""
         self.help_widget.show()
 
-    def save_settings(self):
+
+    def save_settings(self, default=False):
         """ save current primary and secondary display settings"""
-        file_path = QtGui.QFileDialog.getSaveFileName()[0]
+        file_path = self.default_config if default else QtGui.QFileDialog.getSaveFileName()[0]
         # just a number. path.exists won't work in case it is a new file.
         if len(file_path) > 5:
+            if default:
+                self.ui.actionClearDefault.setVisible(True)
             if self.no_of_connected_dev == 1:
                 WriteConfig.write_primary_display(
                     self.return_current_primary_settings(),
@@ -424,17 +475,48 @@ class MyApplication(QtGui.QMainWindow):
 
                 )
 
-    def load_settings(self):
+
+    def _show_error(self, message):     
+        """ Shows an Error Message"""
+        QtGui.QMessageBox.critical(self, 'Error', message)
+
+
+    def delete_default_settings(self):
+        """
+        delete default settings 
+        """        
+        if path.exists(self.default_config):
+            try:
+                remove(self.default_config)
+                self.ui.actionClearDefault.setVisible(False)
+            except OSError as e:
+                self._show_error(str(e))
+        else:
+            return False
+
+
+    def _load_temperature(self, text='Default'):
+        """
+        Load current temperature settings
+        """
+        self.temperature = text
+        primary_temperature_index = self.ui.comboBox.findText(
+            text, QtCore.Qt.MatchFixedString)
+        if primary_temperature_index >= 0:
+            self.ui.comboBox.setCurrentIndex(primary_temperature_index)
+
+
+    def load_settings(self, location=None):
         """
         Load current primary and secondary display settings
         """
-        file_path = QtGui.QFileDialog.getOpenFileName()[0]
+        file_path = location or QtGui.QFileDialog.getOpenFileName()[0]
         if path.exists(file_path):
             loaded_settings = ReadConfig.read_configuration(file_path)
-            print(loaded_settings)
-            if len(loaded_settings) == 4:
+            if len(loaded_settings) == 5:
+                self._load_temperature(loaded_settings[4])
                 self.primary_sliders_in_rgb_0_99(loaded_settings)
-            elif len(loaded_settings) == 10:
+            elif len(loaded_settings) == 11:
                 # checks just in case saved settings are for two displays,
                 # but loads when only one display is connected
                 if self.no_of_connected_dev == 1:
@@ -447,7 +529,8 @@ class MyApplication(QtGui.QMainWindow):
                     return
                 # sets reverse control
                 primary_source = loaded_settings[4]
-                secondary_source = loaded_settings[9]
+                secondary_source = loaded_settings[10]
+                self._load_temperature(loaded_settings[5])
                 primary_combo_index = self.ui.primary_combobox.findText(
                     primary_source, QtCore.Qt.MatchFixedString)
                 second_combo_index = self.ui.secondary_combo.findText(
@@ -458,6 +541,7 @@ class MyApplication(QtGui.QMainWindow):
                 if second_combo_index >= 0:
                     self.ui.secondary_combo.setCurrentIndex(second_combo_index)
                     self.secondary_source_combo_activated(secondary_source)
+
                 self.primary_sliders_in_rgb_0_99(
                     (loaded_settings[0],
                      loaded_settings[1],
@@ -466,13 +550,12 @@ class MyApplication(QtGui.QMainWindow):
                 # (99, 99, 99, 99, 'LVDS-1', 99, 38, 99, 99, 'VGA-1')
 
                 self.secondary_sliders_in_rgb_0_99(
-                    (loaded_settings[5],
-                     loaded_settings[6],
+                    (loaded_settings[6],
                      loaded_settings[7],
-                     loaded_settings[8]))
+                     loaded_settings[8],
+                     loaded_settings[9]))
 
-
-
+        
     def return_current_primary_settings(self):
         """
         return p_br_rgb(primary_brightness,
@@ -484,7 +567,8 @@ class MyApplication(QtGui.QMainWindow):
             self.ui.primary_red.value(),
             self.ui.primary_green.value(),
             self.ui.primary_blue.value(),
-            self.display1
+            self.display1,
+            self.temperature
         ]
 
         return p_br_rgb
