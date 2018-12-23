@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>701</width>
-    <height>333</height>
+    <height>340</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>701</width>
-    <height>333</height>
+    <height>340</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>701</width>
-    <height>333</height>
+    <height>340</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -28,6 +28,9 @@
   <property name="windowIcon">
    <iconset>
     <normaloff>../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg</normaloff>../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg</iconset>
+  </property>
+  <property name="documentMode">
+   <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="horizontalLayoutWidget">
@@ -126,6 +129,9 @@
          </item>
          <item>
           <widget class="QSlider" name="secondary_red">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
+           </property>
            <property name="value">
             <number>99</number>
            </property>
@@ -270,7 +276,7 @@
       <x>529</x>
       <y>0</y>
       <width>213</width>
-      <height>204</height>
+      <height>218</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -416,7 +422,7 @@
      <x>0</x>
      <y>0</y>
      <width>701</width>
-     <height>26</height>
+     <height>38</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -424,6 +430,8 @@
      <string>&amp;File</string>
     </property>
     <addaction name="actionSave"/>
+    <addaction name="actionDefault"/>
+    <addaction name="actionClearDefault"/>
     <addaction name="actionLoad"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -464,10 +472,16 @@
    <property name="text">
     <string>&amp;Save current settings</string>
    </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionLoad">
    <property name="text">
     <string>&amp;Load settings</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionCheck_for_update">
@@ -476,6 +490,19 @@
    </property>
    <property name="text">
     <string>&amp;Check for Update</string>
+   </property>
+  </action>
+  <action name="actionDefault">
+   <property name="text">
+    <string>Save current as default</string>
+   </property>
+  </action>
+  <action name="actionClearDefault">
+   <property name="text">
+    <string>&amp;Clear default settings</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
  </widget>
