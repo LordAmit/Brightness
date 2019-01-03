@@ -1,3 +1,9 @@
+brightness-controller (2.1) bionic; urgency=medium
+
+  * Remember Settings
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sat, 29 Dec 2018 10:33:16 +0530
+
 brightness-controller (2.0.1) artful; urgency=medium
 
   * Icon fix
