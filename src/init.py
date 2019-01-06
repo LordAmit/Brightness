@@ -20,6 +20,7 @@ import sys
 import getpass
 from os import path, remove, makedirs
 from PySide import QtGui, QtCore
+from util.QtSingleApplication import QtSingleApplication
 from ui.mainwindow import Ui_MainWindow
 from ui.license import Ui_Form as License_Ui_Form
 from ui.about import Ui_Form as About_Ui_Form
@@ -95,6 +96,8 @@ class MyApplication(QtGui.QMainWindow):
             if reply == QtGui.QMessageBox.Yes:
                 event.accept()
             else:
+                # fixes an odd event bug, the app never shows but prevents closing
+                self.show()
                 self.hide()
                 event.ignore()
 
@@ -118,8 +121,8 @@ class MyApplication(QtGui.QMainWindow):
             self.tray_icon.show()
 
     def _icon_activated(self, reason):
-        # any future event handling can go here
-        pass
+        if reason in (QtGui.QSystemTrayIcon.Trigger, QtGui.QSystemTrayIcon.DoubleClick):
+            self.show()
 
     def setup_widgets(self):
         """connects the form widgets with functions"""
@@ -652,7 +655,11 @@ class HelpForm(QtGui.QWidget):
         self.main_window = main_win
 
 if __name__ == "__main__":
-    APP = QtGui.QApplication(sys.argv)
+    UUID = 'PHIR-HWOH-MEIZ-AHTA'
+    APP = QtSingleApplication(UUID, sys.argv)
+    if APP.isRunning():
+         sys.exit(0)
     WINDOW = MyApplication()
+    APP.setActivationWindow(WINDOW)
     WINDOW.show()
     sys.exit(APP.exec_())
