@@ -20,6 +20,7 @@ import sys
 import getpass
 from os import path, remove, makedirs
 from PySide import QtGui, QtCore
+from util.QtSingleApplication import QtSingleApplication
 from ui.mainwindow import Ui_MainWindow
 from ui.license import Ui_Form as License_Ui_Form
 from ui.about import Ui_Form as About_Ui_Form
@@ -70,9 +71,10 @@ class MyApplication(QtGui.QMainWindow):
         if path.exists(self.default_config):
             self.load_settings(self.default_config)
 
-        # self.setup_tray(parent)
+        self.setup_tray(parent)
 
     def setup_default_directory(self):
+        """ Create default settings directory if it doesnt exist """
         directory = '/home/{}/.config/' \
             'brightness_controller/'    \
             .format(getpass.getuser())
@@ -83,33 +85,44 @@ class MyApplication(QtGui.QMainWindow):
                 self._show_error(str(e))
 
 
-    # def closeEvent(self, event):
-    #     reply = QtGui.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtGui.QMessageBox.Yes |
-    #                                        QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-    #     if reply == QtGui.QMessageBox.Yes:
-    #         event.accept()
-    #     else:
-    #         self.tray_icon.show()
-    #         self.hide()
-    #         event.ignore()
-
-    # def setup_tray(self, parent):
-    #     self.tray_menu = QtGui.QMenu(parent)
-    #     self.tray_menu.addAction(QtGui.QAction("Quit ...", self,
-    #             statusTip="Quit",
-    #             triggered=self.close))  
-    #     icon = self.style().standardIcon(QtGui.QStyle.SP_ComputerIcon)
-    #     print icon
-    #     self.tray_icon = QtGui.QSystemTrayIcon(icon, self)
-    #     self.tray_icon.connect(
-    #         QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self.__icon_activated)
-    #     self.tray_icon.setContextMenu(self.tray_menu)
-    #     self.tray_icon.show()
+    def closeEvent(self, event):
+        """ Override CloseEvent for system tray """
+        if self.isVisible() is True:
+            self.hide()
+            event.ignore()
+        else:
+            reply = QtGui.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtGui.QMessageBox.Yes |
+                                            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+            if reply == QtGui.QMessageBox.Yes:
+                event.accept()
+            else:
+                # fixes an odd event bug, the app never shows but prevents closing
+                self.show()
+                self.hide()
+                event.ignore()
 
 
-    # def __icon_activated(self, reason):
-    #     if reason == QtGui.QSystemTrayIcon.DoubleClick:
-    #         self.show()        
+    def setup_tray(self, parent):
+        """ Setup systemtray """
+        self.tray_menu = QtGui.QMenu(parent)
+        self.tray_menu.addAction(QtGui.QAction("Show ...", self,
+                statusTip="Show",
+                triggered=self.show))
+        self.tray_menu.addAction(QtGui.QAction("Quit ...", self,
+                statusTip="Quit",
+                triggered=self.close))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.tray_icon = QtGui.QSystemTrayIcon(icon, self)
+        if self.tray_icon.isSystemTrayAvailable():
+            self.tray_icon.connect(
+                QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self._icon_activated)
+            self.tray_icon.setContextMenu(self.tray_menu)
+            self.tray_icon.show()
+
+    def _icon_activated(self, reason):
+        if reason in (QtGui.QSystemTrayIcon.Trigger, QtGui.QSystemTrayIcon.DoubleClick):
+            self.show()
 
     def setup_widgets(self):
         """connects the form widgets with functions"""
@@ -162,7 +175,7 @@ class MyApplication(QtGui.QMainWindow):
         if self.no_of_connected_dev >= 2:
             self.enable_secondary_widgets(True)
             self.connect_secondary_widgets()
-        
+
         if path.exists(self.default_config):
             self.ui.actionClearDefault.setVisible(True)
             self.ui.actionClearDefault.triggered.connect(self.delete_default_settings)
@@ -476,15 +489,15 @@ class MyApplication(QtGui.QMainWindow):
                 )
 
 
-    def _show_error(self, message):     
+    def _show_error(self, message):
         """ Shows an Error Message"""
         QtGui.QMessageBox.critical(self, 'Error', message)
 
 
     def delete_default_settings(self):
         """
-        delete default settings 
-        """        
+        delete default settings
+        """
         if path.exists(self.default_config):
             try:
                 remove(self.default_config)
@@ -555,7 +568,7 @@ class MyApplication(QtGui.QMainWindow):
                      loaded_settings[8],
                      loaded_settings[9]))
 
-        
+
     def return_current_primary_settings(self):
         """
         return p_br_rgb(primary_brightness,
@@ -642,7 +655,11 @@ class HelpForm(QtGui.QWidget):
         self.main_window = main_win
 
 if __name__ == "__main__":
-    APP = QtGui.QApplication(sys.argv)
+    UUID = 'PHIR-HWOH-MEIZ-AHTA'
+    APP = QtSingleApplication(UUID, sys.argv)
+    if APP.isRunning():
+         sys.exit(0)
     WINDOW = MyApplication()
+    APP.setActivationWindow(WINDOW)
     WINDOW.show()
     sys.exit(APP.exec_())

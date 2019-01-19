@@ -11,7 +11,8 @@ Package: brightness-controller
 Architecture: all
 Depends: x11-xserver-utils,
 	 python-pyside,
-	 python
+	 python,
+	 sni-qt
 Section: utils
 Description: Easily adjust your display brightness
  Brightness Controller is the only GUI application 
