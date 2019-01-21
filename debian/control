@@ -1,7 +1,7 @@
 Source: brightness-controller
 Maintainer: Archisman Panigrahi <apandada1@gmail.com>
 Section: utils
-Standards-Version: 3.9.5
+Standards-Version: 4.1.4
 Build-depends: debhelper,
 	       python | python-all | python-dev | python-all-dev
 Homepage: https://github.com/lordamit/Brightness
@@ -12,7 +12,7 @@ Architecture: all
 Depends: x11-xserver-utils,
 	 python-pyside,
 	 python,
-	 sni-qt
+	 sni-qt, ${misc:Depends}
 Section: utils
 Description: Easily adjust your display brightness
  Brightness Controller is the only GUI application 

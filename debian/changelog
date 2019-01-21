@@ -1,3 +1,15 @@
+brightness-controller (2.2.1) unstable; urgency=medium
+
+  * Made changes to fix some Lintian warnings
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Mon, 21 Jan 2019 23:59:12 +0530
+
+brightness-controller (2.2) unstable; urgency=medium
+
+  * New package for submission to Debian
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Mon, 21 Jan 2019 23:28:42 +0530
+
 brightness-controller (2.2) bionic; urgency=medium
 
   * Tray icon
