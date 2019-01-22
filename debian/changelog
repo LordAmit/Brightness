@@ -1,3 +1,21 @@
+brightness-controller (2.2.3-1) unstable; urgency=medium
+
+  * fixed error in lintian (closes: #920033)
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 22 Jan 2019 20:07:54 +0530
+
+brightness-controller (2.2.3) unstable; urgency=medium
+
+  * Removed .pyc files (closes: #920033)
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 22 Jan 2019 01:16:47 +0530
+
+brightness-controller (2.2.2) unstable; urgency=medium
+
+  * New maintainer (closes #920033)
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 22 Jan 2019 01:07:38 +0530
+
 brightness-controller (2.2.1) unstable; urgency=medium
 
   * Made changes to fix some Lintian warnings
