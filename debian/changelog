@@ -1,3 +1,9 @@
+brightness-controller (2.2.3-2) unstable; urgency=medium
+
+  * created Man page and added reset option
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Thu, 24 Jan 2019 17:19:00 +0530
+
 brightness-controller (2.2.3-1) unstable; urgency=medium
 
   * fixed error in lintian (closes: #920033)

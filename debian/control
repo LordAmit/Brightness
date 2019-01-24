@@ -14,7 +14,7 @@ Depends: x11-xserver-utils,
 	 python,
 	 sni-qt, ${misc:Depends}
 Section: utils
-Description: Easily adjust your display brightness
+Description: Easily adjust your display brightness and color temperature
  Brightness Controller is the only GUI application 
  for GNU/Linux that allows you to control brightness of
  your primary and secondary display from the same place. 

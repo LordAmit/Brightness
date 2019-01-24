@@ -1,2 +1,2 @@
-usr/bin/brightness-controller usr/bin/
+usr/bin/* usr/bin/
 usr/share/* usr/share/
