@@ -1,5 +1,4 @@
 usr/bin/brightness-controller usr/bin/
-usr/bin/brightness-reset usr/bin/
 usr/share/icons/hicolor/scalable/apps/brightness-controller.svg usr/share/icons/hicolor/scalable/apps/
 usr/share/icons/hicolor/16x16/apps/brightness-controller.png usr/share/icons/hicolor/16x16/apps/
 usr/share/applications/brightness-controller.desktop usr/share/applications/
