@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Brightness Controller Simple
+Comment=Adjust your screen brightness easily
+Icon=brightness-controller-simple
+Exec=/usr/bin/brightness-controller-simple
+Terminal=false
+Type=Application
+Categories=Utility
+StartupNotify=true
+Name[en_IN]=Brightness Controller Simple

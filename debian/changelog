@@ -1,4 +1,10 @@
-brightness-controller (1.2.2ubuntu5) xenial; urgency=medium
+brightness-controller-simple (1.2.7) bionic; urgency=medium
+
+  * Removed reset
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Thu, 24 Jan 2019 20:23:59 +0530
+ 
+ brightness-controller (1.2.2ubuntu5) xenial; urgency=medium
 
   * Fixed dependency error in Xenial
 

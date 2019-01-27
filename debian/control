@@ -1,4 +1,4 @@
-Source: brightness-controller
+Source: brightness-controller-simple
 Maintainer: Archisman Panigrahi <apandada1@gmail.com>
 Section: utils
 Standards-Version: 3.9.5
@@ -7,7 +7,7 @@ Build-depends: debhelper,
 Homepage: http://lordamit.github.io/Brightness/
 Priority: optional
 
-Package: brightness-controller
+Package: brightness-controller-simple
 Architecture: all
 Depends: x11-xserver-utils,
 	 python-wxgtk3.0 | python-wxgtk2.8 | python-wxgtk2.6,
