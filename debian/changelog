@@ -1,3 +1,9 @@
+brightness-controller-simple (1.2.7ubuntu2) bionic; urgency=medium
+
+  * remove brightness-controller.desktop
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sun, 27 Jan 2019 23:22:27 +0530
+
 brightness-controller-simple (1.2.7ubuntu1) bionic; urgency=medium
 
   * Test whether automatic packaging works
