@@ -1,3 +1,9 @@
+brightness-controller-simple (1.2.7ubuntu1) bionic; urgency=medium
+
+  * Test whether automatic packaging works
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sun, 27 Jan 2019 22:58:05 +0530
+
 brightness-controller-simple (1.2.7) bionic; urgency=medium
 
   * Removed reset
