@@ -1,3 +1,39 @@
+brightness-controller (2.2.3-2) unstable; urgency=medium
+
+  * created Man page and added reset option
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Thu, 24 Jan 2019 17:19:00 +0530
+
+brightness-controller (2.2.3-1) unstable; urgency=medium
+
+  * fixed error in lintian (closes: #920033)
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 22 Jan 2019 20:07:54 +0530
+
+brightness-controller (2.2.3) unstable; urgency=medium
+
+  * Removed .pyc files (closes: #920033)
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 22 Jan 2019 01:16:47 +0530
+
+brightness-controller (2.2.2) unstable; urgency=medium
+
+  * New maintainer (closes #920033)
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Tue, 22 Jan 2019 01:07:38 +0530
+
+brightness-controller (2.2.1) unstable; urgency=medium
+
+  * Made changes to fix some Lintian warnings
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Mon, 21 Jan 2019 23:59:12 +0530
+
+brightness-controller (2.2) unstable; urgency=medium
+
+  * New package for submission to Debian
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Mon, 21 Jan 2019 23:28:42 +0530
+
 brightness-controller (2.2) bionic; urgency=medium
 
   * Tray icon
