@@ -17,6 +17,7 @@
 # along with Brightness Controller.  If not, see
 # <http://www.gnu.org/licenses/>.
 import sys
+import signal
 import getpass
 from os import path, remove, makedirs
 from PySide import QtGui, QtCore
@@ -654,9 +655,22 @@ class HelpForm(QtGui.QWidget):
         """assigns main_win as main_window"""
         self.main_window = main_win
 
+def sigterm_handler(*args):
+    sys.exit(0)
+
 if __name__ == "__main__":
+    # SIGTERM
+    signal.signal(signal.SIGTERM, sigterm_handler)
+    # SIGINT (Ctrl+C)
+    signal.signal(signal.SIGINT, sigterm_handler)
     UUID = 'PHIR-HWOH-MEIZ-AHTA'
     APP = QtSingleApplication(UUID, sys.argv)
+    # Let the PySide event loop share time with python interpreter for SIGTERM
+    timer = QtCore.QTimer()
+    # Check for interrupts in the event loop every 500ms
+    timer.start(500)
+    timer.timeout.connect(lambda: None)
+    # Start app if not running
     if APP.isRunning():
          sys.exit(0)
     WINDOW = MyApplication()
