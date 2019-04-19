@@ -5,8 +5,8 @@ import wx
 import subprocess
 from os import system
 
-class BrightnessController(wx.Frame):
 
+class BrightnessController(wx.Frame):
     def debug_true(self):
         return False
 
@@ -25,8 +25,8 @@ class BrightnessController(wx.Frame):
         return connected_devs
 
     def __init__(self, parent, title):
-        super(BrightnessController, self).__init__(parent, title=title,
-                                                   size=(325, 138))
+        super(BrightnessController, self).__init__(
+            parent, title=title, size=(325, 138))
         self.SetMinSize((325, 138))
         self.SetMaxSize((325, 138))
         self.detected_devices = self.detect_display_devices()
@@ -53,7 +53,7 @@ class BrightnessController(wx.Frame):
             self.third_name = self.detected_devices[2]
         else:
             self.third_name = 'Not found'
- 	if self.no_of_detected_device == 4:
+        if self.no_of_detected_device == 4:
             if self.debug_true():
                 print 'Found four'
             self.fourth_name = self.detected_devices[3]
@@ -69,11 +69,11 @@ class BrightnessController(wx.Frame):
         for i in xrange(0, 101):
             cmd_primary_display = "xrandr --output \
                 %s --brightness %s" % (self.primary_name, self.array_value)
-            cmd_secondary_display="xrandr --output \
+            cmd_secondary_display = "xrandr --output \
                 %s --brightness %s" % (self.secondary_name, self.array_value)
-            cmd_third_display="xrandr --output \
+            cmd_third_display = "xrandr --output \
                 %s --brightness %s" % (self.third_name, self.array_value)
-            cmd_fourth_display="xrandr --output \
+            cmd_fourth_display = "xrandr --output \
                 %s --brightness %s" % (self.fourth_name, self.array_value)
             self.cmds_primary_display.append(cmd_primary_display)
             self.cmds_secondary_display.append(cmd_secondary_display)
@@ -89,7 +89,8 @@ class BrightnessController(wx.Frame):
 
         panel = wx.Panel(self)
         self.vbox = wx.BoxSizer(wx.VERTICAL)
-        st5 = wx.StaticText(panel, label='', style=wx.ALIGN_CENTRE, size=(0, 20))
+        st5 = wx.StaticText(
+            panel, label='', style=wx.ALIGN_CENTRE, size=(0, 20))
         self.vbox.Add(st5, flag=wx.Bottom, border=0)
         menubar = wx.MenuBar()
         help = wx.Menu()
@@ -99,18 +100,18 @@ class BrightnessController(wx.Frame):
         self.SetMenuBar(menubar)
 
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
-        if self.no_of_detected_device == 1 or self.no_of_detected_device == 2 or self.no_of_detected_device == 3:
+        if self.no_of_detected_device == 1 or self.no_of_detected_device == 2 or self.no_of_detected_device == 3 or self.no_of_detected_device == 4:
             st1 = wx.StaticText(panel, label='   Primary')
             hbox1.Add(st1, flag=wx.RIGHT | wx.TOP, border=3)
-            slider1 = wx.Slider(panel,
-                            value=100,
-                            minValue=1,
-                            maxValue=100,
-                            size=(200, -1),
-                            style=wx.SL_HORIZONTAL)
+            slider1 = wx.Slider(
+                panel,
+                value=100,
+                minValue=1,
+                maxValue=100,
+                size=(200, -1),
+                style=wx.SL_HORIZONTAL)
 
-            hbox1.Add(slider1, flag=wx.LEFT,
-                  border=24)
+            hbox1.Add(slider1, flag=wx.LEFT, border=24)
             self.primary_status = wx.StaticText(panel, label='100')
             slider1.Bind(wx.EVT_SCROLL, self.primary_scroll)
             hbox1.Add(self.primary_status, flag=wx.TOP | wx.LEFT, border=3)
@@ -122,19 +123,20 @@ class BrightnessController(wx.Frame):
 
         self.hbox2 = wx.BoxSizer(wx.HORIZONTAL)
 
-        if self.no_of_detected_device == 2 or self.no_of_detected_device == 3:
+        if self.no_of_detected_device == 2 or self.no_of_detected_device == 3 or self.no_of_detected_device == 4:
             st2 = wx.StaticText(panel, label='   Secondary')
             self.hbox2.Add(st2, flag=wx.RIGHT | wx.TOP, border=3)
-            slider2 = wx.Slider(panel,
-                            value=100,
-                            minValue=1,
-                            maxValue=100,
-                            size=(200, -1),
-                            style=wx.SL_HORIZONTAL)
-            self.hbox2.Add(slider2, flag=wx.LEFT,
-                  border=7)
+            slider2 = wx.Slider(
+                panel,
+                value=100,
+                minValue=1,
+                maxValue=100,
+                size=(200, -1),
+                style=wx.SL_HORIZONTAL)
+            self.hbox2.Add(slider2, flag=wx.LEFT, border=7)
             self.secondary_status = wx.StaticText(panel, label='100')
-            self.hbox2.Add(self.secondary_status, flag=wx.TOP | wx.LEFT, border=3)
+            self.hbox2.Add(
+                self.secondary_status, flag=wx.TOP | wx.LEFT, border=3)
 
             slider2.Bind(wx.EVT_SCROLL, self.secondary_scroll)
         else:
@@ -143,19 +145,19 @@ class BrightnessController(wx.Frame):
 
         self.vbox.Add(self.hbox2)
 
-	self.hbox3 = wx.BoxSizer(wx.HORIZONTAL)
+        self.hbox3 = wx.BoxSizer(wx.HORIZONTAL)
 
-        if self.no_of_detected_device == 3:
+        if self.no_of_detected_device == 3 or self.no_of_detected_device == 4:
             st3 = wx.StaticText(panel, label='   Third')
             self.hbox3.Add(st3, flag=wx.RIGHT | wx.TOP, border=3)
-            slider3 = wx.Slider(panel,
-                            value=100,
-                            minValue=1,
-                            maxValue=100,
-                            size=(200, -1),
-                            style=wx.SL_HORIZONTAL)
-            self.hbox3.Add(slider3, flag=wx.LEFT,
-                  border=42)
+            slider3 = wx.Slider(
+                panel,
+                value=100,
+                minValue=1,
+                maxValue=100,
+                size=(200, -1),
+                style=wx.SL_HORIZONTAL)
+            self.hbox3.Add(slider3, flag=wx.LEFT, border=42)
             self.third_status = wx.StaticText(panel, label='100')
             self.hbox3.Add(self.third_status, flag=wx.TOP | wx.LEFT, border=3)
 
@@ -171,14 +173,14 @@ class BrightnessController(wx.Frame):
         if self.no_of_detected_device == 4:
             st4 = wx.StaticText(panel, label='   Fourth')
             self.hbox4.Add(st4, flag=wx.RIGHT | wx.TOP, border=3)
-            slider4 = wx.Slider(panel,
-                            value=100,
-                            minValue=1,
-                            maxValue=100,
-                            size=(200, -1),
-                            style=wx.SL_HORIZONTAL)
-            self.hbox4.Add(slider4, flag=wx.LEFT,
-                  border=34)
+            slider4 = wx.Slider(
+                panel,
+                value=100,
+                minValue=1,
+                maxValue=100,
+                size=(200, -1),
+                style=wx.SL_HORIZONTAL)
+            self.hbox4.Add(slider4, flag=wx.LEFT, border=34)
             self.fourth_status = wx.StaticText(panel, label='100')
             self.hbox4.Add(self.fourth_status, flag=wx.TOP | wx.LEFT, border=3)
 
@@ -246,7 +248,6 @@ received a copy of the GNU General Public License along with Brightness Controll
 if not, see http://www.gnu.org/licenses/gpl.html or write to
 the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"""
 
-
         info = wx.AboutDialogInfo()
 
         info.SetName('Brightness Controller')
@@ -263,6 +264,7 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
         info.AddArtist('Archisman Panigrahi <apandada1@gmail.com>')
 
         wx.AboutBox(info)
+
 
 if __name__ == '__main__':
     app = wx.App()
