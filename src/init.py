@@ -661,5 +661,8 @@ if __name__ == "__main__":
          sys.exit(0)
     WINDOW = MyApplication()
     APP.setActivationWindow(WINDOW)
-    WINDOW.show()
+    if '--hide' not in sys.argv:
+        WINDOW.show()
+    if '--help' in sys.argv:
+        print 'Use --hide argument to start minimized'
     sys.exit(APP.exec_())
