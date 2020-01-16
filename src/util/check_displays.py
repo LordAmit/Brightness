@@ -29,9 +29,10 @@ def detect_display_devices():
 
     xrandr_output = subprocess.check_output('xrandr -q', shell=True)
 
-    lines = xrandr_output.split('\n')
+    lines = xrandr_output.split(b'\n')
+    
     for line in lines:
-        words = line.split(' ')
+        words = line.split(b' ')
         for word in words:
             if word == 'connected':
                 connected_displays.append(words[0])
