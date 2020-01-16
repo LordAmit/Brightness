@@ -29,7 +29,7 @@ from PySide.QtNetwork import *
 """
 
 class QtSingleApplication(QApplication):
-    messageReceived = Signal(unicode)
+    messageReceived = Signal(str)
 
     def __init__(self, id, *argv):
 

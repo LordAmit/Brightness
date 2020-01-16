@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # This file is part of Brightness Controller.
@@ -19,7 +19,7 @@
 import sys
 import getpass
 from os import path, remove, makedirs
-from PySide import QtGui, QtCore
+from PySide2 import QtGui, QtCore, QtWidgets
 from util.QtSingleApplication import QtSingleApplication
 from ui.mainwindow import Ui_MainWindow
 from ui.license import Ui_Form as License_Ui_Form
@@ -30,7 +30,10 @@ import util.check_displays as CDisplay
 import util.write_config as WriteConfig
 import util.read_config as ReadConfig
 
-class MyApplication(QtGui.QMainWindow):
+from PySide2.QtWidgets import QApplication
+
+
+class MyApplication(QtWidgets.QMainWindow):
 
     def __assign_displays(self):
         """assigns display name """
@@ -48,7 +51,7 @@ class MyApplication(QtGui.QMainWindow):
 
     def __init__(self, parent=None):
         """Initializes"""
-        QtGui.QMainWindow.__init__(self, parent)
+        QtWidgets.QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.display1 = None
@@ -606,12 +609,12 @@ class MyApplication(QtGui.QMainWindow):
         return s_br_rgb
 
 
-class LicenseForm(QtGui.QWidget):
+class LicenseForm(QtWidgets.QWidget):
 
     """License Form widget initialization"""
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = License_Ui_Form()
         self.ui.setupUi(self)
         # self.connect_handlers()
@@ -623,12 +626,12 @@ class LicenseForm(QtGui.QWidget):
         self.main_window = main_win
 
 
-class AboutForm(QtGui.QWidget):
+class AboutForm(QtWidgets.QWidget):
 
     """About Form widget initialization"""
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = About_Ui_Form()
         self.ui.setupUi(self)
         self.main_window = None
@@ -639,12 +642,12 @@ class AboutForm(QtGui.QWidget):
         self.main_window = main_win
 
 
-class HelpForm(QtGui.QWidget):
+class HelpForm(QtWidgets.QWidget):
 
     """Help Form widget initialization"""
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = Help_Ui_Form()
         self.ui.setupUi(self)
         self.main_window = None
@@ -659,6 +662,7 @@ if __name__ == "__main__":
     APP = QtSingleApplication(UUID, sys.argv)
     if APP.isRunning():
          sys.exit(0)
+    app = QApplication(sys.argv)
     WINDOW = MyApplication()
     APP.setActivationWindow(WINDOW)
     WINDOW.show()
