@@ -88,21 +88,21 @@ class MyApplication(QtWidgets.QMainWindow):
                 self._show_error(str(e))
 
 
-    def closeEvent(self, event):
-        """ Override CloseEvent for system tray """
-        if self.isVisible() is True:
-            self.hide()
-            event.ignore()
-        else:
-            reply = QtGui.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtGui.QMessageBox.Yes |
-                                            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-            if reply == QtGui.QMessageBox.Yes:
-                event.accept()
-            else:
-                # fixes an odd event bug, the app never shows but prevents closing
-                self.show()
-                self.hide()
-                event.ignore()
+    # def closeEvent(self, event):
+    #     """ Override CloseEvent for system tray """
+    #     if self.isVisible() is True:
+    #         self.hide()
+    #         event.ignore()
+    #     else:
+    #         reply = QtGui.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtGui.QMessageBox.Yes |
+    #                                         QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+    #         if reply == QtGui.QMessageBox.Yes:
+    #             event.accept()
+    #         else:
+    #             # fixes an odd event bug, the app never shows but prevents closing
+    #             self.show()
+    #             self.hide()
+    #             event.ignore()
 
 
     def setup_tray(self, parent):
