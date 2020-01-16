@@ -473,7 +473,7 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def save_settings(self, default=False):
         """ save current primary and secondary display settings"""
-        file_path = self.default_config if default else QtGui.QFileDialog.getSaveFileName()[0]
+        file_path = self.default_config if default else QtWidgets.QFileDialog.getSaveFileName()[0]
         # just a number. path.exists won't work in case it is a new file.
         if len(file_path) > 5:
             if default:
@@ -526,7 +526,7 @@ class MyApplication(QtWidgets.QMainWindow):
         """
         Load current primary and secondary display settings
         """
-        file_path = location or QtGui.QFileDialog.getOpenFileName()[0]
+        file_path = location or QtWidgets.QFileDialog.getOpenFileName()[0]
         if path.exists(file_path):
             loaded_settings = ReadConfig.read_configuration(file_path)
             if len(loaded_settings) == 5:

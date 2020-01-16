@@ -25,7 +25,7 @@ def write_primary_display(p_br_rgb, file_path):
     int primary_green, int primary_blue, str temperature)
     @rtype : object
     """
-    config = configparser.Rawconfigparser()
+    config = configparser.RawConfigParser()
     config.add_section('type')
     config.add_section('primary')
     config.set('primary', 'has_secondary', False)
@@ -55,7 +55,7 @@ def write_both_display(p_br_rgb, s_br_rgb, file_path):
     int secondary_green, int secondary_blue, str source, str temperature)
     file_path - the save file path
     """
-    config = configparser.Rawconfigparser()
+    config = configparser.RawConfigParser()
     config.add_section('primary')
     config.set('primary', 'has_secondary', True)
     if p_br_rgb is None:
