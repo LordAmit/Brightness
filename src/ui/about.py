@@ -18,7 +18,7 @@ from PySide2.QtWidgets import *
 class Ui_Form(object):
     def setupUi(self, Form):
         if Form.objectName():
-            Form.setObjectName(u"Form")
+            Form.setObjectName("Form")
         Form.resize(400, 300)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -28,7 +28,7 @@ class Ui_Form(object):
         Form.setMinimumSize(QSize(400, 300))
         Form.setMaximumSize(QSize(400, 300))
         self.textBrowser = QTextBrowser(Form)
-        self.textBrowser.setObjectName(u"textBrowser")
+        self.textBrowser.setObjectName("textBrowser")
         self.textBrowser.setGeometry(QRect(0, 0, 401, 301))
 
         self.retranslateUi(Form)
@@ -37,8 +37,8 @@ class Ui_Form(object):
     # setupUi
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"About", None))
-        self.textBrowser.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        Form.setWindowTitle(QCoreApplication.translate("Form", "About", None))
+        self.textBrowser.setHtml(QCoreApplication.translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Sans'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
@@ -51,7 +51,7 @@ class Ui_Form(object):
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Significant contributors are listed alphabetically.</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">- Archisman Panigrahi</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">- Jahan Addison</p>\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">- Zlatan Vasovi\u0107</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">- Zlatan Vasovi\\u0107</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">For full list of authors and details, please check https://github.com/lordamit/Bright"
                         "ness</p></body></html>", None))
     # retranslateUi
