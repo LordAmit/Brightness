@@ -66,7 +66,7 @@ class MyApplication(QtWidgets.QMainWindow):
             .format(getpass.getuser())
         self.values = []
         self.array_value = 0.01
-        for i in xrange(0, 100):
+        for i in range(0, 100):
             self.values.append(self.array_value)
             self.array_value += 0.01
         self.connect_handlers()
@@ -74,7 +74,7 @@ class MyApplication(QtWidgets.QMainWindow):
         if path.exists(self.default_config):
             self.load_settings(self.default_config)
 
-        self.setup_tray(parent)
+        #self.setup_tray(parent)
 
     def setup_default_directory(self):
         """ Create default settings directory if it doesnt exist """
@@ -107,16 +107,16 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def setup_tray(self, parent):
         """ Setup systemtray """
-        self.tray_menu = QtGui.QMenu(parent)
-        self.tray_menu.addAction(QtGui.QAction("Show ...", self,
+        self.tray_menu = QtWidgets.QMenu(parent)
+        self.tray_menu.addAction(QtWidgets.QAction("Show ...", self,
                 statusTip="Show",
                 triggered=self.show))
-        self.tray_menu.addAction(QtGui.QAction("Quit ...", self,
+        self.tray_menu.addAction(QtWidgets.QAction("Quit ...", self,
                 statusTip="Quit",
                 triggered=self.close))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.tray_icon = QtGui.QSystemTrayIcon(icon, self)
+        self.tray_icon = QtWidgets.QSystemTrayIcon(icon, self)
         if self.tray_icon.isSystemTrayAvailable():
             self.tray_icon.connect(
                 QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self._icon_activated)
@@ -124,7 +124,7 @@ class MyApplication(QtWidgets.QMainWindow):
             self.tray_icon.show()
 
     def _icon_activated(self, reason):
-        if reason in (QtGui.QSystemTrayIcon.Trigger, QtGui.QSystemTrayIcon.DoubleClick):
+        if reason in (QtWidgets.QSystemTrayIcon.Trigger, QtWidgets.QSystemTrayIcon.DoubleClick):
             self.show()
 
     def setup_widgets(self):
@@ -658,12 +658,12 @@ class HelpForm(QtWidgets.QWidget):
         self.main_window = main_win
 
 if __name__ == "__main__":
-    UUID = 'PHIR-HWOH-MEIZ-AHTA'
-    APP = QtSingleApplication(UUID, sys.argv)
-    if APP.isRunning():
-         sys.exit(0)
-    app = QApplication(sys.argv)
+    #UUID = 'PHIR-HWOH-MEIZ-AHTA'
+    #APP = QtSingleApplication(UUID, sys.argv)
+    #if APP.isRunning():
+    #     sys.exit(0)
+    APP = QApplication(sys.argv)
     WINDOW = MyApplication()
-    APP.setActivationWindow(WINDOW)
+    #APP.setActivationWindow(WINDOW)
     WINDOW.show()
     sys.exit(APP.exec_())
