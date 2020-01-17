@@ -1,1 +1,1 @@
-python /usr/share/brightness-controller/init.py
+python3 /usr/share/brightness-controller/init.py

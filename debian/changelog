@@ -1,3 +1,9 @@
+brightness-controller (3.0) focal; urgency=medium
+
+  * Port to Python3 and PySide2
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Fri, 17 Jan 2020 19:33:11 +0530
+
 brightness-controller (2.2.3-2) unstable; urgency=medium
 
   * created Man page and added reset option

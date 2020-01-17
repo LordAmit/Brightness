@@ -3,9 +3,9 @@ Upstream-Name: Brightness Controller
 Upstream-Contact: Archisman Panigrahi <apandada1@gmail.com>
 
 Files: *
-Copyright: 2013-19, Amit Seal Ami <amitsealami@gmail.com>
-		   2013-19, Archisman Panigrahi <apandada1@gmail.com>
-		   2018-19, Jahan Addison <jahan@jahanaddison.com>
+Copyright: 2013-20, Amit Seal Ami <amitsealami@gmail.com>
+		   2013-20, Archisman Panigrahi <apandada1@gmail.com>
+		   2018-20, Jahan Addison <jahan@jahanaddison.com>
 License: GPL
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
