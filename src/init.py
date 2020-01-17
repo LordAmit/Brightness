@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # This file is part of Brightness Controller.
@@ -19,7 +19,7 @@
 import sys
 import getpass
 from os import path, remove, makedirs
-from PySide import QtGui, QtCore
+from PySide2 import QtGui, QtCore, QtWidgets
 from util.QtSingleApplication import QtSingleApplication
 from ui.mainwindow import Ui_MainWindow
 from ui.license import Ui_Form as License_Ui_Form
@@ -30,7 +30,10 @@ import util.check_displays as CDisplay
 import util.write_config as WriteConfig
 import util.read_config as ReadConfig
 
-class MyApplication(QtGui.QMainWindow):
+from PySide2.QtWidgets import QApplication
+
+
+class MyApplication(QtWidgets.QMainWindow):
 
     def __assign_displays(self):
         """assigns display name """
@@ -48,7 +51,7 @@ class MyApplication(QtGui.QMainWindow):
 
     def __init__(self, parent=None):
         """Initializes"""
-        QtGui.QMainWindow.__init__(self, parent)
+        QtWidgets.QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.display1 = None
@@ -63,7 +66,7 @@ class MyApplication(QtGui.QMainWindow):
             .format(getpass.getuser())
         self.values = []
         self.array_value = 0.01
-        for i in xrange(0, 100):
+        for i in range(0, 100):
             self.values.append(self.array_value)
             self.array_value += 0.01
         self.connect_handlers()
@@ -91,9 +94,9 @@ class MyApplication(QtGui.QMainWindow):
             self.hide()
             event.ignore()
         else:
-            reply = QtGui.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtGui.QMessageBox.Yes |
-                                            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-            if reply == QtGui.QMessageBox.Yes:
+            reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
+                                            QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+            if reply == QtWidgets.QMessageBox.Yes:
                 event.accept()
             else:
                 # fixes an odd event bug, the app never shows but prevents closing
@@ -104,16 +107,16 @@ class MyApplication(QtGui.QMainWindow):
 
     def setup_tray(self, parent):
         """ Setup systemtray """
-        self.tray_menu = QtGui.QMenu(parent)
-        self.tray_menu.addAction(QtGui.QAction("Show ...", self,
+        self.tray_menu = QtWidgets.QMenu(parent)
+        self.tray_menu.addAction(QtWidgets.QAction("Show ...", self,
                 statusTip="Show",
                 triggered=self.show))
-        self.tray_menu.addAction(QtGui.QAction("Quit ...", self,
+        self.tray_menu.addAction(QtWidgets.QAction("Quit ...", self,
                 statusTip="Quit",
                 triggered=self.close))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.tray_icon = QtGui.QSystemTrayIcon(icon, self)
+        self.tray_icon = QtWidgets.QSystemTrayIcon(icon, self)
         if self.tray_icon.isSystemTrayAvailable():
             self.tray_icon.connect(
                 QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self._icon_activated)
@@ -121,7 +124,7 @@ class MyApplication(QtGui.QMainWindow):
             self.tray_icon.show()
 
     def _icon_activated(self, reason):
-        if reason in (QtGui.QSystemTrayIcon.Trigger, QtGui.QSystemTrayIcon.DoubleClick):
+        if reason in (QtWidgets.QSystemTrayIcon.Trigger, QtWidgets.QSystemTrayIcon.DoubleClick):
             self.show()
 
     def setup_widgets(self):
@@ -470,7 +473,7 @@ class MyApplication(QtGui.QMainWindow):
 
     def save_settings(self, default=False):
         """ save current primary and secondary display settings"""
-        file_path = self.default_config if default else QtGui.QFileDialog.getSaveFileName()[0]
+        file_path = self.default_config if default else QtWidgets.QFileDialog.getSaveFileName()[0]
         # just a number. path.exists won't work in case it is a new file.
         if len(file_path) > 5:
             if default:
@@ -523,7 +526,7 @@ class MyApplication(QtGui.QMainWindow):
         """
         Load current primary and secondary display settings
         """
-        file_path = location or QtGui.QFileDialog.getOpenFileName()[0]
+        file_path = location or QtWidgets.QFileDialog.getOpenFileName()[0]
         if path.exists(file_path):
             loaded_settings = ReadConfig.read_configuration(file_path)
             if len(loaded_settings) == 5:
@@ -606,12 +609,12 @@ class MyApplication(QtGui.QMainWindow):
         return s_br_rgb
 
 
-class LicenseForm(QtGui.QWidget):
+class LicenseForm(QtWidgets.QWidget):
 
     """License Form widget initialization"""
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = License_Ui_Form()
         self.ui.setupUi(self)
         # self.connect_handlers()
@@ -623,12 +626,12 @@ class LicenseForm(QtGui.QWidget):
         self.main_window = main_win
 
 
-class AboutForm(QtGui.QWidget):
+class AboutForm(QtWidgets.QWidget):
 
     """About Form widget initialization"""
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = About_Ui_Form()
         self.ui.setupUi(self)
         self.main_window = None
@@ -639,12 +642,12 @@ class AboutForm(QtGui.QWidget):
         self.main_window = main_win
 
 
-class HelpForm(QtGui.QWidget):
+class HelpForm(QtWidgets.QWidget):
 
     """Help Form widget initialization"""
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = Help_Ui_Form()
         self.ui.setupUi(self)
         self.main_window = None
