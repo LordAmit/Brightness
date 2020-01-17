@@ -20,7 +20,7 @@ sudo apt-get install brightness-controller
 First, install pyside.
 
 ```bash
-sudo apt-get install python3-pyside
+sudo apt-get install python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qtwidgets
 ```
 Somtimes it is not enough to install and integrate pyside, so you might also try installing pyside using pip3.
 
@@ -57,7 +57,7 @@ It should be mentioned that through color profile Red, Green and Blue color rati
 ## Dependencies
 There are several dependencies:
 
-1. python3-pyside
+1. python3-pyside2.qtcore, python3-pyside2.qtgui, python3-pyside2.qtwidgets
 2. xrandr support in your system
 3. python3
 
