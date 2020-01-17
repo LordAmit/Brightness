@@ -74,7 +74,7 @@ class MyApplication(QtWidgets.QMainWindow):
         if path.exists(self.default_config):
             self.load_settings(self.default_config)
 
-        #self.setup_tray(parent)
+        self.setup_tray(parent)
 
     def setup_default_directory(self):
         """ Create default settings directory if it doesnt exist """
@@ -88,21 +88,21 @@ class MyApplication(QtWidgets.QMainWindow):
                 self._show_error(str(e))
 
 
-    # def closeEvent(self, event):
-    #     """ Override CloseEvent for system tray """
-    #     if self.isVisible() is True:
-    #         self.hide()
-    #         event.ignore()
-    #     else:
-    #         reply = QtGui.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtGui.QMessageBox.Yes |
-    #                                         QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-    #         if reply == QtGui.QMessageBox.Yes:
-    #             event.accept()
-    #         else:
-    #             # fixes an odd event bug, the app never shows but prevents closing
-    #             self.show()
-    #             self.hide()
-    #             event.ignore()
+    def closeEvent(self, event):
+        """ Override CloseEvent for system tray """
+        if self.isVisible() is True:
+            self.hide()
+            event.ignore()
+        else:
+            reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
+                                            QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+            if reply == QtWidgets.QMessageBox.Yes:
+                event.accept()
+            else:
+                # fixes an odd event bug, the app never shows but prevents closing
+                self.show()
+                self.hide()
+                event.ignore()
 
 
     def setup_tray(self, parent):
@@ -658,12 +658,11 @@ class HelpForm(QtWidgets.QWidget):
         self.main_window = main_win
 
 if __name__ == "__main__":
-    #UUID = 'PHIR-HWOH-MEIZ-AHTA'
-    #APP = QtSingleApplication(UUID, sys.argv)
-    #if APP.isRunning():
-    #     sys.exit(0)
-    APP = QApplication(sys.argv)
+    UUID = 'PHIR-HWOH-MEIZ-AHTA'
+    APP = QtSingleApplication(UUID, sys.argv)
+    if APP.isRunning():
+         sys.exit(0)
     WINDOW = MyApplication()
-    #APP.setActivationWindow(WINDOW)
+    APP.setActivationWindow(WINDOW)
     WINDOW.show()
     sys.exit(APP.exec_())
