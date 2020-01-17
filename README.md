@@ -12,17 +12,17 @@ Thanks to package maintainer @apandada1, we have PPA repository For Ubuntu and l
 
 ```bash
 sudo add-apt-repository ppa:apandada1/brightness-controller
-sudo apt-get update
-sudo apt-get install brightness-controller
+sudo apt update
+sudo apt install brightness-controller
 ```
 
 ## Manual Installation
-First, install pyside.
+First, install PySide2.
 
 ```bash
-sudo apt-get install python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qtwidgets
+sudo apt install python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qtwidgets python3-pyside2.qtnetwork
 ```
-Somtimes it is not enough to install and integrate pyside, so you might also try installing pyside using pip3.
+Somtimes it is not enough to install and integrate PySide2, so you might also try installing PySide2 using pip3.
 
 ```bash
 pip3 install PySide2
@@ -57,7 +57,7 @@ It should be mentioned that through color profile Red, Green and Blue color rati
 ## Dependencies
 There are several dependencies:
 
-1. python3-pyside2.qtcore, python3-pyside2.qtgui, python3-pyside2.qtwidgets
+1. python3-pyside2.qtcore, python3-pyside2.qtgui, python3-pyside2.qtwidgets, python3-pyside2.qtnetwork
 2. xrandr support in your system
 3. python3
 
