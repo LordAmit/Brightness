@@ -47,4 +47,3 @@ def read_configuration(file_path):
                 s_brightness, s_red, s_green, s_blue, s_source)
     else:
         return p_brightness, p_red, p_green, p_blue, temperature
-        
