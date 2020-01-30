@@ -39,10 +39,9 @@ class MyApplication(QtWidgets.QMainWindow):
         self.no_of_displays = len(self.displays)
         self.no_of_connected_dev = self.no_of_displays
 
-        if self.no_of_displays is 1:
-
+        if self.no_of_displays == 1:
             self.display1 = self.displays[0]
-        elif self.no_of_displays is 2:
+        elif self.no_of_displays == 2:
 
             self.display1 = self.displays[0]
             self.display2 = self.displays[1]
