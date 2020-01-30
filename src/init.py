@@ -107,6 +107,7 @@ class MyApplication(QtWidgets.QMainWindow):
                                                    QtWidgets.QMessageBox.No)
             if reply == QtWidgets.QMessageBox.Yes:
                 event.accept()
+                sys.exit(APP.exec_())
             else:
                 event.ignore()
             return
@@ -122,6 +123,7 @@ class MyApplication(QtWidgets.QMainWindow):
                                                        QtWidgets.QMessageBox.No)
                 if reply == QtWidgets.QMessageBox.Yes:
                     event.accept()
+                    sys.exit(APP.exec_())
                 #  else:
                 # # fixes an odd event bug, the app never shows but prevents closing
                 # self.show()
