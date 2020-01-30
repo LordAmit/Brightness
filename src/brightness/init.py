@@ -20,15 +20,16 @@ import sys
 import getpass
 from os import path, remove, makedirs
 from PySide2 import QtGui, QtCore, QtWidgets
-from util.QtSingleApplication import QtSingleApplication
-from ui.mainwindow import Ui_MainWindow
-from ui.license import Ui_Form as License_Ui_Form
-from ui.about import Ui_Form as About_Ui_Form
-from ui.help import Ui_Form as Help_Ui_Form
-import util.executor as Executor
-import util.check_displays as CDisplay
-import util.write_config as WriteConfig
-import util.read_config as ReadConfig
+from brightness.util.QtSingleApplication import QtSingleApplication
+from brightness.util.QtSingleApplication import QtSingleApplication
+from brightness.ui.mainwindow import Ui_MainWindow
+from brightness.ui.license import Ui_Form as License_Ui_Form
+from brightness.ui.about import Ui_Form as About_Ui_Form
+from brightness.ui.help import Ui_Form as Help_Ui_Form
+import brightness.util.executor as Executor
+import brightness.util.check_displays as CDisplay
+import brightness.util.write_config as WriteConfig
+import brightness.util.read_config as ReadConfig
 
 
 class MyApplication(QtWidgets.QMainWindow):
