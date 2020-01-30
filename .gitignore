@@ -1,4 +1,3 @@
-.idea 
 *.pyc
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -101,3 +100,9 @@ ENV/
 
 #vscode
 .vscode/
+
+#mypy
+.mypy*
+
+# idea
+.idea*
