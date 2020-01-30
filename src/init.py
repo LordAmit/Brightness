@@ -101,8 +101,11 @@ class MyApplication(QtWidgets.QMainWindow):
     def closeEvent(self, event):
         """ Override CloseEvent for system tray """
         if not self.canCloseToTray:
-            reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
-                                                   QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+            reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
+                                                   QtWidgets.QMessageBox.Yes,
+                                                   # QtWidgets.QMessageBox.Yes |
+                                                   # QtWidgets.QMessageBox.No,
+                                                   QtWidgets.QMessageBox.No)
             if reply == QtWidgets.QMessageBox.Yes:
                 event.accept()
             else:
