@@ -21,7 +21,6 @@ import getpass
 from os import path, remove, makedirs
 from PySide2 import QtGui, QtCore, QtWidgets
 from brightness.util.QtSingleApplication import QtSingleApplication
-from brightness.util.QtSingleApplication import QtSingleApplication
 from brightness.ui.mainwindow import Ui_MainWindow
 from brightness.ui.license import Ui_Form as License_Ui_Form
 from brightness.ui.about import Ui_Form as About_Ui_Form
