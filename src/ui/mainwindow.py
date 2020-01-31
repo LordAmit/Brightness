@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindow.ui'
+# Form generated from reading UI file 'mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.14.0
+# Created by: Qt User Interface Compiler version 5.14.0
 ##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
+# WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
 from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
-    QRect, QSize, QUrl, Qt)
+                            QRect, QSize, QUrl, Qt)
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QFont,
-    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
-    QRadialGradient)
+                           QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
+                           QRadialGradient)
 from PySide2.QtWidgets import *
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -23,7 +24,8 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QSize(701, 340))
         MainWindow.setMaximumSize(QSize(701, 340))
         icon = QIcon()
-        icon.addFile("ui/brightness-controller.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile("icons/brightness-controller.svg",
+                     QSize(), QIcon.Normal, QIcon.Off)
         # icon.addFile("../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setDocumentMode(True)
@@ -97,7 +99,6 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.primary_blue)
 
-
         self.horizontalLayout.addWidget(self.groupBox_2)
 
         self.groupBox = QGroupBox(self.horizontalLayoutWidget)
@@ -138,7 +139,6 @@ class Ui_MainWindow(object):
         self.secondary_blue.setOrientation(Qt.Vertical)
 
         self.horizontalLayout_3.addWidget(self.secondary_blue)
-
 
         self.horizontalLayout.addWidget(self.groupBox)
 
@@ -185,7 +185,8 @@ class Ui_MainWindow(object):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_12.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.label_12.sizePolicy().hasHeightForWidth())
         self.label_12.setSizePolicy(sizePolicy)
 
         self.verticalLayout.addWidget(self.label_12)
@@ -195,7 +196,8 @@ class Ui_MainWindow(object):
         sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.primary_combobox.sizePolicy().hasHeightForWidth())
+        sizePolicy1.setHeightForWidth(
+            self.primary_combobox.sizePolicy().hasHeightForWidth())
         self.primary_combobox.setSizePolicy(sizePolicy1)
         self.primary_combobox.setMaximumSize(QSize(150, 28))
 
@@ -265,45 +267,81 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "Brightness Controller", None))
-        self.actionExit.setText(QCoreApplication.translate("MainWindow", "E&xit", None))
-        self.actionHelp.setText(QCoreApplication.translate("MainWindow", "&Help", None))
-        self.actionAbout.setText(QCoreApplication.translate("MainWindow", "&About", None))
-        self.actionLicense.setText(QCoreApplication.translate("MainWindow", "&License", None))
-        self.actionSave.setText(QCoreApplication.translate("MainWindow", "&Save current settings", None))
-        self.actionLoad.setText(QCoreApplication.translate("MainWindow", "&Load settings", None))
-        self.actionCheck_for_update.setText(QCoreApplication.translate("MainWindow", "&Check for Update", None))
-        self.actionDefault.setText(QCoreApplication.translate("MainWindow", "Save current as default", None))
-        self.actionClearDefault.setText(QCoreApplication.translate("MainWindow", "&Clear default settings", None))
-        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", "Primary", None))
-        self.groupBox.setTitle(QCoreApplication.translate("MainWindow", "Secondary", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", "Brightness", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", " R", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", " G", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", " B", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", "Brightness", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", " R", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", " G", None))
-        self.label_8.setText(QCoreApplication.translate("MainWindow", " B", None))
-        self.label_9.setText(QCoreApplication.translate("MainWindow", "Advanced", None))
-        self.label_12.setText(QCoreApplication.translate("MainWindow", "Primary Brightness", None))
-        self.label_11.setText(QCoreApplication.translate("MainWindow", "Secondary Brightness", None))
-#if QT_CONFIG(tooltip)
-        self.secondary_combo.setToolTip(QCoreApplication.translate("MainWindow", "<html><head/><body><p>You can select the source of Secondary Brightness Here.</p></body></html>", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate(
+            "MainWindow", "Brightness Controller", None))
+        self.actionExit.setText(
+            QCoreApplication.translate("MainWindow", "E&xit", None))
+        self.actionHelp.setText(
+            QCoreApplication.translate("MainWindow", "&Help", None))
+        self.actionAbout.setText(
+            QCoreApplication.translate("MainWindow", "&About", None))
+        self.actionLicense.setText(
+            QCoreApplication.translate("MainWindow", "&License", None))
+        self.actionSave.setText(QCoreApplication.translate(
+            "MainWindow", "&Save current settings", None))
+        self.actionLoad.setText(QCoreApplication.translate(
+            "MainWindow", "&Load settings", None))
+        self.actionCheck_for_update.setText(
+            QCoreApplication.translate("MainWindow", "&Check for Update", None))
+        self.actionDefault.setText(QCoreApplication.translate(
+            "MainWindow", "Save current as default", None))
+        self.actionClearDefault.setText(QCoreApplication.translate(
+            "MainWindow", "&Clear default settings", None))
+        self.groupBox_2.setTitle(
+            QCoreApplication.translate("MainWindow", "Primary", None))
+        self.groupBox.setTitle(QCoreApplication.translate(
+            "MainWindow", "Secondary", None))
+        self.label.setText(QCoreApplication.translate(
+            "MainWindow", "Brightness", None))
+        self.label_2.setText(
+            QCoreApplication.translate("MainWindow", " R", None))
+        self.label_3.setText(
+            QCoreApplication.translate("MainWindow", " G", None))
+        self.label_4.setText(
+            QCoreApplication.translate("MainWindow", " B", None))
+        self.label_5.setText(QCoreApplication.translate(
+            "MainWindow", "Brightness", None))
+        self.label_6.setText(
+            QCoreApplication.translate("MainWindow", " R", None))
+        self.label_7.setText(
+            QCoreApplication.translate("MainWindow", " G", None))
+        self.label_8.setText(
+            QCoreApplication.translate("MainWindow", " B", None))
+        self.label_9.setText(QCoreApplication.translate(
+            "MainWindow", "Advanced", None))
+        self.label_12.setText(QCoreApplication.translate(
+            "MainWindow", "Primary Brightness", None))
+        self.label_11.setText(QCoreApplication.translate(
+            "MainWindow", "Secondary Brightness", None))
+# if QT_CONFIG(tooltip)
+        self.secondary_combo.setToolTip(QCoreApplication.translate(
+            "MainWindow", "<html><head/><body><p>You can select the source of Secondary Brightness Here.</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_10.setText(QCoreApplication.translate("MainWindow", "Color Temperature", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", "Default", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", "1900K Candle", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("MainWindow", "2600K 40W Tungsten", None))
-        self.comboBox.setItemText(3, QCoreApplication.translate("MainWindow", "2850K 100W Tungsten", None))
-        self.comboBox.setItemText(4, QCoreApplication.translate("MainWindow", "3200K Halogen", None))
-        self.comboBox.setItemText(5, QCoreApplication.translate("MainWindow", "5200K Carbon Arc", None))
-        self.comboBox.setItemText(6, QCoreApplication.translate("MainWindow", "5400K High Noon", None))
-        self.comboBox.setItemText(7, QCoreApplication.translate("MainWindow", "6000K Direct Sun", None))
-        self.comboBox.setItemText(8, QCoreApplication.translate("MainWindow", "7000K Overcast Sky", None))
-        self.comboBox.setItemText(9, QCoreApplication.translate("MainWindow", "20000K Clear Blue Sky", None))
+        self.label_10.setText(QCoreApplication.translate(
+            "MainWindow", "Color Temperature", None))
+        self.comboBox.setItemText(
+            0, QCoreApplication.translate("MainWindow", "Default", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate(
+            "MainWindow", "1900K Candle", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate(
+            "MainWindow", "2600K 40W Tungsten", None))
+        self.comboBox.setItemText(3, QCoreApplication.translate(
+            "MainWindow", "2850K 100W Tungsten", None))
+        self.comboBox.setItemText(4, QCoreApplication.translate(
+            "MainWindow", "3200K Halogen", None))
+        self.comboBox.setItemText(5, QCoreApplication.translate(
+            "MainWindow", "5200K Carbon Arc", None))
+        self.comboBox.setItemText(6, QCoreApplication.translate(
+            "MainWindow", "5400K High Noon", None))
+        self.comboBox.setItemText(7, QCoreApplication.translate(
+            "MainWindow", "6000K Direct Sun", None))
+        self.comboBox.setItemText(8, QCoreApplication.translate(
+            "MainWindow", "7000K Overcast Sky", None))
+        self.comboBox.setItemText(9, QCoreApplication.translate(
+            "MainWindow", "20000K Clear Blue Sky", None))
 
-        self.menuFile.setTitle(QCoreApplication.translate("MainWindow", "&File", None))
-        self.menuHelp.setTitle(QCoreApplication.translate("MainWindow", "&Help", None))
+        self.menuFile.setTitle(
+            QCoreApplication.translate("MainWindow", "&File", None))
+        self.menuHelp.setTitle(
+            QCoreApplication.translate("MainWindow", "&Help", None))
     # retranslateUi
-

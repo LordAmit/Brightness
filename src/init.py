@@ -29,6 +29,7 @@ import util.executor as Executor
 import util.check_displays as CDisplay
 import util.write_config as WriteConfig
 import util.read_config as ReadConfig
+import util.filepath_handler as Filepath_handler
 
 
 class MyApplication(QtWidgets.QMainWindow):
@@ -144,7 +145,9 @@ class MyApplication(QtWidgets.QMainWindow):
         self.tray_menu.addAction(quit_action)
 
         icon = QtGui.QIcon()
-        icon_path = "ui/brightness-controller.svg"
+        icon_path = "icons/brightness-controller.svg"
+        icon_path = Filepath_handler.find_data_file(icon_path)
+        print(icon_path)
         # icon_path = "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
         icon.addPixmap(QtGui.QPixmap(icon_path),
                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -212,9 +215,11 @@ class MyApplication(QtWidgets.QMainWindow):
 
         if path.exists(self.default_config):
             self.ui.actionClearDefault.setVisible(True)
-            self.ui.actionClearDefault.triggered.connect(self.delete_default_settings)
+            self.ui.actionClearDefault.triggered.connect(
+                self.delete_default_settings)
 
-        self.ui.actionDefault.triggered.connect(lambda: self.save_settings(True))
+        self.ui.actionDefault.triggered.connect(
+            lambda: self.save_settings(True))
         self.ui.comboBox.activated[str].connect(self.combo_activated)
         self.ui.primary_combobox.activated[
             str].connect(self.primary_source_combo_activated)
@@ -503,7 +508,8 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def save_settings(self, default=False):
         """ save current primary and secondary display settings"""
-        file_path = self.default_config if default else QtWidgets.QFileDialog.getSaveFileName()[0]
+        file_path = self.default_config if default else QtWidgets.QFileDialog.getSaveFileName()[
+            0]
         # just a number. path.exists won't work in case it is a new file.
         if len(file_path) > 5:
             if default:
@@ -577,7 +583,8 @@ class MyApplication(QtWidgets.QMainWindow):
                 second_combo_index = self.ui.secondary_combo.findText(
                     secondary_source, QtCore.Qt.MatchFixedString)
                 if primary_combo_index >= 0:
-                    self.ui.primary_combobox.setCurrentIndex(primary_combo_index)
+                    self.ui.primary_combobox.setCurrentIndex(
+                        primary_combo_index)
                     self.primary_source_combo_activated(primary_source)
                 if second_combo_index >= 0:
                     self.ui.secondary_combo.setCurrentIndex(second_combo_index)
