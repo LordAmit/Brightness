@@ -5,7 +5,6 @@ from cx_Freeze import setup, Executable
 # fine tuning.
 
 base = 'Win32GUI' if sys.platform == 'win32' else None
-# includefiles = ['ui/*.svg']
 include_files = [('icons/brightness-controller.svg',
                   'icons/brightness-controller.svg')]
 
