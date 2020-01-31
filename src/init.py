@@ -20,6 +20,8 @@ import sys
 import getpass
 from os import path, remove, makedirs
 from PySide2 import QtGui, QtCore, QtWidgets
+from PySide2.QtCore import QSize
+from PySide2.QtGui import QIcon
 from util.QtSingleApplication import QtSingleApplication
 from ui.mainwindow import Ui_MainWindow
 from ui.license import Ui_Form as License_Ui_Form
@@ -61,7 +63,11 @@ class MyApplication(QtWidgets.QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
+        self.ui_icon = QIcon()
+        self.ui_icon.addFile(Filepath_handler.get_icon_path(),
+                     QSize(), QIcon.Normal, QIcon.Off)
+        # icon.addFile("../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(self.ui_icon)
         self.temperature = 'Default'
         self.no_of_connected_dev = 0
         self.__assign_displays()
@@ -145,10 +151,12 @@ class MyApplication(QtWidgets.QMainWindow):
         self.tray_menu.addAction(quit_action)
 
         icon = QtGui.QIcon()
-        icon_path = "icons/brightness-controller.svg"
-        icon_path = Filepath_handler.find_data_file(icon_path)
-        print(icon_path)
-        # icon_path = "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
+        # icon_path = "icons/brightness-controller.svg"
+        # icon_path = Filepath_handler.find_data_file(icon_path)
+        # icon_path =
+        # "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
+        icon_path = Filepath_handler.get_icon_path()
+        # print(icon_path)
         icon.addPixmap(QtGui.QPixmap(icon_path),
                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
