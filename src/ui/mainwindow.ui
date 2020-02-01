@@ -25,10 +25,6 @@
   <property name="windowTitle">
    <string>Brightness Controller</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg</normaloff>../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg</iconset>
-  </property>
   <property name="documentMode">
    <bool>true</bool>
   </property>
@@ -422,7 +418,7 @@
      <x>0</x>
      <y>0</y>
      <width>701</width>
-     <height>38</height>
+     <height>32</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

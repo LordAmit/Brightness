@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+from os import system
+import util.check_displays as check_displays
+
+
+class BrightnessRestore():
+    def __init__(self):
+        self.detected_devices = check_displays.detect_display_devices()
+        # self.primary_name = self.detected_devices[0]
+        for device in self.detected_devices:
+            command = "xrandr --output \
+                    %s --brightness %s" % (device, 1)
+            system(command)
+
+
+if __name__ == '__main__':
+    BrightnessRestore()

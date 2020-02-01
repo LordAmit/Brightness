@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # This file is part of Brightness Controller.
 #
@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Brightness Controller.  If not, see <http://www.gnu.org/licenses/>.
 
-import ConfigParser
+import configparser
 
 
 def read_configuration(file_path):
@@ -27,7 +27,7 @@ def read_configuration(file_path):
     for one display:
     return (p_brightness, p_red, p_green, p_blue, temperature)
     """
-    config = ConfigParser.RawConfigParser()
+    config = configparser.RawConfigParser()
     config.read(file_path)
     p_brightness = config.getint('primary', 'brightness')
     p_red = config.getint('primary', 'red')
@@ -47,4 +47,3 @@ def read_configuration(file_path):
                 s_brightness, s_red, s_green, s_blue, s_source)
     else:
         return p_brightness, p_red, p_green, p_blue, temperature
-        

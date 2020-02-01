@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # This file is part of Brightness Controller.
 #
@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Brightness Controller.  If not, see <http://www.gnu.org/licenses/>.
 
-import ConfigParser
+import configparser
 
 
 def write_primary_display(p_br_rgb, file_path):
@@ -25,24 +25,24 @@ def write_primary_display(p_br_rgb, file_path):
     int primary_green, int primary_blue, str temperature)
     @rtype : object
     """
-    config = ConfigParser.RawConfigParser()
-    config.add_section('type')
-    config.add_section('primary')
-    config.set('primary', 'has_secondary', False)
+    config = configparser.RawConfigParser()
+    config['type'] = {}
+    config['primary'] = {}
+    config['primary']['has_secondary'] = "False"
     if p_br_rgb is None:
-        config.set('primary', 'brightness', 99)
-        config.set('primary', 'red', 99)
-        config.set('primary', 'green', 99)
-        config.set('primary', 'blue', 99)
-        config.set('primary', 'temperature', 'Default')
+        config['primary']['brightness'] = 99
+        config['primary']['red'] = 99
+        config['primary']['green'] = 99
+        config['primary']['blue'] = 99
+        config['primary']['temperature'] = 99
     else:
-        config.set('primary', 'brightness', p_br_rgb[0])
-        config.set('primary', 'red', p_br_rgb[1])
-        config.set('primary', 'green', p_br_rgb[2])
-        config.set('primary', 'blue', p_br_rgb[3])
-        config.set('primary', 'temperature', p_br_rgb[4])
+        config['primary']['brightness'] = str(p_br_rgb[0])
+        config['primary']['red'] = str(p_br_rgb[1])
+        config['primary']['green'] = str(p_br_rgb[2])
+        config['primary']['blue'] = str(p_br_rgb[3])
+        config['primary']['temperature'] = str(p_br_rgb[4])
 
-    with open(file_path, 'wb') as configfile:
+    with open(file_path, 'w+') as configfile:
         config.write(configfile)
 
 
@@ -55,33 +55,35 @@ def write_both_display(p_br_rgb, s_br_rgb, file_path):
     int secondary_green, int secondary_blue, str source, str temperature)
     file_path - the save file path
     """
-    config = ConfigParser.RawConfigParser()
-    config.add_section('primary')
-    config.set('primary', 'has_secondary', True)
+    config = configparser.RawConfigParser()
+    config['type'] = {}
+    config['primary'] = {}
+    config['primary']['has_secondary'] = "True"
     if p_br_rgb is None:
-        config.set('primary', 'brightness', 99)
-        config.set('primary', 'red', 99)
-        config.set('primary', 'green', 99)
-        config.set('primary', 'blue', 99)
-        config.set('primary', 'temperature', 'Default')
+        config['primary']['brightness'] = 99
+        config['primary']['red'] = 99
+        config['primary']['green'] = 99
+        config['primary']['blue'] = 99
+        config['primary']['temperature'] = 99
     else:
-        config.set('primary', 'brightness', p_br_rgb[0])
-        config.set('primary', 'red', p_br_rgb[1])
-        config.set('primary', 'green', p_br_rgb[2])
-        config.set('primary', 'blue', p_br_rgb[3])
-        config.set('primary', 'source', p_br_rgb[4])
-        config.set('primary', 'temperature', p_br_rgb[5])
-    config.add_section('secondary')
+        config['primary']['brightness'] = str(p_br_rgb[0])
+        config['primary']['red'] = str(p_br_rgb[1])
+        config['primary']['green'] = str(p_br_rgb[2])
+        config['primary']['blue'] = str(p_br_rgb[3])
+        config['primary']['temperature'] = str(p_br_rgb[4])
+    config['secondary'] = {}
     if s_br_rgb is None:
-        config.set('secondary', 'brightness', 99)
-        config.set('secondary', 'red', 99)
-        config.set('secondary', 'green', 99)
-        config.set('secondary', 'blue', 99)
+        config['secondary']['brightness'] = 99
+        config['secondary']['red'] = 99
+        config['secondary']['green'] = 99
+        config['secondary']['blue'] = 99
+        config['secondary']['temperature'] = 99
     else:
-        config.set('secondary', 'brightness', s_br_rgb[0])
-        config.set('secondary', 'red', s_br_rgb[1])
-        config.set('secondary', 'green', s_br_rgb[2])
-        config.set('secondary', 'blue', s_br_rgb[3])
-        config.set('secondary', 'source', s_br_rgb[4])
-    with open(file_path, 'wb') as configfile:
+        config['secondary']['brightness'] = str(s_br_rgb[0])
+        config['secondary']['red'] = str(s_br_rgb[1])
+        config['secondary']['green'] = str(s_br_rgb[2])
+        config['secondary']['blue'] = str(s_br_rgb[3])
+        config['secondary']['temperature'] = str(s_br_rgb[4])
+
+    with open(file_path, 'w+') as configfile:
         config.write(configfile)

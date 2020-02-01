@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-from PySide.QtCore import *
-from PySide.QtGui import *
-from PySide.QtNetwork import *
+from PySide2.QtCore import Signal, QTextStream, Qt
+# from PySide2.QtGui import *
+from PySide2.QtNetwork import QLocalSocket, QLocalServer
+from PySide2.QtWidgets import QApplication
 
 """ Python 2.7 implementation of the C++ QtSingleApplication interface
-
+    Note: This is Python 3 implementation of the above, using Pyside2 - Archisman Panigrahi <apandada1@gmail.com>
     Copyright 2013, Johan Råde
     All rights reserved.
 
@@ -28,8 +29,9 @@ from PySide.QtNetwork import *
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
+
 class QtSingleApplication(QApplication):
-    messageReceived = Signal(unicode)
+    messageReceived = Signal(str)
 
     def __init__(self, id, *argv):
 
@@ -66,7 +68,7 @@ class QtSingleApplication(QApplication):
     def activationWindow(self):
         return self._activationWindow
 
-    def setActivationWindow(self, activationWindow, activateOnMessage = True):
+    def setActivationWindow(self, activationWindow, activateOnMessage=True):
         self._activationWindow = activationWindow
         self._activateOnMessage = activateOnMessage
 

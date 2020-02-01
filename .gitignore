@@ -100,3 +100,9 @@ ENV/
 
 #vscode
 .vscode/
+
+#mypy
+.mypy*
+
+# idea
+.idea*

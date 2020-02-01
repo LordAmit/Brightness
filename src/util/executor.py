@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
 # This file is part of Brightness Controller.
@@ -20,5 +20,4 @@ import subprocess
 
 
 def execute_command(string_cmd):
-    subprocess.check_output(string_cmd, shell = True)
-
+    subprocess.check_output(string_cmd, shell=True)
