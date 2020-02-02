@@ -14,8 +14,7 @@ Depends: x11-xserver-utils,
 	 python3-pyside2.qtgui,
 	 python3-pyside2.qtwidgets,
 	 python3-pyside2.qtnetwork,
-	 python3,
-	 python, ${misc:Depends}
+	 python3, ${misc:Depends}
 Section: utils
 Description: Easily adjust your display brightness and color temperature
  Brightness Controller is the only GUI application 

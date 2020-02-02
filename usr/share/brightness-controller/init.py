@@ -30,7 +30,6 @@ import util.check_displays as CDisplay
 import util.write_config as WriteConfig
 import util.read_config as ReadConfig
 
-from PySide2.QtWidgets import QApplication
 
 
 class MyApplication(QtWidgets.QMainWindow):
@@ -41,10 +40,10 @@ class MyApplication(QtWidgets.QMainWindow):
         self.no_of_displays = len(self.displays)
         self.no_of_connected_dev = self.no_of_displays
 
-        if self.no_of_displays is 1:
+        if self.no_of_displays == 1:
 
             self.display1 = self.displays[0]
-        elif self.no_of_displays is 2:
+        elif self.no_of_displays == 2:
 
             self.display1 = self.displays[0]
             self.display2 = self.displays[1]
@@ -96,8 +95,9 @@ class MyApplication(QtWidgets.QMainWindow):
         else:
             reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
                                             QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
-            if reply == QtWidgets.QMessageBox.Yes:
-                event.accept()
+            if str(reply) == "QtWidgets.QMessageBox.Yes" or str(reply) == "PySide2.QtWidgets.QMessageBox.StandardButton.Yes":
+                #event.accept()  #Note: Somehow this did not work in Manjaro KDE with Python 3.8
+                quit()
             else:
                 # fixes an odd event bug, the app never shows but prevents closing
                 self.show()
