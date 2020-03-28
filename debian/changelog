@@ -1,3 +1,9 @@
+brightness-controller (2.3.3-1) focal; urgency=medium
+
+  * Finalized v2.3 by LordAmit
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sat, 28 Mar 2020 12:00:25 +0530
+
 brightness-controller (2.3.3) focal; urgency=medium
 
   * Removed python2 dependency altogether. Ported brightness-reset to Python3
