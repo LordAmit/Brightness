@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
 # This file is part of Brightness Controller.
@@ -17,7 +17,8 @@
 # along with Brightness Controller.  If not, see <http://www.gnu.org/licenses/>.
 
 import subprocess
-
+import shlex
+import re
 
 def detect_display_devices():
     """
@@ -36,9 +37,18 @@ def detect_display_devices():
     #         if word == 'connected':
     #             connected_displays.append(words[0])
     # return connected_displays
+    query = "xrandr --query"
 
-    xrandr_output = subprocess.Popen(['xrandr', '-q'], stdout = subprocess.PIPE,stderr = subprocess.STDOUT)
-    stdout,stderr = xrandr_output.communicate()
-    connected_displays = [str(stdout.split()[14],'utf-8')]
-    #print(connected_displays)
+    pattern = re.compile(r'\b({0})\b'.format("connected"), flags=re.IGNORECASE)
+
+    xrandr_output = subprocess.Popen(shlex.split(query), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    stdout, stderr = xrandr_output.communicate()
+    output = str(stdout, "utf-8")
+    lines = output.splitlines()
+    connected = [line for line in lines if pattern.search(line)]
+    connected_displays = list(map(lambda display: display.split()[0], connected))
     return connected_displays
+
+
+if __name__ == '__main__':
+    print(detect_display_devices())
