@@ -18,6 +18,26 @@
 import configparser
 
 
+def _default_config(config, display_type: str = 'primary'):
+    config[display_type]['brightness'] = 99
+    config[display_type]['red'] = 99
+    config[display_type]['green'] = 99
+    config[display_type]['blue'] = 99
+    config[display_type]['source'] = 'Default'
+    config[display_type]['temperature'] = 99
+    return config
+
+
+def set_value_in_config(config, br_rgb, display_type: str = 'primary'):
+    config[display_type]['brightness'] = str(br_rgb[0])
+    config[display_type]['red'] = str(br_rgb[1])
+    config[display_type]['green'] = str(br_rgb[2])
+    config[display_type]['blue'] = str(br_rgb[3])
+    config[display_type]['source'] = str(br_rgb[4])
+    config[display_type]['temperature'] = str(br_rgb[5])
+    return config
+
+
 def write_primary_display(p_br_rgb, file_path):
     """
     writes the configuration file as set in brightness controller
@@ -26,21 +46,12 @@ def write_primary_display(p_br_rgb, file_path):
     @rtype : object
     """
     config = configparser.RawConfigParser()
-    config['type'] = {}
     config['primary'] = {}
     config['primary']['has_secondary'] = "False"
     if p_br_rgb is None:
-        config['primary']['brightness'] = 99
-        config['primary']['red'] = 99
-        config['primary']['green'] = 99
-        config['primary']['blue'] = 99
-        config['primary']['temperature'] = 99
+        config = _default_config(config)
     else:
-        config['primary']['brightness'] = str(p_br_rgb[0])
-        config['primary']['red'] = str(p_br_rgb[1])
-        config['primary']['green'] = str(p_br_rgb[2])
-        config['primary']['blue'] = str(p_br_rgb[3])
-        config['primary']['temperature'] = str(p_br_rgb[4])
+        config = set_value_in_config(config, p_br_rgb)
 
     with open(file_path, 'w+') as configfile:
         config.write(configfile)
@@ -56,34 +67,17 @@ def write_both_display(p_br_rgb, s_br_rgb, file_path):
     file_path - the save file path
     """
     config = configparser.RawConfigParser()
-    config['type'] = {}
     config['primary'] = {}
     config['primary']['has_secondary'] = "True"
     if p_br_rgb is None:
-        config['primary']['brightness'] = 99
-        config['primary']['red'] = 99
-        config['primary']['green'] = 99
-        config['primary']['blue'] = 99
-        config['primary']['temperature'] = 99
+        config = _default_config(config)
     else:
-        config['primary']['brightness'] = str(p_br_rgb[0])
-        config['primary']['red'] = str(p_br_rgb[1])
-        config['primary']['green'] = str(p_br_rgb[2])
-        config['primary']['blue'] = str(p_br_rgb[3])
-        config['primary']['temperature'] = str(p_br_rgb[4])
+        config = set_value_in_config(config, p_br_rgb)
     config['secondary'] = {}
     if s_br_rgb is None:
-        config['secondary']['brightness'] = 99
-        config['secondary']['red'] = 99
-        config['secondary']['green'] = 99
-        config['secondary']['blue'] = 99
-        config['secondary']['temperature'] = 99
+        _default_config(config, 'secondary')
     else:
-        config['secondary']['brightness'] = str(s_br_rgb[0])
-        config['secondary']['red'] = str(s_br_rgb[1])
-        config['secondary']['green'] = str(s_br_rgb[2])
-        config['secondary']['blue'] = str(s_br_rgb[3])
-        config['secondary']['temperature'] = str(s_br_rgb[4])
+        set_value_in_config(config, s_br_rgb, 'secondary')
 
     with open(file_path, 'w+') as configfile:
         config.write(configfile)
