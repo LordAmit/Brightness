@@ -1,6 +1,6 @@
 # Brightness Controller
 
-This is version 2.3 of Brightness Controller, ported to Python 3 and PySide 2. It supports an arbitrary number of displays!
+This is version 2.3.4 of Brightness Controller, ported to Python 3 and PySide 2. It supports an arbitrary number of displays!
 
 If you like this, do not forget to give us a Star!  [![GitHub stars](https://img.shields.io/github/stars/lordamit/brightness.svg?style=flat-square)](https://github.com/lordamit/brightness/stargazers) People already did!
 

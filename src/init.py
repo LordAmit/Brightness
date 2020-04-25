@@ -87,11 +87,11 @@ class MyApplication(QtWidgets.QMainWindow):
         if path.exists(self.default_config):
             self.load_settings(self.default_config)
 
-        self.canCloseToTray = False
+        # self.canCloseToTray = False
 
-        if QtWidgets.QSystemTrayIcon.isSystemTrayAvailable():
-            self.canCloseToTray = True
-            self.setup_tray(parent)
+        # if QtWidgets.QSystemTrayIcon.isSystemTrayAvailable():
+        #     self.canCloseToTray = True
+        #     self.setup_tray(parent)
 
     def setup_default_directory(self):
         """ Create default settings directory if it doesnt exist """
@@ -104,71 +104,71 @@ class MyApplication(QtWidgets.QMainWindow):
             except OSError as e:
                 self._show_error(str(e))
 
-    def closeEvent(self, event):
-        """ Override CloseEvent for system tray """
-        if not self.canCloseToTray:
-            reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
-                                                   QtWidgets.QMessageBox.Yes,
-                                                   # QtWidgets.QMessageBox.Yes |
-                                                   # QtWidgets.QMessageBox.No,
-                                                   QtWidgets.QMessageBox.No)
-            if reply == QtWidgets.QMessageBox.Yes:
-                event.accept()
-                sys.exit(APP.exec_())
-            else:
-                event.ignore()
-            return
-        else:
-            if self.isVisible() is True:
-                self.hide()
-                event.ignore()
-            else:
-                reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
-                                                       # QtWidgets.QMessageBox.Yes |
-                                                       # QtWidgets.QMessageBox.No,
-                                                       QtWidgets.QMessageBox.Yes,
-                                                       QtWidgets.QMessageBox.No)
-                if reply == QtWidgets.QMessageBox.Yes:
-                    event.accept()
-                    sys.exit(APP.exec_())
+    # def closeEvent(self, event):
+    #     """ Override CloseEvent for system tray """
+    #     if not self.canCloseToTray:
+    #         reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
+    #                                                QtWidgets.QMessageBox.Yes,
+    #                                                # QtWidgets.QMessageBox.Yes |
+    #                                                # QtWidgets.QMessageBox.No,
+    #                                                QtWidgets.QMessageBox.No)
+    #         if reply == QtWidgets.QMessageBox.Yes:
+    #             event.accept()
+    #             sys.exit(APP.exec_())
+    #         else:
+    #             event.ignore()
+    #         return
+    #     else:
+    #         if self.isVisible() is True:
+    #             self.hide()
+    #             event.ignore()
+    #         else:
+    #             reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
+    #                                                    # QtWidgets.QMessageBox.Yes |
+    #                                                    # QtWidgets.QMessageBox.No,
+    #                                                    QtWidgets.QMessageBox.Yes,
+    #                                                    QtWidgets.QMessageBox.No)
+    #             if reply == QtWidgets.QMessageBox.Yes:
+    #                 event.accept()
+    #                 sys.exit(APP.exec_())
                 #  else:
                 # # fixes an odd event bug, the app never shows but prevents closing
                 # self.show()
                 # self.hide()
                 # event.ignore()
 
-    def setup_tray(self, parent):
-        """ Setup system tray """
-        self.tray_menu = QtWidgets.QMenu(parent)
+    # def setup_tray(self, parent):
+    #     """ Setup system tray """
+    #     self.tray_menu = QtWidgets.QMenu(parent)
+    #
+    #     show_action = QtWidgets.QAction("Show", self,
+    #                                     statusTip="Show",
+    #                                     triggered=self.show)
+    #     quit_action = QtWidgets.QAction("Quit", self,
+    #                                     statusTip="Quit",
+    #                                     triggered=self.close)
+    #     self.tray_menu.addAction(show_action)
+    #     self.tray_menu.addAction(quit_action)
+    #
+    #     icon = QtGui.QIcon()
+    #     # icon_path = "icons/brightness-controller.svg"
+    #     # icon_path = Filepath_handler.find_data_file(icon_path)
+    #     # icon_path =
+    #     # "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
+    #     icon_path = Filepath_handler.get_icon_path()
+    #     # print(icon_path)
+    #     icon.addPixmap(QtGui.QPixmap(icon_path),
+    #                    QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    #
+    #     self.tray_icon = QtWidgets.QSystemTrayIcon(icon, self)
+    #     self.tray_icon.connect(
+    #         QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self._icon_activated)
+    #     self.tray_icon.setContextMenu(self.tray_menu)
+    #     self.tray_icon.show()
 
-        show_action = QtWidgets.QAction("Show", self,
-                                        statusTip="Show",
-                                        triggered=self.show)
-        quit_action = QtWidgets.QAction("Quit", self,
-                                        statusTip="Quit",
-                                        triggered=self.close)
-        self.tray_menu.addAction(show_action)
-        self.tray_menu.addAction(quit_action)
-
-        icon = QtGui.QIcon()
-        # icon_path = "icons/brightness-controller.svg"
-        # icon_path = Filepath_handler.find_data_file(icon_path)
-        # icon_path =
-        # "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
-        icon_path = Filepath_handler.get_icon_path()
-        # print(icon_path)
-        icon.addPixmap(QtGui.QPixmap(icon_path),
-                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
-
-        self.tray_icon = QtWidgets.QSystemTrayIcon(icon, self)
-        self.tray_icon.connect(
-            QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self._icon_activated)
-        self.tray_icon.setContextMenu(self.tray_menu)
-        self.tray_icon.show()
-
-    def _icon_activated(self, reason):
-        if reason in (QtWidgets.QSystemTrayIcon.Trigger, QtWidgets.QSystemTrayIcon.DoubleClick):
-            self.show()
+    # def _icon_activated(self, reason):
+    #     if reason in (QtWidgets.QSystemTrayIcon.Trigger, QtWidgets.QSystemTrayIcon.DoubleClick):
+    #         self.show()
 
     def setup_widgets(self):
         """connects the form widgets with functions"""
@@ -228,6 +228,7 @@ class MyApplication(QtWidgets.QMainWindow):
 
         self.ui.actionDefault.triggered.connect(
             lambda: self.save_settings(True))
+
         self.ui.comboBox.activated[str].connect(self.combo_activated)
         self.ui.primary_combobox.activated[
             str].connect(self.primary_source_combo_activated)
@@ -613,8 +614,14 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def return_current_primary_settings(self):
         """
-        return p_br_rgb(primary_brightness,
-        primary_red, primary_green, primary_blue)
+        return p_br_rgb(
+        primary_brightness,
+        primary_red,
+        primary_green,
+        primary_blue,
+        primary_display_name,
+        temperature
+        )
         """
         # p_br_rgb = []
         p_br_rgb = [
@@ -630,15 +637,21 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def return_current_secondary_settings(self):
         """
-        return s_br_rgb(secondary_brightness,
-        secondary_red, secondary_green, secondary_blue)
+        return s_br_rgb(
+        secondary_brightness,
+        secondary_red,
+        secondary_green,
+        secondary_blue,
+        secondary_display_name,
+        temperature)
         """
         s_br_rgb = [
             self.ui.secondary_brightness.value(),
             self.ui.secondary_red.value(),
             self.ui.secondary_green.value(),
             self.ui.secondary_blue.value(),
-            self.display2
+            self.display2,
+            self.temperature
         ]
         # s_br_rgb = []
         # s_br_rgb.append(self.ui.secondary_brightness.value())
