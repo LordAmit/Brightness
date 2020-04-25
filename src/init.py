@@ -228,6 +228,7 @@ class MyApplication(QtWidgets.QMainWindow):
 
         self.ui.actionDefault.triggered.connect(
             lambda: self.save_settings(True))
+
         self.ui.comboBox.activated[str].connect(self.combo_activated)
         self.ui.primary_combobox.activated[
             str].connect(self.primary_source_combo_activated)
@@ -613,8 +614,14 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def return_current_primary_settings(self):
         """
-        return p_br_rgb(primary_brightness,
-        primary_red, primary_green, primary_blue)
+        return p_br_rgb(
+        primary_brightness,
+        primary_red,
+        primary_green,
+        primary_blue,
+        primary_display_name,
+        temperature
+        )
         """
         # p_br_rgb = []
         p_br_rgb = [
@@ -630,15 +637,21 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def return_current_secondary_settings(self):
         """
-        return s_br_rgb(secondary_brightness,
-        secondary_red, secondary_green, secondary_blue)
+        return s_br_rgb(
+        secondary_brightness,
+        secondary_red,
+        secondary_green,
+        secondary_blue,
+        secondary_display_name,
+        temperature)
         """
         s_br_rgb = [
             self.ui.secondary_brightness.value(),
             self.ui.secondary_red.value(),
             self.ui.secondary_green.value(),
             self.ui.secondary_blue.value(),
-            self.display2
+            self.display2,
+            self.temperature
         ]
         # s_br_rgb = []
         # s_br_rgb.append(self.ui.secondary_brightness.value())
