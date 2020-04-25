@@ -1,3 +1,9 @@
+brightness-controller (2.3.4) focal; urgency=medium
+
+  * v2.3.4 with fix in save defaults and temporarity disable systray
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sat, 25 Apr 2020 13:09:52 +0530
+
 brightness-controller (2.3.3-1) focal; urgency=medium
 
   * Finalized v2.3 by LordAmit
