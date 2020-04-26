@@ -18,7 +18,7 @@
 import configparser
 
 
-def _default_config(config, display_type: str = 'primary'):
+def default_config(config, display_type: str = 'primary'):
     config[display_type]['brightness'] = 99
     config[display_type]['red'] = 99
     config[display_type]['green'] = 99
@@ -49,7 +49,7 @@ def write_primary_display(p_br_rgb, file_path):
     config['primary'] = {}
     config['primary']['has_secondary'] = "False"
     if p_br_rgb is None:
-        config = _default_config(config)
+        config = default_config(config)
     else:
         config = set_value_in_config(config, p_br_rgb)
 
@@ -70,12 +70,12 @@ def write_both_display(p_br_rgb, s_br_rgb, file_path):
     config['primary'] = {}
     config['primary']['has_secondary'] = "True"
     if p_br_rgb is None:
-        config = _default_config(config)
+        config = default_config(config)
     else:
         config = set_value_in_config(config, p_br_rgb)
     config['secondary'] = {}
     if s_br_rgb is None:
-        _default_config(config, 'secondary')
+        default_config(config, 'secondary')
     else:
         set_value_in_config(config, s_br_rgb, 'secondary')
 
