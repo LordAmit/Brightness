@@ -18,7 +18,7 @@
 import configparser
 
 
-def default_config(config, display_type: str = 'primary'):
+def default_config(config, display_type = 'primary'):
     config[display_type]['brightness'] = 99
     config[display_type]['red'] = 99
     config[display_type]['green'] = 99
@@ -28,7 +28,7 @@ def default_config(config, display_type: str = 'primary'):
     return config
 
 
-def set_value_in_config(config, br_rgb, display_type: str = 'primary'):
+def set_value_in_config(config, br_rgb, display_type = 'primary'):
     config[display_type]['brightness'] = str(br_rgb[0])
     config[display_type]['red'] = str(br_rgb[1])
     config[display_type]['green'] = str(br_rgb[2])
