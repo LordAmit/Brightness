@@ -20,6 +20,8 @@ import sys
 import getpass
 from os import path, remove, makedirs
 from PySide2 import QtGui, QtCore, QtWidgets
+from PySide2.QtCore import QSize
+from PySide2.QtGui import QIcon
 from util.QtSingleApplication import QtSingleApplication
 from ui.mainwindow import Ui_MainWindow
 from ui.license import Ui_Form as License_Ui_Form
@@ -29,8 +31,7 @@ import util.executor as Executor
 import util.check_displays as CDisplay
 import util.write_config as WriteConfig
 import util.read_config as ReadConfig
-
-from PySide2.QtWidgets import QApplication
+import util.filepath_handler as Filepath_handler
 
 
 class MyApplication(QtWidgets.QMainWindow):
@@ -41,10 +42,9 @@ class MyApplication(QtWidgets.QMainWindow):
         self.no_of_displays = len(self.displays)
         self.no_of_connected_dev = self.no_of_displays
 
-        if self.no_of_displays is 1:
-
+        if self.no_of_displays == 1:
             self.display1 = self.displays[0]
-        elif self.no_of_displays is 2:
+        elif self.no_of_displays == 2:
 
             self.display1 = self.displays[0]
             self.display2 = self.displays[1]
@@ -52,17 +52,29 @@ class MyApplication(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         """Initializes"""
         QtWidgets.QMainWindow.__init__(self, parent)
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+
+        self.tray_menu = None
+        self.tray_icon = None
         self.display1 = None
         self.display2 = None
+        self.license_widget = None
+        self.about_widget = None
+        self.help_widget = None
+
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.ui_icon = QIcon()
+        self.ui_icon.addFile(Filepath_handler.get_icon_path(),
+                     QSize(), QIcon.Normal, QIcon.Off)
+        # icon.addFile("../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(self.ui_icon)
         self.temperature = 'Default'
         self.no_of_connected_dev = 0
         self.__assign_displays()
         self.setup_default_directory()
         self.generate_dynamic_items()
         self.default_config = '/home/{}/.config/' \
-            'brightness_controller/settings'      \
+                              'brightness_controller/settings' \
             .format(getpass.getuser())
         self.values = []
         self.array_value = 0.01
@@ -71,61 +83,92 @@ class MyApplication(QtWidgets.QMainWindow):
             self.array_value += 0.01
         self.connect_handlers()
         self.setup_widgets()
+
         if path.exists(self.default_config):
             self.load_settings(self.default_config)
 
-        self.setup_tray(parent)
+        # self.canCloseToTray = False
+
+        # if QtWidgets.QSystemTrayIcon.isSystemTrayAvailable():
+        #     self.canCloseToTray = True
+        #     self.setup_tray(parent)
 
     def setup_default_directory(self):
         """ Create default settings directory if it doesnt exist """
         directory = '/home/{}/.config/' \
-            'brightness_controller/'    \
+                    'brightness_controller/' \
             .format(getpass.getuser())
         if not path.exists(directory):
             try:
                 makedirs(directory)
-            except error as e:
+            except OSError as e:
                 self._show_error(str(e))
 
+    # def closeEvent(self, event):
+    #     """ Override CloseEvent for system tray """
+    #     if not self.canCloseToTray:
+    #         reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
+    #                                                QtWidgets.QMessageBox.Yes,
+    #                                                # QtWidgets.QMessageBox.Yes |
+    #                                                # QtWidgets.QMessageBox.No,
+    #                                                QtWidgets.QMessageBox.No)
+    #         if reply == QtWidgets.QMessageBox.Yes:
+    #             event.accept()
+    #             sys.exit(APP.exec_())
+    #         else:
+    #             event.ignore()
+    #         return
+    #     else:
+    #         if self.isVisible() is True:
+    #             self.hide()
+    #             event.ignore()
+    #         else:
+    #             reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
+    #                                                    # QtWidgets.QMessageBox.Yes |
+    #                                                    # QtWidgets.QMessageBox.No,
+    #                                                    QtWidgets.QMessageBox.Yes,
+    #                                                    QtWidgets.QMessageBox.No)
+    #             if reply == QtWidgets.QMessageBox.Yes:
+    #                 event.accept()
+    #                 sys.exit(APP.exec_())
+                #  else:
+                # # fixes an odd event bug, the app never shows but prevents closing
+                # self.show()
+                # self.hide()
+                # event.ignore()
 
-    def closeEvent(self, event):
-        """ Override CloseEvent for system tray """
-        if self.isVisible() is True:
-            self.hide()
-            event.ignore()
-        else:
-            reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
-                                            QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
-            if reply == QtWidgets.QMessageBox.Yes:
-                event.accept()
-            else:
-                # fixes an odd event bug, the app never shows but prevents closing
-                self.show()
-                self.hide()
-                event.ignore()
+    # def setup_tray(self, parent):
+    #     """ Setup system tray """
+    #     self.tray_menu = QtWidgets.QMenu(parent)
+    #
+    #     show_action = QtWidgets.QAction("Show", self,
+    #                                     statusTip="Show",
+    #                                     triggered=self.show)
+    #     quit_action = QtWidgets.QAction("Quit", self,
+    #                                     statusTip="Quit",
+    #                                     triggered=self.close)
+    #     self.tray_menu.addAction(show_action)
+    #     self.tray_menu.addAction(quit_action)
+    #
+    #     icon = QtGui.QIcon()
+    #     # icon_path = "icons/brightness-controller.svg"
+    #     # icon_path = Filepath_handler.find_data_file(icon_path)
+    #     # icon_path =
+    #     # "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
+    #     icon_path = Filepath_handler.get_icon_path()
+    #     # print(icon_path)
+    #     icon.addPixmap(QtGui.QPixmap(icon_path),
+    #                    QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    #
+    #     self.tray_icon = QtWidgets.QSystemTrayIcon(icon, self)
+    #     self.tray_icon.connect(
+    #         QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self._icon_activated)
+    #     self.tray_icon.setContextMenu(self.tray_menu)
+    #     self.tray_icon.show()
 
-
-    def setup_tray(self, parent):
-        """ Setup systemtray """
-        self.tray_menu = QtWidgets.QMenu(parent)
-        self.tray_menu.addAction(QtWidgets.QAction("Show ...", self,
-                statusTip="Show",
-                triggered=self.show))
-        self.tray_menu.addAction(QtWidgets.QAction("Quit ...", self,
-                statusTip="Quit",
-                triggered=self.close))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.tray_icon = QtWidgets.QSystemTrayIcon(icon, self)
-        if self.tray_icon.isSystemTrayAvailable():
-            self.tray_icon.connect(
-                QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self._icon_activated)
-            self.tray_icon.setContextMenu(self.tray_menu)
-            self.tray_icon.show()
-
-    def _icon_activated(self, reason):
-        if reason in (QtWidgets.QSystemTrayIcon.Trigger, QtWidgets.QSystemTrayIcon.DoubleClick):
-            self.show()
+    # def _icon_activated(self, reason):
+    #     if reason in (QtWidgets.QSystemTrayIcon.Trigger, QtWidgets.QSystemTrayIcon.DoubleClick):
+    #         self.show()
 
     def setup_widgets(self):
         """connects the form widgets with functions"""
@@ -142,15 +185,15 @@ class MyApplication(QtWidgets.QMainWindow):
         self.help_widget.hide()
 
     def generate_dynamic_items(self):
-        '''
+        """
         manages widgets that may contain dynamic items.
-        '''
+        """
         self.generate_brightness_sources()
 
     def generate_brightness_sources(self):
-        '''
+        """
         generates assigns display sources to combo boxes
-        '''
+        """
         if self.no_of_connected_dev < 2:
             self.ui.secondary_combo.addItem("Disabled")
             self.ui.secondary_combo.setEnabled(False)
@@ -162,16 +205,15 @@ class MyApplication(QtWidgets.QMainWindow):
             self.ui.secondary_combo.addItem(display)
             self.ui.primary_combobox.addItem(display)
 
-
     def connect_handlers(self):
         """Connects the handlers of GUI widgets"""
-        self.ui.primary_brightness.valueChanged[int].\
+        self.ui.primary_brightness.valueChanged[int]. \
             connect(self.change_value_pbr)
-        self.ui.primary_red.valueChanged[int].\
+        self.ui.primary_red.valueChanged[int]. \
             connect(self.change_value_pr)
-        self.ui.primary_blue.valueChanged[int].\
+        self.ui.primary_blue.valueChanged[int]. \
             connect(self.change_value_pb)
-        self.ui.primary_green.valueChanged[int].\
+        self.ui.primary_green.valueChanged[int]. \
             connect(self.change_value_pg)
         self.enable_secondary_widgets(False)
 
@@ -181,9 +223,12 @@ class MyApplication(QtWidgets.QMainWindow):
 
         if path.exists(self.default_config):
             self.ui.actionClearDefault.setVisible(True)
-            self.ui.actionClearDefault.triggered.connect(self.delete_default_settings)
+            self.ui.actionClearDefault.triggered.connect(
+                self.delete_default_settings)
 
-        self.ui.actionDefault.triggered.connect(lambda: self.save_settings(True))
+        self.ui.actionDefault.triggered.connect(
+            lambda: self.save_settings(True))
+
         self.ui.comboBox.activated[str].connect(self.combo_activated)
         self.ui.primary_combobox.activated[
             str].connect(self.primary_source_combo_activated)
@@ -209,13 +254,13 @@ class MyApplication(QtWidgets.QMainWindow):
         """
         connects the secondary widgets with functions
         """
-        self.ui.secondary_brightness.valueChanged[int].\
+        self.ui.secondary_brightness.valueChanged[int]. \
             connect(self.change_value_sbr)
-        self.ui.secondary_red.valueChanged[int].\
+        self.ui.secondary_red.valueChanged[int]. \
             connect(self.change_value_sr)
-        self.ui.secondary_blue.valueChanged[int].\
+        self.ui.secondary_blue.valueChanged[int]. \
             connect(self.change_value_sb)
-        self.ui.secondary_green.valueChanged[int].\
+        self.ui.secondary_green.valueChanged[int]. \
             connect(self.change_value_sg)
 
     def change_value_pbr(self, value):
@@ -224,11 +269,11 @@ class MyApplication(QtWidgets.QMainWindow):
         --output %s \
         --brightness %s\
         --gamma %s:%s:%s" % \
-            (self.display1,
-             self.values[value],
-             self.values[self.ui.primary_red.value()],
-             self.values[self.ui.primary_green.value()],
-             self.values[self.ui.primary_blue.value()])
+                    (self.display1,
+                     self.values[value],
+                     self.values[self.ui.primary_red.value()],
+                     self.values[self.ui.primary_green.value()],
+                     self.values[self.ui.primary_blue.value()])
         Executor.execute_command(cmd_value)
 
     def change_value_pr(self, value):
@@ -237,11 +282,11 @@ class MyApplication(QtWidgets.QMainWindow):
         --output %s \
         --brightness %s\
         --gamma %s:%s:%s" % \
-            (self.display1,
-             self.values[self.ui.primary_brightness.value()],
-             self.values[value],
-             self.values[self.ui.primary_green.value()],
-             self.values[self.ui.primary_blue.value()])
+                    (self.display1,
+                     self.values[self.ui.primary_brightness.value()],
+                     self.values[value],
+                     self.values[self.ui.primary_green.value()],
+                     self.values[self.ui.primary_blue.value()])
         Executor.execute_command(cmd_value)
 
     def change_value_pg(self, value):
@@ -250,11 +295,11 @@ class MyApplication(QtWidgets.QMainWindow):
         --output %s \
         --brightness %s\
         --gamma %s:%s:%s" % \
-            (self.display1,
-             self.values[self.ui.primary_brightness.value()],
-             self.values[self.ui.primary_red.value()],
-             self.values[value],
-             self.values[self.ui.primary_blue.value()])
+                    (self.display1,
+                     self.values[self.ui.primary_brightness.value()],
+                     self.values[self.ui.primary_red.value()],
+                     self.values[value],
+                     self.values[self.ui.primary_blue.value()])
 
         Executor.execute_command(cmd_value)
 
@@ -264,11 +309,11 @@ class MyApplication(QtWidgets.QMainWindow):
         --output %s \
         --brightness %s\
         --gamma %s:%s:%s" % \
-            (self.display1,
-             self.values[self.ui.primary_brightness.value()],
-             self.values[self.ui.primary_red.value()],
-             self.values[self.ui.primary_green.value()],
-             self.values[value])
+                    (self.display1,
+                     self.values[self.ui.primary_brightness.value()],
+                     self.values[self.ui.primary_red.value()],
+                     self.values[self.ui.primary_green.value()],
+                     self.values[value])
         Executor.execute_command(cmd_value)
 
     def change_value_sbr(self, value):
@@ -279,11 +324,11 @@ class MyApplication(QtWidgets.QMainWindow):
         --output %s \
         --brightness %s\
         --gamma %s:%s:%s" % \
-            (self.display2,
-             self.values[value],
-             self.values[self.ui.secondary_red.value()],
-             self.values[self.ui.secondary_green.value()],
-             self.values[self.ui.secondary_blue.value()])
+                    (self.display2,
+                     self.values[value],
+                     self.values[self.ui.secondary_red.value()],
+                     self.values[self.ui.secondary_green.value()],
+                     self.values[self.ui.secondary_blue.value()])
         Executor.execute_command(cmd_value)
 
     def change_value_sr(self, value):
@@ -292,11 +337,11 @@ class MyApplication(QtWidgets.QMainWindow):
         --output %s \
         --brightness %s\
         --gamma %s:%s:%s" % \
-            (self.display2,
-             self.values[self.ui.secondary_brightness.value()],
-             self.values[value],
-             self.values[self.ui.secondary_green.value()],
-             self.values[self.ui.secondary_blue.value()])
+                    (self.display2,
+                     self.values[self.ui.secondary_brightness.value()],
+                     self.values[value],
+                     self.values[self.ui.secondary_green.value()],
+                     self.values[self.ui.secondary_blue.value()])
         Executor.execute_command(cmd_value)
 
     def change_value_sg(self, value):
@@ -305,11 +350,11 @@ class MyApplication(QtWidgets.QMainWindow):
         --output %s \
         --brightness %s\
         --gamma %s:%s:%s" % \
-            (self.display2,
-             self.values[self.ui.secondary_brightness.value()],
-             self.values[self.ui.secondary_red.value()],
-             self.values[value],
-             self.values[self.ui.secondary_blue.value()])
+                    (self.display2,
+                     self.values[self.ui.secondary_brightness.value()],
+                     self.values[self.ui.secondary_red.value()],
+                     self.values[value],
+                     self.values[self.ui.secondary_blue.value()])
 
         Executor.execute_command(cmd_value)
 
@@ -319,11 +364,11 @@ class MyApplication(QtWidgets.QMainWindow):
         --output %s \
         --brightness %s\
         --gamma %s:%s:%s" % \
-            (self.display2,
-             self.values[self.ui.secondary_brightness.value()],
-             self.values[self.ui.secondary_red.value()],
-             self.values[self.ui.secondary_green.value()],
-             self.values[value])
+                    (self.display2,
+                     self.values[self.ui.secondary_brightness.value()],
+                     self.values[self.ui.secondary_red.value()],
+                     self.values[self.ui.secondary_green.value()],
+                     self.values[value])
         Executor.execute_command(cmd_value)
 
     def changed_state(self, state):
@@ -337,13 +382,13 @@ class MyApplication(QtWidgets.QMainWindow):
             self.display2 = temp
 
     def secondary_source_combo_activated(self, text):
-        '''
+        """
         assigns combo value to display
-        '''
+        """
         self.display2 = text
 
     def primary_source_combo_activated(self, text):
-        '''assigns combo value to display'''
+        """assigns combo value to display"""
         self.display1 = text
 
     def combo_activated(self, text):
@@ -470,10 +515,10 @@ class MyApplication(QtWidgets.QMainWindow):
         """ Shows the Help Widget"""
         self.help_widget.show()
 
-
     def save_settings(self, default=False):
         """ save current primary and secondary display settings"""
-        file_path = self.default_config if default else QtWidgets.QFileDialog.getSaveFileName()[0]
+        file_path = self.default_config if default else QtWidgets.QFileDialog.getSaveFileName()[
+            0]
         # just a number. path.exists won't work in case it is a new file.
         if len(file_path) > 5:
             if default:
@@ -491,11 +536,9 @@ class MyApplication(QtWidgets.QMainWindow):
 
                 )
 
-
     def _show_error(self, message):
         """ Shows an Error Message"""
-        QtGui.QMessageBox.critical(self, 'Error', message)
-
+        QtWidgets.QMessageBox.critical(self, 'Error', message)
 
     def delete_default_settings(self):
         """
@@ -510,7 +553,6 @@ class MyApplication(QtWidgets.QMainWindow):
         else:
             return False
 
-
     def _load_temperature(self, text='Default'):
         """
         Load current temperature settings
@@ -520,7 +562,6 @@ class MyApplication(QtWidgets.QMainWindow):
             text, QtCore.Qt.MatchFixedString)
         if primary_temperature_index >= 0:
             self.ui.comboBox.setCurrentIndex(primary_temperature_index)
-
 
     def load_settings(self, location=None):
         """
@@ -536,7 +577,6 @@ class MyApplication(QtWidgets.QMainWindow):
                 # checks just in case saved settings are for two displays,
                 # but loads when only one display is connected
                 if self.no_of_connected_dev == 1:
-
                     self.primary_sliders_in_rgb_0_99(
                         (loaded_settings[0],
                          loaded_settings[1],
@@ -552,7 +592,8 @@ class MyApplication(QtWidgets.QMainWindow):
                 second_combo_index = self.ui.secondary_combo.findText(
                     secondary_source, QtCore.Qt.MatchFixedString)
                 if primary_combo_index >= 0:
-                    self.ui.primary_combobox.setCurrentIndex(primary_combo_index)
+                    self.ui.primary_combobox.setCurrentIndex(
+                        primary_combo_index)
                     self.primary_source_combo_activated(primary_source)
                 if second_combo_index >= 0:
                     self.ui.secondary_combo.setCurrentIndex(second_combo_index)
@@ -571,11 +612,16 @@ class MyApplication(QtWidgets.QMainWindow):
                      loaded_settings[8],
                      loaded_settings[9]))
 
-
     def return_current_primary_settings(self):
         """
-        return p_br_rgb(primary_brightness,
-        primary_red, primary_green, primary_blue)
+        return p_br_rgb(
+        primary_brightness,
+        primary_red,
+        primary_green,
+        primary_blue,
+        primary_display_name,
+        temperature
+        )
         """
         # p_br_rgb = []
         p_br_rgb = [
@@ -591,15 +637,21 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def return_current_secondary_settings(self):
         """
-        return s_br_rgb(secondary_brightness,
-        secondary_red, secondary_green, secondary_blue)
+        return s_br_rgb(
+        secondary_brightness,
+        secondary_red,
+        secondary_green,
+        secondary_blue,
+        secondary_display_name,
+        temperature)
         """
         s_br_rgb = [
             self.ui.secondary_brightness.value(),
             self.ui.secondary_red.value(),
             self.ui.secondary_green.value(),
             self.ui.secondary_blue.value(),
-            self.display2
+            self.display2,
+            self.temperature
         ]
         # s_br_rgb = []
         # s_br_rgb.append(self.ui.secondary_brightness.value())
@@ -610,7 +662,6 @@ class MyApplication(QtWidgets.QMainWindow):
 
 
 class LicenseForm(QtWidgets.QWidget):
-
     """License Form widget initialization"""
 
     def __init__(self, parent=None):
@@ -627,7 +678,6 @@ class LicenseForm(QtWidgets.QWidget):
 
 
 class AboutForm(QtWidgets.QWidget):
-
     """About Form widget initialization"""
 
     def __init__(self, parent=None):
@@ -643,7 +693,6 @@ class AboutForm(QtWidgets.QWidget):
 
 
 class HelpForm(QtWidgets.QWidget):
-
     """Help Form widget initialization"""
 
     def __init__(self, parent=None):
@@ -657,11 +706,12 @@ class HelpForm(QtWidgets.QWidget):
         """assigns main_win as main_window"""
         self.main_window = main_win
 
+
 if __name__ == "__main__":
     UUID = 'PHIR-HWOH-MEIZ-AHTA'
     APP = QtSingleApplication(UUID, sys.argv)
     if APP.isRunning():
-         sys.exit(0)
+        sys.exit(0)
     WINDOW = MyApplication()
     APP.setActivationWindow(WINDOW)
     WINDOW.show()

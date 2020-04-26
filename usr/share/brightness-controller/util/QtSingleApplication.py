@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from PySide2.QtCore import Signal, QTextStream, Qt
-#from PySide2.QtGui import *
+# from PySide2.QtGui import *
 from PySide2.QtNetwork import QLocalSocket, QLocalServer
 from PySide2.QtWidgets import QApplication
 
@@ -28,6 +28,7 @@ from PySide2.QtWidgets import QApplication
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
+
 
 class QtSingleApplication(QApplication):
     messageReceived = Signal(str)
@@ -67,7 +68,7 @@ class QtSingleApplication(QApplication):
     def activationWindow(self):
         return self._activationWindow
 
-    def setActivationWindow(self, activationWindow, activateOnMessage = True):
+    def setActivationWindow(self, activationWindow, activateOnMessage=True):
         self._activationWindow = activationWindow
         self._activateOnMessage = activateOnMessage
 

@@ -1,3 +1,33 @@
+brightness-controller (2.3.4) focal; urgency=medium
+
+  * v2.3.4 with fix in save defaults and temporarity disable systray
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sat, 25 Apr 2020 13:09:52 +0530
+
+brightness-controller (2.3.3-1) focal; urgency=medium
+
+  * Finalized v2.3 by LordAmit
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sat, 28 Mar 2020 12:00:25 +0530
+
+brightness-controller (2.3.3) focal; urgency=medium
+
+  * Removed python2 dependency altogether. Ported brightness-reset to Python3
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Fri, 29 Jan 2020 22:39:46 +0530
+
+brightness-controller (2.3.2) focal; urgency=medium
+
+  * python2 instead of python
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Fri, 29 Jan 2020 12:42:11 +0530
+
+brightness-controller (2.3.1) focal; urgency=medium
+
+  * Fixed some error which appeared in Manjaro
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Fri, 20 Jan 2020 22:51:11 +0530
+
 brightness-controller (2.3) focal; urgency=medium
 
   * Port to Python3 and PySide2
