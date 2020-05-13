@@ -15,7 +15,7 @@ executables = [
 ]
 
 setup(name='Brightness',
-      version='2.3.1',
+      version='2.3.4',
       description='Brightness Controller',
       options=dict(build_exe=buildOptions),
       executables=executables)
