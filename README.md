@@ -59,13 +59,13 @@ Brightness Controller changes Red, Green and Blue color ratios  in the screen th
 
 We work on this in our spare time, so can not really promise when the v3 will be released. The current version available is stable and should work as intended.
 
-## Dependencies
+## Requirements
 
-There are several dependencies:
+There are several requirements:
 
-1. python3-pyside2.qtcore, python3-pyside2.qtgui, python3-pyside2.qtwidgets, python3-pyside2.qtnetwork
-2. xrandr support in your system
-3. python3
+1. python3
+2. python3-pyside2.qtcore, python3-pyside2.qtgui, python3-pyside2.qtwidgets, python3-pyside2.qtnetwork
+3. xrandr support in your system
 
 ## Bugs
 
@@ -74,6 +74,7 @@ Please test v2.3. Reporting bugs is appreciated.
 ## Can I have just brightness sliders - For Controlling Four displays at the same time?
 
 We got you covered! Try version 1.2.8/simpler version of Brightness Controller.
+
 ![](img/brightness-controller-1.png)
 
 To install, simply do this:
