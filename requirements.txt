@@ -4,4 +4,4 @@
 #
 #    pip-compile --output-file requirements.txt requirements.txt
 #
-pyside==1.1.2
+qtpy>=1.3.0

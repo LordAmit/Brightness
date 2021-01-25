@@ -1,6 +1,6 @@
 # Brightness Controller
 
-This is version 2.3.4 of Brightness Controller, ported to Python 3 and PySide 2. It supports an arbitrary number of displays!
+This is version 2.3.4 of Brightness Controller, ported to Python 3 and QtPy. It supports an arbitrary number of displays!
 
 If you like this, do not forget to give us a Star!  [![GitHub stars](https://img.shields.io/github/stars/lordamit/brightness.svg?style=flat-square)](https://github.com/lordamit/brightness/stargazers) People already did!
 
@@ -17,19 +17,19 @@ sudo apt install brightness-controller
 ```
 
 ## Manual Installation
-First, install PySide2.
+First, install QtPy.
 
 ```bash
-sudo apt install python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qtwidgets python3-pyside2.qtnetwork
+sudo apt install python3-qtpy
 ```
 
-Somtimes it is not enough to install and integrate PySide2, so you might also try installing PySide2 using pip3.
+Somtimes it is not enough to install and integrate QtPY, so you might also try installing QtPy using pip3.
 
 ```bash
-pip3 install PySide2
+pip3 install qtpy
 ```
 
-We prefer using `--user` while installing PySide2 using pip. Installing it in virtual environment may not work as intended. 
+We prefer using `--user` while installing QtPy using pip. Installing it in virtual environment may not work as intended.
 
 Next, download the latest zip file from [here](https://github.com/lordamit/Brightness/archive/master.zip).
 
@@ -64,7 +64,7 @@ We work on this in our spare time, so can not really promise when the v3 will be
 There are several requirements:
 
 1. python3
-2. python3-pyside2.qtcore, python3-pyside2.qtgui, python3-pyside2.qtwidgets, python3-pyside2.qtnetwork
+2. python3-qtpy
 3. xrandr support in your system
 
 ## Bugs
