@@ -23,7 +23,7 @@ First, install QtPy.
 sudo apt install python3-qtpy
 ```
 
-Somtimes it is not enough to install and integrate QtPY, so you might also try installing QtPy using pip3.
+Somtimes it is not enough to install and integrate QtPY, so you might also try installing QtPy using pip3. QtPy is a wrapper that works by using PyQt or PySide; therefore it needs either of these to work. Please check Requirements section for missing dependencies.
 
 ```bash
 pip3 install qtpy
