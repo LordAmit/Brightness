@@ -67,6 +67,8 @@ There are several requirements:
 2. python3-qtpy
 3. xrandr support in your system
 
+`python3-qtpy` is a wrapper around Qt for Python. You will need either PyQt5, PyQt4, PySide2 or PySide installed in your system.
+
 ## Bugs
 
 Please test v2.3. Reporting bugs is appreciated.
