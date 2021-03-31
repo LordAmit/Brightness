@@ -17,19 +17,30 @@ sudo apt install brightness-controller
 ```
 
 ## Manual Installation
-First, install QtPy.
+
+First, install `QtPy`.
 
 ```bash
 sudo apt install python3-qtpy
 ```
 
-Somtimes it is not enough to install and integrate QtPY, so you might also try installing QtPy using pip3. QtPy is a wrapper that works by using PyQt or PySide; therefore it needs either of these to work. Please check Requirements section for missing dependencies.
+Sometimes it is not enough to install and integrate `QtPy`, so you might also try installing `QtPy` using `pip3`.
 
 ```bash
 pip3 install qtpy
 ```
 
-We prefer using `--user` while installing QtPy using pip. Installing it in virtual environment may not work as intended.
+`QtPy` is a wrapper that works by using `PyQt` or `PySide`.
+
+**It needs either of these to work**, and some operating systems come with either of these preinstalled, and some do not.
+
+If your system does not have either of these, you may need to install either `PySide` or `PyQt`. For example, you may have to execute the following:
+
+```bash
+pip install PySide2
+```
+
+Please check [Requirements](#requirements) section for missing dependencies. We prefer using `--user` while installing `QtPy`  (and its other dependencies) using `pip`. Installing it in virtual environment may not work as intended.
 
 Next, download the latest zip file from [here](https://github.com/lordamit/Brightness/archive/master.zip).
 
