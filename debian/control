@@ -2,8 +2,7 @@ Source: brightness-controller
 Maintainer: Archisman Panigrahi <apandada1@gmail.com>
 Section: utils
 Standards-Version: 4.1.4
-Build-depends: debhelper,
-	       python | python-all | python-dev | python-all-dev | python3
+Build-depends: debhelper, python3-dev
 Homepage: https://github.com/lordamit/Brightness
 Priority: optional
 
