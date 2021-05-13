@@ -19,9 +19,9 @@
 import sys
 import getpass
 from os import path, remove, makedirs
-from PySide2 import QtGui, QtCore, QtWidgets
-from PySide2.QtCore import QSize
-from PySide2.QtGui import QIcon
+from qtpy import QtGui, QtCore, QtWidgets
+from qtpy.QtCore import QSize
+from qtpy.QtGui import QIcon
 from util.QtSingleApplication import QtSingleApplication
 from ui.mainwindow import Ui_MainWindow
 from ui.license import Ui_Form as License_Ui_Form

@@ -10,10 +10,7 @@ Priority: optional
 Package: brightness-controller
 Architecture: all
 Depends: x11-xserver-utils,
-	 python3-pyside2.qtcore,
-	 python3-pyside2.qtgui,
-	 python3-pyside2.qtwidgets,
-	 python3-pyside2.qtnetwork,
+	 python3-qtpy,
 	 python3, ${misc:Depends}
 Section: utils
 Description: Easily adjust your display brightness and color temperature
