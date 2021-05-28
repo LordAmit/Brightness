@@ -6,14 +6,21 @@ If you like this, do not forget to give us a Star!  [![GitHub stars](https://img
 
 ![](img/BrightnessController.gif)
 
-## Installation via PPA
+## Installation via package managers
 
-Thanks to package maintainer @apandada1, we have PPA repository For Ubuntu and likewise users:
+### Ubuntu and derivatives
+Thanks to package maintainer @apandada1, we have [PPA](https://launchpad.net/~apandada1/+archive/ubuntu/brightness-controller/) repository For Ubuntu and likewise users:
 
 ```bash
 sudo add-apt-repository ppa:apandada1/brightness-controller
 sudo apt update
 sudo apt install brightness-controller
+```
+### Arch and derivatives
+Thanks to @yochananmarqos, a package for Arch and derivatives is available in the [AUR](https://aur.archlinux.org/packages/brightness-controller-git).
+
+```bash
+yay -S brightness-controller-git
 ```
 
 ## Manual Installation
