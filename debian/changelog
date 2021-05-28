@@ -1,3 +1,15 @@
+brightness-controller (2.3.4-2) focal; urgency=medium
+
+  * Use qtpy instead of pyside
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Thu, 13 May 2021 14:25:17 +0530
+
+brightness-controller (2.3.4-1) focal; urgency=medium
+
+  * updated v2.3.4
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sun, 26 Apr 2020 13:09:52 +0530
+
 brightness-controller (2.3.4) focal; urgency=medium
 
   * v2.3.4 with fix in save defaults and temporarity disable systray
