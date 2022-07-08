@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindow.ui'
+## Form generated from reading UI file 'mainwindowlPqlsB.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.14.1
+## Created by: Qt User Interface Compiler version 5.15.5
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
+
+#from PySide2.QtCore import *  # type: ignore
+#from PySide2.QtGui import *  # type: ignore
+#from PySide2.QtWidgets import *  # type: ignore
 
 from qtpy.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
     QRect, QSize, QUrl, Qt)
@@ -15,10 +19,9 @@ from qtpy.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
     QRadialGradient)
 from qtpy.QtWidgets import *
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        if MainWindow.objectName():
+        if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(701, 340)
         MainWindow.setMinimumSize(QSize(701, 340))
@@ -165,7 +168,7 @@ class Ui_MainWindow(object):
         self.label_8.setGeometry(QRect(470, 260, 16, 16))
         self.verticalLayoutWidget = QWidget(self.centralWidget)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(529, 0, 213, 218))
+        self.verticalLayoutWidget.setGeometry(QRect(529, 0, 218, 258))
         self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setSpacing(6)
         self.verticalLayout.setContentsMargins(11, 11, 11, 11)
@@ -229,6 +232,21 @@ class Ui_MainWindow(object):
         self.comboBox.setMaximumSize(QSize(150, 28))
 
         self.verticalLayout.addWidget(self.comboBox)
+
+        self.ddcutilsNotInstalled = QLabel(self.verticalLayoutWidget)
+        self.ddcutilsNotInstalled.setObjectName(u"ddcutilsNotInstalled")
+        self.ddcutilsNotInstalled.setEnabled(True)
+        font = QFont()
+        font.setPointSize(8)
+        self.ddcutilsNotInstalled.setFont(font)
+
+        self.verticalLayout.addWidget(self.ddcutilsNotInstalled)
+
+        self.directControlBox = QCheckBox(self.verticalLayoutWidget)
+        self.directControlBox.setObjectName(u"directControlBox")
+        self.directControlBox.setEnabled(False)
+
+        self.verticalLayout.addWidget(self.directControlBox)
 
         MainWindow.setCentralWidget(self.centralWidget)
         self.statusBar = QStatusBar(MainWindow)
@@ -300,6 +318,8 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(8, QCoreApplication.translate("MainWindow", u"7000K Overcast Sky", None))
         self.comboBox.setItemText(9, QCoreApplication.translate("MainWindow", u"20000K Clear Blue Sky", None))
 
+        self.ddcutilsNotInstalled.setText(QCoreApplication.translate("MainWindow", u"Install ddcutil for direct control", None))
+        self.directControlBox.setText(QCoreApplication.translate("MainWindow", u"Direct Control (DDC)", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"&File", None))
         self.menuHelp.setTitle(QCoreApplication.translate("MainWindow", u"&Help", None))
     # retranslateUi

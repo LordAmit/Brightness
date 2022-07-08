@@ -32,6 +32,20 @@ import util.check_displays as CDisplay
 import util.write_config as WriteConfig
 import util.read_config as ReadConfig
 import util.filepath_handler as Filepath_handler
+import subprocess
+import threading
+
+
+displayMaxes = []
+
+
+def directlySetMaxBrightness(displayNum, percentage):
+
+        percentage = round(percentage)/100
+
+        print(displayNum, percentage, displayMaxes[displayNum - 1] * percentage)
+
+        subprocess.run(["ddcutil", "setvcp", "10", str(int(displayMaxes[displayNum - 1] * percentage)), "-d", str(displayNum)])
 
 
 class MyApplication(QtWidgets.QMainWindow):
@@ -87,6 +101,27 @@ class MyApplication(QtWidgets.QMainWindow):
         if path.exists(self.default_config):
             self.load_settings(self.default_config)
 
+        #Check if ddcutil is installed
+        try:
+            if "ddcutil" in str(subprocess.check_output(["ddcutil", "--version"]), 'utf-8'):
+                ddcutil_Installed = True
+                if "sudo modprobe" in str(subprocess.check_output(["ddcutil", "environment"]), 'utf-8'):
+
+                    self.ui.ddcutilsNotInstalled
+                    self.ui.ddcutilsNotInstalled.setText("add i2c-dev to /etc/modules-load.d")
+                    #self.ui.ddcutilsNotInstalled.font.setFont(font, 6)
+
+                else:
+                    for i in range(self.no_of_displays):
+                        displayMaxes.append(int(str(subprocess.check_output(["ddcutil", "getvcp", "10", "-d", str(i + 1)]), 'utf-8').split(",")[1].split("=")[1].strip()))
+
+                    self.ui.directControlBox.setEnabled(True)
+                    self.ui.ddcutilsNotInstalled.setVisible(False)
+        except:
+            ddcutil_Installed = False
+
+
+
         # self.canCloseToTray = False
 
         # if QtWidgets.QSystemTrayIcon.isSystemTrayAvailable():
@@ -111,7 +146,8 @@ class MyApplication(QtWidgets.QMainWindow):
     #                                                QtWidgets.QMessageBox.Yes,
     #                                                # QtWidgets.QMessageBox.Yes |
     #                                                # QtWidgets.QMessageBox.No,
-    #                                                QtWidgets.QMessageBox.No)
+    #                                        getMax = str(subprocess.check_output(["ddcutil", "getvcp", "10", "-d", "1"]), 'utf-8').split(",")[1].split("=")[1].strip()
+    #        print(getMax)        QtWidgets.QMessageBox.No)
     #         if reply == QtWidgets.QMessageBox.Yes:
     #             event.accept()
     #             sys.exit(APP.exec_())
@@ -123,7 +159,7 @@ class MyApplication(QtWidgets.QMainWindow):
     #             self.hide()
     #             event.ignore()
     #         else:
-    #             reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
+    #             reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",print(ddcutil_Installed)
     #                                                    # QtWidgets.QMessageBox.Yes |
     #                                                    # QtWidgets.QMessageBox.No,
     #                                                    QtWidgets.QMessageBox.Yes,
@@ -170,6 +206,7 @@ class MyApplication(QtWidgets.QMainWindow):
     #     if reason in (QtWidgets.QSystemTrayIcon.Trigger, QtWidgets.QSystemTrayIcon.DoubleClick):
     #         self.show()
 
+
     def setup_widgets(self):
         """connects the form widgets with functions"""
         self.license_widget = LicenseForm()
@@ -192,7 +229,7 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def generate_brightness_sources(self):
         """
-        generates assigns display sources to combo boxes
+        generates and assigns display sources to combo boxes
         """
         if self.no_of_connected_dev < 2:
             self.ui.secondary_combo.addItem("Disabled")
@@ -207,14 +244,14 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def connect_handlers(self):
         """Connects the handlers of GUI widgets"""
-        self.ui.primary_brightness.valueChanged[int]. \
-            connect(self.change_value_pbr)
+        self.ui.primary_brightness.sliderReleased.connect(self.change_value_pbr)
         self.ui.primary_red.valueChanged[int]. \
             connect(self.change_value_pr)
         self.ui.primary_blue.valueChanged[int]. \
             connect(self.change_value_pb)
         self.ui.primary_green.valueChanged[int]. \
             connect(self.change_value_pg)
+        self.ui.directControlBox.stateChanged.connect(self.directControlUpdate)
         self.enable_secondary_widgets(False)
 
         if self.no_of_connected_dev >= 2:
@@ -241,6 +278,16 @@ class MyApplication(QtWidgets.QMainWindow):
         self.ui.actionSave.triggered.connect(self.save_settings)
         self.ui.actionLoad.triggered.connect(self.load_settings)
 
+
+    def directControlUpdate(self, value):
+        if self.ui.directControlBox.isChecked():
+            self.ui.primary_brightness.setMaximum(100)
+            self.ui.secondary_brightness.setMaximum(100)
+        else:
+            self.ui.primary_brightness.setMaximum(99)
+            self.ui.secondary_brightness.setMaximum(99)
+
+
     def enable_secondary_widgets(self, boolean):
         """
         boolean - assigns boolean value to setEnabled(boolean)
@@ -254,7 +301,7 @@ class MyApplication(QtWidgets.QMainWindow):
         """
         connects the secondary widgets with functions
         """
-        self.ui.secondary_brightness.valueChanged[int]. \
+        self.ui.secondary_brightness.sliderReleased. \
             connect(self.change_value_sbr)
         self.ui.secondary_red.valueChanged[int]. \
             connect(self.change_value_sr)
@@ -263,18 +310,25 @@ class MyApplication(QtWidgets.QMainWindow):
         self.ui.secondary_green.valueChanged[int]. \
             connect(self.change_value_sg)
 
-    def change_value_pbr(self, value):
+    def change_value_pbr(self):
         """Changes Primary Display Brightness"""
-        cmd_value = "xrandr\
-        --output %s \
-        --brightness %s\
-        --gamma %s:%s:%s" % \
+        if self.ui.directControlBox.isChecked():
+
+            setValue = threading.Thread(target=directlySetMaxBrightness, args=(1,self.ui.primary_brightness.value()))
+            setValue.start()
+
+        else:
+            value = self.ui.primary_brightness.value()
+            cmd_value = "xrandr\
+            --output %s \
+            --brightness %s\
+            --gamma %s:%s:%s" % \
                     (self.display1,
                      self.values[value],
                      self.values[self.ui.primary_red.value()],
                      self.values[self.ui.primary_green.value()],
                      self.values[self.ui.primary_blue.value()])
-        Executor.execute_command(cmd_value)
+            Executor.execute_command(cmd_value)
 
     def change_value_pr(self, value):
         """Changes Primary Display Red ratio"""
@@ -316,20 +370,28 @@ class MyApplication(QtWidgets.QMainWindow):
                      self.values[value])
         Executor.execute_command(cmd_value)
 
-    def change_value_sbr(self, value):
+    def change_value_sbr(self):
         """
         Changes Secondary Display Brightness
         """
-        cmd_value = "xrandr\
-        --output %s \
-        --brightness %s\
-        --gamma %s:%s:%s" % \
+
+        if self.ui.directControlBox.isChecked():
+
+            setValue = threading.Thread(target=directlySetMaxBrightness, args=(2,self.ui.secondary_brightness.value()))
+            setValue.start()
+
+        else:
+            value = self.ui.secondary_brightness.value()
+            cmd_value = "xrandr\
+            --output %s \
+            --brightness %s\
+            --gamma %s:%s:%s" % \
                     (self.display2,
                      self.values[value],
                      self.values[self.ui.secondary_red.value()],
                      self.values[self.ui.secondary_green.value()],
                      self.values[self.ui.secondary_blue.value()])
-        Executor.execute_command(cmd_value)
+            Executor.execute_command(cmd_value)
 
     def change_value_sr(self, value):
         """Changes Secondary Display Red ratio"""
