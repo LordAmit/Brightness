@@ -314,7 +314,9 @@ class MyApplication(QtWidgets.QMainWindow):
         """Changes Primary Display Brightness"""
         if self.ui.directControlBox.isChecked():
 
-            setValue = threading.Thread(target=directlySetMaxBrightness, args=(1,self.ui.primary_brightness.value()))
+
+
+            setValue = threading.Thread(target=directlySetMaxBrightness, args=(self.ui.primary_combobox.currentIndex() + 1,self.ui.primary_brightness.value()))
             setValue.start()
 
         else:
@@ -377,7 +379,7 @@ class MyApplication(QtWidgets.QMainWindow):
 
         if self.ui.directControlBox.isChecked():
 
-            setValue = threading.Thread(target=directlySetMaxBrightness, args=(2,self.ui.secondary_brightness.value()))
+            args=(self.ui.primary_combobox.currentIndex() + 1,self.ui.secondary_brightness.value())
             setValue.start()
 
         else:
