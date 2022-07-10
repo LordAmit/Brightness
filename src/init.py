@@ -37,13 +37,12 @@ import threading
 
 
 displayMaxes = []
+displayValues = []
 
 
 def directlySetMaxBrightness(displayNum, percentage):
 
         percentage = round(percentage)/100
-
-        print(displayNum, percentage, displayMaxes[displayNum - 1] * percentage)
 
         subprocess.run(["ddcutil", "setvcp", "10", str(int(displayMaxes[displayNum - 1] * percentage)), "-d", str(displayNum)])
 
@@ -108,15 +107,19 @@ class MyApplication(QtWidgets.QMainWindow):
                 if "sudo modprobe" in str(subprocess.check_output(["ddcutil", "environment"]), 'utf-8'):
 
                     self.ui.ddcutilsNotInstalled
-                    self.ui.ddcutilsNotInstalled.setText("add i2c-dev to /etc/modules-load.d")
-                    #self.ui.ddcutilsNotInstalled.font.setFont(font, 6)
+                    self.ui.ddcutilsNotInstalled.setText("add i2c-dev to etc/modules-load.d")
 
                 else:
                     for i in range(self.no_of_displays):
-                        displayMaxes.append(int(str(subprocess.check_output(["ddcutil", "getvcp", "10", "-d", str(i + 1)]), 'utf-8').split(",")[1].split("=")[1].strip()))
+                        brightnessValue = str(subprocess.check_output(["ddcutil", "getvcp", "10", "-d", str(i + 1)]), 'utf-8')
+
+                        displayMaxes.append(int(brightnessValue.split(",")[1].split("=")[1].strip()))
+
+                        displayValues.append(int(brightnessValue.split(',')[0].split('=')[1].strip()))
 
                     self.ui.directControlBox.setEnabled(True)
                     self.ui.ddcutilsNotInstalled.setVisible(False)
+
         except:
             ddcutil_Installed = False
 
@@ -257,6 +260,7 @@ class MyApplication(QtWidgets.QMainWindow):
         if self.no_of_connected_dev >= 2:
             self.enable_secondary_widgets(True)
             self.connect_secondary_widgets()
+            self.ui.secondary_combo.setCurrentIndex(1)
 
         if path.exists(self.default_config):
             self.ui.actionClearDefault.setVisible(True)
@@ -283,9 +287,13 @@ class MyApplication(QtWidgets.QMainWindow):
         if self.ui.directControlBox.isChecked():
             self.ui.primary_brightness.setMaximum(100)
             self.ui.secondary_brightness.setMaximum(100)
+            self.ui.primary_brightness.setValue(int((displayValues[0]/displayMaxes[0])*100))
+            self.ui.secondary_brightness.setValue(int((displayValues[1]/displayMaxes[1])*100))
         else:
             self.ui.primary_brightness.setMaximum(99)
             self.ui.secondary_brightness.setMaximum(99)
+            self.ui.primary_brightness.setValue(99)
+            self.ui.secondary_brightness.setValue(99)
 
 
     def enable_secondary_widgets(self, boolean):
@@ -314,10 +322,11 @@ class MyApplication(QtWidgets.QMainWindow):
         """Changes Primary Display Brightness"""
         if self.ui.directControlBox.isChecked():
 
-
-
             setValue = threading.Thread(target=directlySetMaxBrightness, args=(self.ui.primary_combobox.currentIndex() + 1,self.ui.primary_brightness.value()))
+
             setValue.start()
+
+            displayValues[self.ui.primary_combobox.currentIndex()] = int(self.ui.primary_brightness.value())
 
         else:
             value = self.ui.primary_brightness.value()
@@ -379,8 +388,11 @@ class MyApplication(QtWidgets.QMainWindow):
 
         if self.ui.directControlBox.isChecked():
 
-            args=(self.ui.primary_combobox.currentIndex() + 1,self.ui.secondary_brightness.value())
+            setValue = threading.Thread(target=directlySetMaxBrightness, args=(self.ui.secondary_combo.currentIndex() + 1,self.ui.secondary_brightness.value()))
+
             setValue.start()
+
+            displayValues[self.ui.secondary_combo.currentIndex()] = int(self.ui.secondary_brightness.value())
 
         else:
             value = self.ui.secondary_brightness.value()
