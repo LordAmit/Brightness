@@ -20,7 +20,7 @@ import sys
 import getpass
 from os import path, remove, makedirs
 from qtpy import QtGui, QtCore, QtWidgets
-from qtpy.QtCore import QSize
+from qtpy.QtCore import QSize, Qt
 from qtpy.QtGui import QIcon
 from util.QtSingleApplication import QtSingleApplication
 from ui.mainwindow import Ui_MainWindow
@@ -247,7 +247,8 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def connect_handlers(self):
         """Connects the handlers of GUI widgets"""
-        self.ui.primary_brightness.sliderReleased.connect(self.change_value_pbr)
+        self.ui.primary_brightness.setTracking(False)
+        self.ui.primary_brightness.valueChanged[int].connect(self.change_value_pbr)
         self.ui.primary_red.valueChanged[int]. \
             connect(self.change_value_pr)
         self.ui.primary_blue.valueChanged[int]. \
@@ -289,11 +290,15 @@ class MyApplication(QtWidgets.QMainWindow):
             self.ui.secondary_brightness.setMaximum(100)
             self.ui.primary_brightness.setValue(int((displayValues[0]/displayMaxes[0])*100))
             self.ui.secondary_brightness.setValue(int((displayValues[1]/displayMaxes[1])*100))
+            self.ui.primary_brightness.setFocusPolicy(Qt.NoFocus)
+            self.ui.secondary_brightness.setFocusPolicy(Qt.NoFocus)
         else:
             self.ui.primary_brightness.setMaximum(99)
             self.ui.secondary_brightness.setMaximum(99)
             self.ui.primary_brightness.setValue(99)
             self.ui.secondary_brightness.setValue(99)
+            self.ui.primary_brightness.setFocusPolicy(Qt.StrongFocus)
+            self.ui.secondary_brightness.setFocusPolicy(Qt.StrongFocus)
 
 
     def enable_secondary_widgets(self, boolean):
@@ -309,7 +314,8 @@ class MyApplication(QtWidgets.QMainWindow):
         """
         connects the secondary widgets with functions
         """
-        self.ui.secondary_brightness.sliderReleased. \
+        self.ui.secondary_brightness.setTracking(False)
+        self.ui.secondary_brightness.valueChanged[int]. \
             connect(self.change_value_sbr)
         self.ui.secondary_red.valueChanged[int]. \
             connect(self.change_value_sr)
@@ -348,7 +354,7 @@ class MyApplication(QtWidgets.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
                     (self.display1,
-                     self.values[self.ui.primary_brightness.value()],
+                     self.values[self.ui.primary_brightness.value() - 1],
                      self.values[value],
                      self.values[self.ui.primary_green.value()],
                      self.values[self.ui.primary_blue.value()])
@@ -361,7 +367,7 @@ class MyApplication(QtWidgets.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
                     (self.display1,
-                     self.values[self.ui.primary_brightness.value()],
+                     self.values[self.ui.primary_brightness.value() - 1],
                      self.values[self.ui.primary_red.value()],
                      self.values[value],
                      self.values[self.ui.primary_blue.value()])
@@ -375,7 +381,7 @@ class MyApplication(QtWidgets.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
                     (self.display1,
-                     self.values[self.ui.primary_brightness.value()],
+                     self.values[self.ui.primary_brightness.value() - 1],
                      self.values[self.ui.primary_red.value()],
                      self.values[self.ui.primary_green.value()],
                      self.values[value])
@@ -401,7 +407,7 @@ class MyApplication(QtWidgets.QMainWindow):
             --brightness %s\
             --gamma %s:%s:%s" % \
                     (self.display2,
-                     self.values[value],
+                     self.values[value - 1],
                      self.values[self.ui.secondary_red.value()],
                      self.values[self.ui.secondary_green.value()],
                      self.values[self.ui.secondary_blue.value()])
@@ -414,7 +420,7 @@ class MyApplication(QtWidgets.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
                     (self.display2,
-                     self.values[self.ui.secondary_brightness.value()],
+                     self.values[self.ui.secondary_brightness.value() - 1],
                      self.values[value],
                      self.values[self.ui.secondary_green.value()],
                      self.values[self.ui.secondary_blue.value()])
@@ -427,7 +433,7 @@ class MyApplication(QtWidgets.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
                     (self.display2,
-                     self.values[self.ui.secondary_brightness.value()],
+                     self.values[self.ui.secondary_brightness.value() - 1],
                      self.values[self.ui.secondary_red.value()],
                      self.values[value],
                      self.values[self.ui.secondary_blue.value()])
@@ -441,7 +447,7 @@ class MyApplication(QtWidgets.QMainWindow):
         --brightness %s\
         --gamma %s:%s:%s" % \
                     (self.display2,
-                     self.values[self.ui.secondary_brightness.value()],
+                     self.values[self.ui.secondary_brightness.value() - 1],
                      self.values[self.ui.secondary_red.value()],
                      self.values[self.ui.secondary_green.value()],
                      self.values[value])
