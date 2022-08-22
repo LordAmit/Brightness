@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Brightness Controller.  If not, see
 # <http://www.gnu.org/licenses/>.
+
 import sys
 import getpass
 from os import path, remove, makedirs
@@ -36,18 +37,13 @@ import subprocess
 import threading
 
 
-displayMaxes = []
-displayValues = []
-
-
-def directlySetMaxBrightness(displayNum, percentage):
-
-        percentage = round(percentage)/100
-
-        subprocess.run(["ddcutil", "setvcp", "10", str(int(displayMaxes[displayNum - 1] * percentage)), "-d", str(displayNum)])
-
-
 class MyApplication(QtWidgets.QMainWindow):
+
+    ddcutil_Installed = False
+
+    displayMaxes = []
+    displayValues = []
+    displayNames = []
 
     def __assign_displays(self):
         """assigns display name """
@@ -62,9 +58,46 @@ class MyApplication(QtWidgets.QMainWindow):
             self.display1 = self.displays[0]
             self.display2 = self.displays[1]
 
+    def directlySetMaxBrightness(self, displayNum, percentage):
+
+        percentage = round(percentage)/100
+
+        subprocess.run(["ddcutil", "setvcp", "10", str(int(self.displayMaxes[displayNum - 1] * percentage)), "-d", str(displayNum)])
+
+
     def __init__(self, parent=None):
         """Initializes"""
         QtWidgets.QMainWindow.__init__(self, parent)
+
+        #check if ddcutil is installed
+        try:
+            if "ddcutil" in str(subprocess.check_output(["ddcutil", "--version"]), 'utf-8'):
+                print("a")
+                if "sudo modprobe" in str(subprocess.check_output(["ddcutil", "environment"]), 'utf-8'):
+                    self.ui.ddcutilsNotInstalled.setText("add i2c-dev to etc/modules-load.d")
+                else:
+                    self.ddcutil_Installed = True
+        except:
+            self.ddcutil_Installed = False
+
+
+        try:
+            getNames = str(subprocess.check_output(["ddcutil", "detect"]), 'utf-8').split("\n")
+            for i in range(len(getNames)):
+                if "Model:" in getNames[i]:
+                    print(getNames[i].split(":")[1].strip())
+
+                    self.displayNames.append(getNames[i].split(":")[1].strip())
+
+            for i in range(len(self.displayNames)):
+                brightnessValue = str(subprocess.check_output(["ddcutil", "getvcp", "10", "-d", str(i + 1)]), 'utf-8')
+
+                self.displayMaxes.append(int(brightnessValue.split(",")[1].split("=")[1].strip()))
+
+                self.displayValues.append(int(brightnessValue.split(',')[0].split('=')[1].strip()))
+
+        except:
+            print("error")
 
         self.tray_menu = None
         self.tray_icon = None
@@ -100,36 +133,21 @@ class MyApplication(QtWidgets.QMainWindow):
         if path.exists(self.default_config):
             self.load_settings(self.default_config)
 
-        #Check if ddcutil is installed
-        try:
-            if "ddcutil" in str(subprocess.check_output(["ddcutil", "--version"]), 'utf-8'):
-                ddcutil_Installed = True
-                if "sudo modprobe" in str(subprocess.check_output(["ddcutil", "environment"]), 'utf-8'):
+        if self.ddcutil_Installed:
+            self.ui.directControlBox.setEnabled(True)
+            self.ui.ddcutilsNotInstalled.setVisible(False)
 
-                    self.ui.ddcutilsNotInstalled
-                    self.ui.ddcutilsNotInstalled.setText("add i2c-dev to etc/modules-load.d")
+        print(self.displayNames)
 
-                else:
-                    for i in range(self.no_of_displays):
-                        brightnessValue = str(subprocess.check_output(["ddcutil", "getvcp", "10", "-d", str(i + 1)]), 'utf-8')
+        print(self.ddcutil_Installed)
 
-                        displayMaxes.append(int(brightnessValue.split(",")[1].split("=")[1].strip()))
-
-                        displayValues.append(int(brightnessValue.split(',')[0].split('=')[1].strip()))
-
-                    self.ui.directControlBox.setEnabled(True)
-                    self.ui.ddcutilsNotInstalled.setVisible(False)
-
-        except:
-            ddcutil_Installed = False
+        self.canCloseToTray = False
 
 
+        if QtWidgets.QSystemTrayIcon.isSystemTrayAvailable():
+            self.canCloseToTray = True
+            self.setup_tray(parent)
 
-        # self.canCloseToTray = False
-
-        # if QtWidgets.QSystemTrayIcon.isSystemTrayAvailable():
-        #     self.canCloseToTray = True
-        #     self.setup_tray(parent)
 
     def setup_default_directory(self):
         """ Create default settings directory if it doesnt exist """
@@ -142,73 +160,70 @@ class MyApplication(QtWidgets.QMainWindow):
             except OSError as e:
                 self._show_error(str(e))
 
-    # def closeEvent(self, event):
-    #     """ Override CloseEvent for system tray """
-    #     if not self.canCloseToTray:
-    #         reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
-    #                                                QtWidgets.QMessageBox.Yes,
-    #                                                # QtWidgets.QMessageBox.Yes |
-    #                                                # QtWidgets.QMessageBox.No,
-    #                                        getMax = str(subprocess.check_output(["ddcutil", "getvcp", "10", "-d", "1"]), 'utf-8').split(",")[1].split("=")[1].strip()
-    #        print(getMax)        QtWidgets.QMessageBox.No)
-    #         if reply == QtWidgets.QMessageBox.Yes:
-    #             event.accept()
-    #             sys.exit(APP.exec_())
-    #         else:
-    #             event.ignore()
-    #         return
-    #     else:
-    #         if self.isVisible() is True:
-    #             self.hide()
-    #             event.ignore()
-    #         else:
-    #             reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",print(ddcutil_Installed)
-    #                                                    # QtWidgets.QMessageBox.Yes |
-    #                                                    # QtWidgets.QMessageBox.No,
-    #                                                    QtWidgets.QMessageBox.Yes,
-    #                                                    QtWidgets.QMessageBox.No)
-    #             if reply == QtWidgets.QMessageBox.Yes:
-    #                 event.accept()
-    #                 sys.exit(APP.exec_())
-                #  else:
-                # # fixes an odd event bug, the app never shows but prevents closing
-                # self.show()
-                # self.hide()
-                # event.ignore()
+    def closeEvent(self, event):
+        """ Override CloseEvent for system tray """
+        if not self.isVisible():
+            reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
+                                                    QtWidgets.QMessageBox.Yes |
+                                                    QtWidgets.QMessageBox.No,
+                                                    QtWidgets.QMessageBox.No)
+            if reply == QtWidgets.QMessageBox.Yes:
+                event.accept()
+                sys.exit(APP.exec_())
+            else:
+                event.ignore()
+            return
+        else:
+            # fixes an odd event bug, the app never shows but prevents closing
+                self.show()
+                self.hide()
+                event.ignore()
 
-    # def setup_tray(self, parent):
-    #     """ Setup system tray """
-    #     self.tray_menu = QtWidgets.QMenu(parent)
-    #
-    #     show_action = QtWidgets.QAction("Show", self,
-    #                                     statusTip="Show",
-    #                                     triggered=self.show)
-    #     quit_action = QtWidgets.QAction("Quit", self,
-    #                                     statusTip="Quit",
-    #                                     triggered=self.close)
-    #     self.tray_menu.addAction(show_action)
-    #     self.tray_menu.addAction(quit_action)
-    #
-    #     icon = QtGui.QIcon()
-    #     # icon_path = "icons/brightness-controller.svg"
+    
+    def trayClose(self):
+        reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?",
+                                                    QtWidgets.QMessageBox.Yes |
+                                                    QtWidgets.QMessageBox.No,
+                                                    QtWidgets.QMessageBox.No)
+        if reply == QtWidgets.QMessageBox.Yes:
+            sys.exit(APP.exec_())
+                
+
+    
+    def setup_tray(self, parent):
+        # Setup system tray 
+        self.tray_menu = QtWidgets.QMenu(parent)
+    
+        show_action = QtWidgets.QAction("Show", self,
+                                        statusTip="Show",
+                                        triggered=self.show)
+        quit_action = QtWidgets.QAction("Quit", self,
+                                        statusTip="Quit",
+                                        triggered=self.trayClose)
+        self.tray_menu.addAction(show_action)
+        self.tray_menu.addAction(quit_action)
+    
+        icon = QtGui.QIcon()
+        icon_path = "icons/brightness-controller.svg"
     #     # icon_path = Filepath_handler.find_data_file(icon_path)
     #     # icon_path =
     #     # "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
     #     icon_path = Filepath_handler.get_icon_path()
     #     # print(icon_path)
-    #     icon.addPixmap(QtGui.QPixmap(icon_path),
-    #                    QtGui.QIcon.Normal, QtGui.QIcon.Off)
-    #
-    #     self.tray_icon = QtWidgets.QSystemTrayIcon(icon, self)
-    #     self.tray_icon.connect(
-    #         QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self._icon_activated)
-    #     self.tray_icon.setContextMenu(self.tray_menu)
-    #     self.tray_icon.show()
+        icon.addPixmap(QtGui.QPixmap(icon_path),QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    
+        self.tray_icon = QtWidgets.QSystemTrayIcon(icon, self)
+        self.tray_icon.activated.connect(self._icon_activated)
+        self.tray_icon.setContextMenu(self.tray_menu)
+        self.tray_icon.show()
 
-    # def _icon_activated(self, reason):
-    #     if reason in (QtWidgets.QSystemTrayIcon.Trigger, QtWidgets.QSystemTrayIcon.DoubleClick):
-    #         self.show()
 
+    def _icon_activated(self, reason):
+        #can't seem to get double click?
+        if reason in (QtWidgets.QSystemTrayIcon.Trigger, QtWidgets.QSystemTrayIcon.DoubleClick):
+            print(reason, QtWidgets.QSystemTrayIcon.DoubleClick)
+            self.show()
+    
 
     def setup_widgets(self):
         """connects the form widgets with functions"""
@@ -234,6 +249,7 @@ class MyApplication(QtWidgets.QMainWindow):
         """
         generates and assigns display sources to combo boxes
         """
+        print("gen sources")
         if self.no_of_connected_dev < 2:
             self.ui.secondary_combo.addItem("Disabled")
             self.ui.secondary_combo.setEnabled(False)
@@ -241,9 +257,15 @@ class MyApplication(QtWidgets.QMainWindow):
             self.ui.primary_combobox.setEnabled(False)
             return
 
-        for display in self.displays:
-            self.ui.secondary_combo.addItem(display)
-            self.ui.primary_combobox.addItem(display)
+        if self.ddcutil_Installed:
+            for i in range(self.no_of_connected_dev):
+                self.ui.secondary_combo.addItem(self.displayNames[i])
+                self.ui.primary_combobox.addItem(self.displayNames[i])
+            pass
+        else:
+            for display in self.displays:
+                self.ui.secondary_combo.addItem(display)
+                self.ui.primary_combobox.addItem(display)
 
     def connect_handlers(self):
         """Connects the handlers of GUI widgets"""
@@ -288,17 +310,21 @@ class MyApplication(QtWidgets.QMainWindow):
         if self.ui.directControlBox.isChecked():
             self.ui.primary_brightness.setMaximum(100)
             self.ui.secondary_brightness.setMaximum(100)
-            self.ui.primary_brightness.setValue(int((displayValues[0]/displayMaxes[0])*100))
-            self.ui.secondary_brightness.setValue(int((displayValues[1]/displayMaxes[1])*100))
+            self.ui.primary_brightness.setValue(int(round((self.displayValues[0]/self.displayMaxes[0])*100)))
+            self.ui.secondary_brightness.setValue(int(round((self.displayValues[1]/self.displayMaxes[1])*100)))
             self.ui.primary_brightness.setFocusPolicy(Qt.NoFocus)
+            self.ui.primary_brightness.setTracking(False)
             self.ui.secondary_brightness.setFocusPolicy(Qt.NoFocus)
+            self.ui.secondary_brightness.setTracking(False)
         else:
             self.ui.primary_brightness.setMaximum(99)
             self.ui.secondary_brightness.setMaximum(99)
             self.ui.primary_brightness.setValue(99)
             self.ui.secondary_brightness.setValue(99)
             self.ui.primary_brightness.setFocusPolicy(Qt.StrongFocus)
+            self.ui.primary_brightness.setTracking(True)
             self.ui.secondary_brightness.setFocusPolicy(Qt.StrongFocus)
+            self.ui.secondary_brightness.setTracking(True)
 
 
     def enable_secondary_widgets(self, boolean):
@@ -328,11 +354,11 @@ class MyApplication(QtWidgets.QMainWindow):
         """Changes Primary Display Brightness"""
         if self.ui.directControlBox.isChecked():
 
-            setValue = threading.Thread(target=directlySetMaxBrightness, args=(self.ui.primary_combobox.currentIndex() + 1,self.ui.primary_brightness.value()))
+            setValue = threading.Thread(target=self.directlySetMaxBrightness, args=(self.ui.primary_combobox.currentIndex() + 1,self.ui.primary_brightness.value()))
 
             setValue.start()
 
-            displayValues[self.ui.primary_combobox.currentIndex()] = int(self.ui.primary_brightness.value())
+            self.displayValues[self.ui.primary_combobox.currentIndex()] = int( round(self.ui.primary_brightness.value()/100 * self.displayMaxes[self.ui.primary_combobox.currentIndex()]))
 
         else:
             value = self.ui.primary_brightness.value()
@@ -394,11 +420,13 @@ class MyApplication(QtWidgets.QMainWindow):
 
         if self.ui.directControlBox.isChecked():
 
-            setValue = threading.Thread(target=directlySetMaxBrightness, args=(self.ui.secondary_combo.currentIndex() + 1,self.ui.secondary_brightness.value()))
+            setValue = threading.Thread(target=self.directlySetMaxBrightness, args=(self.ui.secondary_combo.currentIndex() + 1,self.ui.secondary_brightness.value()))
 
             setValue.start()
+            
 
-            displayValues[self.ui.secondary_combo.currentIndex()] = int(self.ui.secondary_brightness.value())
+            self.displayValues[self.ui.secondary_combo.currentIndex()] = int(round((self.ui.secondary_brightness.value()/100 * self.displayMaxes[self.ui.secondary_combo.currentIndex()])))
+
 
         else:
             value = self.ui.secondary_brightness.value()
@@ -467,11 +495,11 @@ class MyApplication(QtWidgets.QMainWindow):
         """
         assigns combo value to display
         """
-        self.display2 = text
+        self.display2 = self.displays[self.ui.secondary_combo.currentIndex()] #text
 
     def primary_source_combo_activated(self, text):
         """assigns combo value to display"""
-        self.display1 = text
+        self.display1 = self.displays[self.ui.primary_combobox.currentIndex()]#text
 
     def combo_activated(self, text):
         """ Designates values to display and to sliders """
