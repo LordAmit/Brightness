@@ -103,7 +103,7 @@ class MyApplication(QtWidgets.QMainWindow):
 					self.displayValues.append(int(brightnessValue.split(',')[0].split('=')[1].strip()))
 				else:
 					self.displayMaxes.append(1)
-					self.displayValues.append(0)
+					self.displayValues.append(1)
 
 		except:
 			print("error")
@@ -296,6 +296,7 @@ class MyApplication(QtWidgets.QMainWindow):
 			self.enable_secondary_widgets(True)
 			self.connect_secondary_widgets()
 			self.ui.secondary_combo.setCurrentIndex(1)
+			
 
 		if path.exists(self.default_config):
 			self.ui.actionClearDefault.setVisible(True)
@@ -325,11 +326,19 @@ class MyApplication(QtWidgets.QMainWindow):
 			self.ui.primary_brightness.setFocusPolicy(Qt.NoFocus)
 			self.ui.primary_brightness.setTracking(False)
 
+			print("Update: " + self.ui.primary_combobox.currentText())
+
+			if self.ui.primary_combobox.currentText() == "Invalid display":
+				self.ui.primary_brightness.setEnabled(False)
+
 			if self.no_of_displays > 1:
 				self.ui.secondary_brightness.setMaximum(100)
 				self.ui.secondary_brightness.setValue(int(round((self.displayValues[1]/self.displayMaxes[1])*100)))
 				self.ui.secondary_brightness.setFocusPolicy(Qt.NoFocus)
 				self.ui.secondary_brightness.setTracking(False)
+
+				if self.ui.secondary_combo.currentText() == "Invalid display":
+					self.ui.secondary_brightness.setEnabled(False)
 
 		else:
 			self.ui.primary_brightness.setMaximum(99)
@@ -341,6 +350,11 @@ class MyApplication(QtWidgets.QMainWindow):
 			self.ui.secondary_brightness.setFocusPolicy(Qt.StrongFocus)
 			self.ui.secondary_brightness.setTracking(True)
 
+			if self.no_of_displays == 1:
+				self.ui.primary_brightness.setEnabled(True)
+			else:
+				self.ui.primary_brightness.setEnabled(True)
+				self.ui.secondary_brightness.setEnabled(True)
 
 	def enable_secondary_widgets(self, boolean):
 		"""
@@ -439,7 +453,6 @@ class MyApplication(QtWidgets.QMainWindow):
 
 			setValue.start()
 			
-
 			self.displayValues[self.ui.secondary_combo.currentIndex()] = int(round((self.ui.secondary_brightness.value()/100 * self.displayMaxes[self.ui.secondary_combo.currentIndex()])))
 
 
@@ -468,6 +481,7 @@ class MyApplication(QtWidgets.QMainWindow):
 					 self.values[self.ui.secondary_green.value()],
 					 self.values[self.ui.secondary_blue.value()])
 		Executor.execute_command(cmd_value)
+
 
 	def change_value_sg(self, value):
 		"""Changes Secondary Display Green ratio"""
@@ -511,10 +525,32 @@ class MyApplication(QtWidgets.QMainWindow):
 		assigns combo value to display
 		"""
 		self.display2 = self.displays[self.ui.secondary_combo.currentIndex()] #text
+		print(self.ui.secondary_combo.currentText())
+		if self.ui.directControlBox.isChecked():
+			if self.ui.secondary_combo.currentText() == "Invalid display":
+				self.ui.secondary_brightness.setEnabled(False)
+				print("secondary disabled")
+			else:
+				self.ui.secondary_brightness.setEnabled(True)
+				print("secondary enabled")
+		else:
+			self.ui.secondary_brightness.setEnabled(True)
+
 
 	def primary_source_combo_activated(self, text):
 		"""assigns combo value to display"""
 		self.display1 = self.displays[self.ui.primary_combobox.currentIndex()]#text
+
+		print(self.ui.primary_combobox.currentText())
+		if self.ui.directControlBox.isChecked():
+			if self.ui.primary_combobox.currentText() == "Invalid display":
+				self.ui.primary_brightness.setEnabled(False)
+				print("primary disabled")
+			else:
+				self.ui.primary_brightness.setEnabled(True)
+				print("primary enabled")
+		else:
+			self.ui.secondary_brightness.setEnabled(True)
 
 	def combo_activated(self, text):
 		""" Designates values to display and to sliders """
