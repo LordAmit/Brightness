@@ -56,6 +56,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QSlider" name="primary_brightness">
+           <property name="maximum">
+            <number>99</number>
+           </property>
            <property name="value">
             <number>99</number>
            </property>
@@ -272,7 +275,7 @@
       <x>529</x>
       <y>0</y>
       <width>213</width>
-      <height>218</height>
+      <height>258</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -406,6 +409,25 @@
          <string>20000K Clear Blue Sky</string>
         </property>
        </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="ddcutilsNotInstalled">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>install ddcutil for direct control</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="directControlBox">
+       <property name="text">
+        <string>Direct Control (DDC)</string>
+       </property>
       </widget>
      </item>
     </layout>
