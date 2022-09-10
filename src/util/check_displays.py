@@ -20,34 +20,31 @@ import subprocess
 import shlex
 import re
 
+
+def query_xrandr():
+    query = "xrandr --query"
+    xrandr_output = subprocess.Popen(shlex.split(query), stdout=subprocess.PIPE,
+                                     stderr=subprocess.STDOUT)
+    stdout, stderr = xrandr_output.communicate()
+    return str(stdout, "utf-8")
+
+
+def extract_displays(output):
+    pattern = re.compile(r'\b({0})\b'.format("connected"), flags=re.IGNORECASE)
+    lines = output.splitlines()
+    connected = [line for line in lines if pattern.search(line)]
+    connected_displays = list(
+        map(lambda display: display.split()[0], connected))
+    return connected_displays
+
+
 def detect_display_devices():
     """
     Detects available displays.
     returns connected_displays
     This contains the available device names compatible with xrandr
     """
-    connected_displays = []
-
-    # xrandr_output = subprocess.check_output('xrandr -q', shell=True)
-
-    # lines = xrandr_output.split('\n')
-    # for line in lines:
-    #     words = line.split(' ')
-    #     for word in words:
-    #         if word == 'connected':
-    #             connected_displays.append(words[0])
-    # return connected_displays
-    query = "xrandr --query"
-
-    pattern = re.compile(r'\b({0})\b'.format("connected"), flags=re.IGNORECASE)
-
-    xrandr_output = subprocess.Popen(shlex.split(query), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    stdout, stderr = xrandr_output.communicate()
-    output = str(stdout, "utf-8")
-    lines = output.splitlines()
-    connected = [line for line in lines if pattern.search(line)]
-    connected_displays = list(map(lambda display: display.split()[0], connected))
-    return connected_displays
+    return extract_displays(query_xrandr())
 
 
 if __name__ == '__main__':
