@@ -52,8 +52,7 @@ class MyApplication(QtWidgets.QMainWindow):
 
         if self.no_of_displays == 1:
             self.display1 = self.displays[0]
-        elif self.no_of_displays == 2:
-
+        elif self.no_of_displays >= 2:
             self.display1 = self.displays[0]
             self.display2 = self.displays[1]
 
