@@ -17,7 +17,7 @@ def get_icon_path():
     if os.path.exists('/usr/share/brightness-controller/util/debian_install'):
         return "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
     else:
-        return _find_data_file("icons/brightness-controller.svg")
+        return _find_data_file("src/brightness_controller_linux/icons/brightness-controller.svg")
 
 
 if __name__ == "__main__":
