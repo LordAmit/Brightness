@@ -53,8 +53,11 @@ def write_primary_display(p_br_rgb, file_path):
     else:
         config = set_value_in_config(config, p_br_rgb)
 
-    with open(file_path, 'w+') as configfile:
-        config.write(configfile)
+    try:
+        with open(file_path, 'w+') as configfile:
+            config.write(configfile)
+    except PermissionError as e:
+        print("permission error at: " + file_path)
 
 
 def write_both_display(p_br_rgb, s_br_rgb, file_path):
@@ -79,5 +82,8 @@ def write_both_display(p_br_rgb, s_br_rgb, file_path):
     else:
         set_value_in_config(config, s_br_rgb, 'secondary')
 
-    with open(file_path, 'w+') as configfile:
-        config.write(configfile)
+    try:
+        with open(file_path, 'w+') as configfile:
+            config.write(configfile)
+    except PermissionError as e:
+        print("permission error at: " + file_path)
