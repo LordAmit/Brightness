@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "brightness-controller-linux"
-version = "0.1.0"
-description = ""
+version = "2.3.4"
+description = "Using Brightness Controller, you can control brightness of both primary and external displays in Linux. Check it out!"
 authors = ["Amit <lordamit@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
