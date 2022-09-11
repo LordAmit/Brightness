@@ -16,9 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Brightness Controller.  If not, see
 # <http://www.gnu.org/licenses/>.
-
+import importlib.resources
+import logging
+import os.path
 import sys
 import getpass
+from importlib import resources
+from logging import Logger
 from os import path, remove, makedirs
 from qtpy import QtGui, QtCore, QtWidgets
 from qtpy.QtCore import QSize, Qt
@@ -32,6 +36,7 @@ import util.executor as Executor
 import util.check_displays as CDisplay
 import util.write_config as WriteConfig
 import util.read_config as ReadConfig
+import util.resource_provider as rp
 import util.filepath_handler as Filepath_handler
 import subprocess
 import threading
@@ -110,8 +115,8 @@ class MyApplication(QtWidgets.QMainWindow):
                     self.displayMaxes.append(1)
                     self.displayValues.append(1)
 
-        except:
-            print("error")
+        except Exception as e:
+            print("error: " + str(e))
 
         self.tray_menu = None
         self.tray_icon = None
@@ -124,8 +129,10 @@ class MyApplication(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui_icon = QIcon()
-        self.ui_icon.addFile(Filepath_handler.get_icon_path(),
-                             QSize(), QIcon.Normal, QIcon.Off)
+
+        # self.ui_icon.addFile(Filepath_handler.get_icon_path(),
+        #                      QSize(), QIcon.Normal, QIcon.Off)
+        self.ui_icon.addFile(rp.icon_path(), QSize(), QIcon.Normal, QIcon.Off)
         # icon.addFile("../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(self.ui_icon)
         self.temperature = 'Default'
@@ -220,7 +227,8 @@ class MyApplication(QtWidgets.QMainWindow):
         self.tray_menu.addAction(quit_action)
 
         icon = QtGui.QIcon()
-        icon_path = "icons/brightness-controller.svg"
+        # icon_path = "icons/brightness-controller.svg"
+        icon_path = rp.icon_path()
         #     # icon_path = Filepath_handler.find_data_file(icon_path)
         #     # icon_path =
         #     # "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
@@ -714,6 +722,9 @@ class MyApplication(QtWidgets.QMainWindow):
                         file_path
                     )
             except PermissionError:
+                self._show_error(
+                    "Does not have permission to write file at " + file_path)
+            except OSError:
                 self._show_error(
                     "Does not have permission to write file at " + file_path)
 
