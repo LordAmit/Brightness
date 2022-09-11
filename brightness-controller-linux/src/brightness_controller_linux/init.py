@@ -574,53 +574,53 @@ class MyApplication(QtWidgets.QMainWindow):
         if text == 'Default':
             rgb = [255, 255, 255]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
 
         elif text == '1900K Candle':
             rgb = [255, 147, 41]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '2600K 40W Tungsten':
             rgb = [255, 197, 143]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '2850K 100W Tungsten':
             rgb = [255, 214, 170]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '3200K Halogen':
             rgb = [255, 241, 224]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '5200K Carbon Arc':
             rgb = [255, 250, 244]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '5400K High Noon':
             rgb = [255, 255, 251]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '6000K Direct Sun':
             rgb = [255, 255, 255]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '7000K Overcast Sky':
             rgb = [201, 226, 255]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '20000K Clear Blue Sky':
             rgb = [64, 156, 255]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
 
     def change_primary_sliders(self, rgb):
