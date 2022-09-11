@@ -18,7 +18,7 @@
 import configparser
 
 
-def default_config(config, display_type = 'primary'):
+def default_config(config, display_type='primary'):
     config[display_type]['brightness'] = 99
     config[display_type]['red'] = 99
     config[display_type]['green'] = 99
@@ -28,7 +28,7 @@ def default_config(config, display_type = 'primary'):
     return config
 
 
-def set_value_in_config(config, br_rgb, display_type = 'primary'):
+def set_value_in_config(config, br_rgb, display_type='primary'):
     config[display_type]['brightness'] = str(br_rgb[0])
     config[display_type]['red'] = str(br_rgb[1])
     config[display_type]['green'] = str(br_rgb[2])
@@ -57,7 +57,7 @@ def write_primary_display(p_br_rgb, file_path):
         with open(file_path, 'w+') as configfile:
             config.write(configfile)
     except PermissionError as e:
-        print("permission error at: " + file_path)
+        raise e
 
 
 def write_both_display(p_br_rgb, s_br_rgb, file_path):
@@ -86,4 +86,4 @@ def write_both_display(p_br_rgb, s_br_rgb, file_path):
         with open(file_path, 'w+') as configfile:
             config.write(configfile)
     except PermissionError as e:
-        print("permission error at: " + file_path)
+        raise e

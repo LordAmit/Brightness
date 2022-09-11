@@ -389,8 +389,8 @@ class MyApplication(QtWidgets.QMainWindow):
 
             setValue = threading.Thread(target=self.directlySetMaxBrightness,
                                         args=(
-                                        self.ui.primary_combobox.currentIndex() + 1,
-                                        self.ui.primary_brightness.value()))
+                                            self.ui.primary_combobox.currentIndex() + 1,
+                                            self.ui.primary_brightness.value()))
 
             setValue.start()
 
@@ -461,8 +461,8 @@ class MyApplication(QtWidgets.QMainWindow):
 
             setValue = threading.Thread(target=self.directlySetMaxBrightness,
                                         args=(
-                                        self.ui.secondary_combo.currentIndex() + 1,
-                                        self.ui.secondary_brightness.value()))
+                                            self.ui.secondary_combo.currentIndex() + 1,
+                                            self.ui.secondary_brightness.value()))
 
             setValue.start()
 
@@ -695,24 +695,27 @@ class MyApplication(QtWidgets.QMainWindow):
     def save_settings(self, default=False):
         """ save current primary and secondary display settings"""
         file_path = self.default_config if default else \
-        QtWidgets.QFileDialog.getSaveFileName()[
-            0]
+            QtWidgets.QFileDialog.getSaveFileName()[
+                0]
         # just a number. path.exists won't work in case it is a new file.
         if len(file_path) > 5:
             if default:
                 self.ui.actionClearDefault.setVisible(True)
-            if self.no_of_connected_dev == 1:
-                WriteConfig.write_primary_display(
-                    self.return_current_primary_settings(),
-                    file_path
-                )
-            elif self.no_of_connected_dev >= 2:
-                WriteConfig.write_both_display(
-                    self.return_current_primary_settings(),
-                    self.return_current_secondary_settings(),
-                    file_path
-
-                )
+            try:
+                if self.no_of_connected_dev == 1:
+                    WriteConfig.write_primary_display(
+                        self.return_current_primary_settings(),
+                        file_path
+                    )
+                elif self.no_of_connected_dev >= 2:
+                    WriteConfig.write_both_display(
+                        self.return_current_primary_settings(),
+                        self.return_current_secondary_settings(),
+                        file_path
+                    )
+            except PermissionError:
+                self._show_error(
+                    "Does not have permission to write file at " + file_path)
 
     def _show_error(self, message):
         """ Shows an Error Message"""
