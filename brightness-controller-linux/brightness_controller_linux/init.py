@@ -16,28 +16,24 @@
 # You should have received a copy of the GNU General Public License
 # along with Brightness Controller.  If not, see
 # <http://www.gnu.org/licenses/>.
-import importlib.resources
-import logging
-import os.path
+
 import sys
 import getpass
-from importlib import resources
-from logging import Logger
 from os import path, remove, makedirs
 from qtpy import QtGui, QtCore, QtWidgets
 from qtpy.QtCore import QSize, Qt
 from qtpy.QtGui import QIcon
-from util.QtSingleApplication import QtSingleApplication
-from ui.mainwindow import Ui_MainWindow
-from ui.license import Ui_Form as License_Ui_Form
-from ui.about import Ui_Form as About_Ui_Form
-from ui.help import Ui_Form as Help_Ui_Form
-import util.executor as Executor
-import util.check_displays as CDisplay
-import util.write_config as WriteConfig
-import util.read_config as ReadConfig
-import util.resource_provider as rp
-import util.filepath_handler as Filepath_handler
+from brightness_controller_linux.util.QtSingleApplication import QtSingleApplication
+from brightness_controller_linux.ui.mainwindow import Ui_MainWindow
+from brightness_controller_linux.ui.license import Ui_Form as License_Ui_Form
+from brightness_controller_linux.ui.about import Ui_Form as About_Ui_Form
+from brightness_controller_linux.ui.help import Ui_Form as Help_Ui_Form
+from brightness_controller_linux.util import executor as Executor
+from brightness_controller_linux.util import check_displays as CDisplay
+from brightness_controller_linux.util import write_config as WriteConfig
+from brightness_controller_linux.util import read_config as ReadConfig
+from brightness_controller_linux.util import resource_provider as rp
+# import util.filepath_handler as Filepath_handler
 import subprocess
 import threading
 
@@ -898,8 +894,7 @@ class HelpForm(QtWidgets.QWidget):
         """assigns main_win as main_window"""
         self.main_window = main_win
 
-
-if __name__ == "__main__":
+def main():
     UUID = 'PHIR-HWOH-MEIZ-AHTA'
     APP = QtSingleApplication(UUID, sys.argv)
     if APP.isRunning():
@@ -908,3 +903,6 @@ if __name__ == "__main__":
     APP.setActivationWindow(WINDOW)
     WINDOW.show()
     sys.exit(APP.exec_())
+
+if __name__ == "__main__":
+    main()
