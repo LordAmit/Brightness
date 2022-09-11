@@ -1,22 +1,24 @@
-from util import check_displays as cd
-import unittest
+import os
 
-class TestClass(unittest.TestCase):
-    def test_extract_display_one(self):
-        content = None
-        with open("xrandr_query.txt", "r") as file:
-            content = ''.join(file.readlines())
+from brightness_controller_linux.util import check_displays as cd
 
-        output = cd.extract_displays(content)
-        self.assertEqual(output, ["eDP-1"])
 
-    def test_extract_display_two(self):
-        content = None
-        with open("xrandr_query_two.txt", "r") as file:
-            content = ''.join(file.readlines())
+def test_extract_display_one():
+    content = None
+    print("HELLO "+ os.getcwd())
+    with open("tests/xrandr_query.txt",
+              "r") as file:
+        content = ''.join(file.readlines())
 
-        output = cd.extract_displays(content)
-        self.assertEqual(output, ["eDP-1", "HDMI-1"])
+    output = cd.extract_displays(content)
+    assert output == ["eDP-1"]
 
-if __name__ == '__main__':
-    unittest.main()
+
+def test_extract_display_two():
+    content = None
+    with open("tests/xrandr_query_two.txt",
+              "r") as file:
+        content = ''.join(file.readlines())
+
+    output = cd.extract_displays(content)
+    assert output == ["eDP-1", "HDMI-1"]
