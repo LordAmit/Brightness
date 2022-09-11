@@ -6,9 +6,14 @@ authors = ["Amit <lordamit@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+QtPy = "^2.2.0"
 
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
+# [tool.poetry.dev-dependencies]
+# pytest = "^5.2"
+
+[tool.poetry.group.dev.dependencies]
+PyQt5 = "^5.15.7"
+pytest = "^7.1.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
