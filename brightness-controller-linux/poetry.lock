@@ -41,14 +41,15 @@ pyparsing = ">=2.0.2,<3.0.5 || >3.0.5"
 
 [[package]]
 name = "pluggy"
-version = "0.13.1"
+version = "1.0.0"
 description = "plugin and hook calling mechanisms for python"
 category = "dev"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+python-versions = ">=3.6"
 
 [package.extras]
 dev = ["pre-commit", "tox"]
+testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "py"
@@ -73,7 +74,7 @@ diagrams = ["jinja2", "railroad-diagrams"]
 name = "PyQt5"
 version = "5.15.7"
 description = "Python bindings for the Qt cross platform application toolkit"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -85,7 +86,7 @@ PyQt5-sip = ">=12.11,<13"
 name = "PyQt5-Qt5"
 version = "5.15.2"
 description = "The subset of a Qt installation needed by PyQt5."
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -93,7 +94,7 @@ python-versions = "*"
 name = "PyQt5-sip"
 version = "12.11.0"
 description = "The sip module support for PyQt5"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -142,7 +143,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ba0db0fb8d105b7c313cdd5a47012847e58b45192af8efdeda3bb3eeee9186eb"
+content-hash = "6cb55fbae7c75eef595c187aa6c8b5487a0875c8feddee2d8d9697dd55a5748e"
 
 [metadata.files]
 attrs = [
@@ -162,8 +163,8 @@ packaging = [
     {file = "packaging-21.3.tar.gz", hash = "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb"},
 ]
 pluggy = [
-    {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},
-    {file = "pluggy-0.13.1.tar.gz", hash = "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"},
+    {file = "pluggy-1.0.0-py2.py3-none-any.whl", hash = "sha256:74134bbf457f031a36d68416e1509f34bd5ccc019f0bcc952c7b909d06b37bd3"},
+    {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
 py = [
     {file = "py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},
