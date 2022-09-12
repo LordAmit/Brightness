@@ -18,7 +18,7 @@ include = ["brightness_controller_linux/util",
     "brightness_controller_linux/ui"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 QtPy = "^2.2.0"
 PyQt5 = {version = "^5.15", optional = true}
 
