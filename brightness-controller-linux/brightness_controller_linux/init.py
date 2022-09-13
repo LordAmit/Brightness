@@ -125,6 +125,7 @@ class MyApplication(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui_icon = QIcon()
+        self.APP = None
 
         # self.ui_icon.addFile(Filepath_handler.get_icon_path(),
         #                      QSize(), QIcon.Normal, QIcon.Off)
@@ -190,7 +191,7 @@ class MyApplication(QtWidgets.QMainWindow):
                                                    QtWidgets.QMessageBox.No)
             if reply == QtWidgets.QMessageBox.Yes:
                 event.accept()
-                sys.exit(APP.exec_())
+                sys.exit(self.APP.exec_())
             else:
                 event.ignore()
             return
@@ -207,7 +208,7 @@ class MyApplication(QtWidgets.QMainWindow):
                                                QtWidgets.QMessageBox.No,
                                                QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
-            sys.exit(APP.exec_())
+            sys.exit(self.APP.exec_())
 
     def setup_tray(self, parent):
         # Setup system tray
@@ -900,6 +901,7 @@ def main():
     if APP.isRunning():
         sys.exit(0)
     WINDOW = MyApplication()
+    WINDOW.APP = APP
     APP.setActivationWindow(WINDOW)
     WINDOW.show()
     sys.exit(APP.exec_())
