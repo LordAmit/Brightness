@@ -1,8 +1,8 @@
 # Brightness Controller
 
-This is version 2.4 of Brightness Controller, ported to Python 3 and QtPy. It supports an arbitrary number of displays!
+This is version 2.4 of Brightness Controller for Linux! It supports an arbitrary number of displays!
 
-If you like this, do not forget to give us a Star!  [![GitHub stars](https://img.shields.io/github/stars/lordamit/brightness.svg?style=flat-square)](https://github.com/lordamit/brightness/stargazers) People already did!
+If you like this, do not forget to give us a Star! That's the only way we can estimate whether people are using it or not since we do not collect any data, at all. [![GitHub stars](https://img.shields.io/github/stars/lordamit/brightness.svg?style=flat-square)](https://github.com/lordamit/brightness/stargazers) People already did!
 
 ![](img/BrightnessController.gif)
 
@@ -12,7 +12,7 @@ If you like this, do not forget to give us a Star!  [![GitHub stars](https://img
 pip install brightness-controller-linux
 ```
 
-Requires at least `python3.8` or above and PyQt5 or above.
+Requires at least `python3.8` or above, and `PyQt5` or above.
 
 ## Installation via package managers
 
@@ -81,7 +81,7 @@ We are working on the following features and plan to release these through versi
 2. Auto-loading of color and brightness settings based on profile
 3. Checking for update
 
-Brightness Controller changes Red, Green and Blue color ratios  in the screen through color profile at software level using `xrandr`.
+Brightness Controller changes Red, Green and Blue color ratios in the screen through color profile at software level using `xrandr`.
 
 We work on this in our spare time, so can not really promise when the v3 will be released. The current version available is stable and should work as intended.
 
@@ -93,11 +93,11 @@ There are several requirements:
 2. python3-qtpy
 3. xrandr support in your system
 
-`python3-qtpy` is a wrapper around Qt for Python. You will need either PyQt5, PyQt4, PySide2 or PySide installed in your system.
+`python3-qtpy` is a wrapper around Qt for Python. You will need either PyQt5, PyQt4, or PySide2 installed in your system for it to work.
 
 ## Bugs
 
-Please test v2.3. Reporting bugs is appreciated.
+Please test v2.4. Reporting bugs is appreciated.
 
 ## Can I have just brightness sliders - For Controlling Four displays at the same time?
 
@@ -114,4 +114,5 @@ sudo apt-get install brightness-controller-simple
 ```
 
 Further details are available [here](http://lordamit.github.io/Brightness/)
+
 Please note that the simple version may not work properly in newer versions of Linux. Unfortunately we can not provide any more updates to the simple version.
