@@ -23,16 +23,17 @@ from os import path, remove, makedirs
 from qtpy import QtGui, QtCore, QtWidgets
 from qtpy.QtCore import QSize, Qt
 from qtpy.QtGui import QIcon
-from util.QtSingleApplication import QtSingleApplication
-from ui.mainwindow import Ui_MainWindow
-from ui.license import Ui_Form as License_Ui_Form
-from ui.about import Ui_Form as About_Ui_Form
-from ui.help import Ui_Form as Help_Ui_Form
-import util.executor as Executor
-import util.check_displays as CDisplay
-import util.write_config as WriteConfig
-import util.read_config as ReadConfig
-import util.filepath_handler as Filepath_handler
+from brightness_controller_linux.util.QtSingleApplication import QtSingleApplication
+from brightness_controller_linux.ui.mainwindow import Ui_MainWindow
+from brightness_controller_linux.ui.license import Ui_Form as License_Ui_Form
+from brightness_controller_linux.ui.about import Ui_Form as About_Ui_Form
+from brightness_controller_linux.ui.help import Ui_Form as Help_Ui_Form
+from brightness_controller_linux.util import executor as Executor
+from brightness_controller_linux.util import check_displays as CDisplay
+from brightness_controller_linux.util import write_config as WriteConfig
+from brightness_controller_linux.util import read_config as ReadConfig
+from brightness_controller_linux.util import resource_provider as rp
+# import util.filepath_handler as Filepath_handler
 import subprocess
 import threading
 
@@ -110,8 +111,8 @@ class MyApplication(QtWidgets.QMainWindow):
                     self.displayMaxes.append(1)
                     self.displayValues.append(1)
 
-        except:
-            print("error")
+        except Exception as e:
+            print("error: " + str(e))
 
         self.tray_menu = None
         self.tray_icon = None
@@ -124,8 +125,11 @@ class MyApplication(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui_icon = QIcon()
-        self.ui_icon.addFile(Filepath_handler.get_icon_path(),
-                             QSize(), QIcon.Normal, QIcon.Off)
+        self.APP = None
+
+        # self.ui_icon.addFile(Filepath_handler.get_icon_path(),
+        #                      QSize(), QIcon.Normal, QIcon.Off)
+        self.ui_icon.addFile(rp.icon_path(), QSize(), QIcon.Normal, QIcon.Off)
         # icon.addFile("../../../../../../usr/share/icons/hicolor/scalable/apps/brightness-controller.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(self.ui_icon)
         self.temperature = 'Default'
@@ -187,7 +191,7 @@ class MyApplication(QtWidgets.QMainWindow):
                                                    QtWidgets.QMessageBox.No)
             if reply == QtWidgets.QMessageBox.Yes:
                 event.accept()
-                sys.exit(APP.exec_())
+                sys.exit(self.APP.exec_())
             else:
                 event.ignore()
             return
@@ -204,7 +208,7 @@ class MyApplication(QtWidgets.QMainWindow):
                                                QtWidgets.QMessageBox.No,
                                                QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
-            sys.exit(APP.exec_())
+            sys.exit(self.APP.exec_())
 
     def setup_tray(self, parent):
         # Setup system tray
@@ -220,7 +224,8 @@ class MyApplication(QtWidgets.QMainWindow):
         self.tray_menu.addAction(quit_action)
 
         icon = QtGui.QIcon()
-        icon_path = "icons/brightness-controller.svg"
+        # icon_path = "icons/brightness-controller.svg"
+        icon_path = rp.icon_path()
         #     # icon_path = Filepath_handler.find_data_file(icon_path)
         #     # icon_path =
         #     # "/usr/share/icons/hicolor/scalable/apps/brightness-controller.svg"
@@ -389,8 +394,8 @@ class MyApplication(QtWidgets.QMainWindow):
 
             setValue = threading.Thread(target=self.directlySetMaxBrightness,
                                         args=(
-                                        self.ui.primary_combobox.currentIndex() + 1,
-                                        self.ui.primary_brightness.value()))
+                                            self.ui.primary_combobox.currentIndex() + 1,
+                                            self.ui.primary_brightness.value()))
 
             setValue.start()
 
@@ -461,8 +466,8 @@ class MyApplication(QtWidgets.QMainWindow):
 
             setValue = threading.Thread(target=self.directlySetMaxBrightness,
                                         args=(
-                                        self.ui.secondary_combo.currentIndex() + 1,
-                                        self.ui.secondary_brightness.value()))
+                                            self.ui.secondary_combo.currentIndex() + 1,
+                                            self.ui.secondary_brightness.value()))
 
             setValue.start()
 
@@ -574,53 +579,53 @@ class MyApplication(QtWidgets.QMainWindow):
         if text == 'Default':
             rgb = [255, 255, 255]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
 
         elif text == '1900K Candle':
             rgb = [255, 147, 41]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '2600K 40W Tungsten':
             rgb = [255, 197, 143]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '2850K 100W Tungsten':
             rgb = [255, 214, 170]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '3200K Halogen':
             rgb = [255, 241, 224]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '5200K Carbon Arc':
             rgb = [255, 250, 244]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '5400K High Noon':
             rgb = [255, 255, 251]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '6000K Direct Sun':
             rgb = [255, 255, 255]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '7000K Overcast Sky':
             rgb = [201, 226, 255]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
         elif text == '20000K Clear Blue Sky':
             rgb = [64, 156, 255]
             self.change_primary_sliders(rgb)
-            if self.no_of_connected_dev == 2:
+            if self.no_of_connected_dev >= 2:
                 self.change_secondary_sliders(rgb)
 
     def change_primary_sliders(self, rgb):
@@ -695,24 +700,30 @@ class MyApplication(QtWidgets.QMainWindow):
     def save_settings(self, default=False):
         """ save current primary and secondary display settings"""
         file_path = self.default_config if default else \
-        QtWidgets.QFileDialog.getSaveFileName()[
-            0]
+            QtWidgets.QFileDialog.getSaveFileName()[
+                0]
         # just a number. path.exists won't work in case it is a new file.
         if len(file_path) > 5:
             if default:
                 self.ui.actionClearDefault.setVisible(True)
-            if self.no_of_connected_dev == 1:
-                WriteConfig.write_primary_display(
-                    self.return_current_primary_settings(),
-                    file_path
-                )
-            elif self.no_of_connected_dev >= 2:
-                WriteConfig.write_both_display(
-                    self.return_current_primary_settings(),
-                    self.return_current_secondary_settings(),
-                    file_path
-
-                )
+            try:
+                if self.no_of_connected_dev == 1:
+                    WriteConfig.write_primary_display(
+                        self.return_current_primary_settings(),
+                        file_path
+                    )
+                elif self.no_of_connected_dev >= 2:
+                    WriteConfig.write_both_display(
+                        self.return_current_primary_settings(),
+                        self.return_current_secondary_settings(),
+                        file_path
+                    )
+            except PermissionError:
+                self._show_error(
+                    "Does not have permission to write file at " + file_path)
+            except OSError:
+                self._show_error(
+                    "Does not have permission to write file at " + file_path)
 
     def _show_error(self, message):
         """ Shows an Error Message"""
@@ -884,13 +895,16 @@ class HelpForm(QtWidgets.QWidget):
         """assigns main_win as main_window"""
         self.main_window = main_win
 
-
-if __name__ == "__main__":
+def main():
     UUID = 'PHIR-HWOH-MEIZ-AHTA'
     APP = QtSingleApplication(UUID, sys.argv)
     if APP.isRunning():
         sys.exit(0)
     WINDOW = MyApplication()
+    WINDOW.APP = APP
     APP.setActivationWindow(WINDOW)
     WINDOW.show()
     sys.exit(APP.exec_())
+
+if __name__ == "__main__":
+    main()

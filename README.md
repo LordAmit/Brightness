@@ -1,10 +1,18 @@
 # Brightness Controller
 
-This is version 2.3.4 of Brightness Controller, ported to Python 3 and QtPy. It supports an arbitrary number of displays!
+This is version 2.4 of Brightness Controller, ported to Python 3 and QtPy. It supports an arbitrary number of displays!
 
 If you like this, do not forget to give us a Star!  [![GitHub stars](https://img.shields.io/github/stars/lordamit/brightness.svg?style=flat-square)](https://github.com/lordamit/brightness/stargazers) People already did!
 
 ![](img/BrightnessController.gif)
+
+## Installation via Pip
+
+```sh
+pip install brightness-controller-linux
+```
+
+Requires at least `python3.8` or above and PyQt5 or above.
 
 ## Installation via package managers
 
@@ -73,7 +81,7 @@ We are working on the following features and plan to release these through versi
 2. Auto-loading of color and brightness settings based on profile
 3. Checking for update
 
-Brightness Controller changes Red, Green and Blue color ratios  in the screen through color profile at software level using `xrandr`. 
+Brightness Controller changes Red, Green and Blue color ratios  in the screen through color profile at software level using `xrandr`.
 
 We work on this in our spare time, so can not really promise when the v3 will be released. The current version available is stable and should work as intended.
 
