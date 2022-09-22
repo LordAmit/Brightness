@@ -1,6 +1,6 @@
 # Brightness Controller
 
-This is version 2.4 of Brightness Controller for Linux! It supports an arbitrary number of displays!
+This is version 2.4 of Brightness Controller for Linux. It supports an arbitrary number of displays and also allows changing the color temperature across displays!
 
 If you like this, do not forget to give us a Star! That's the only way we can estimate whether people are using it or not since we do not collect any data, at all. [![GitHub stars](https://img.shields.io/github/stars/lordamit/brightness.svg?style=flat-square)](https://github.com/lordamit/brightness/stargazers) People already did!
 
@@ -12,7 +12,7 @@ If you like this, do not forget to give us a Star! That's the only way we can es
 pip install brightness-controller-linux
 ```
 
-Requires at least `python3.8` or above, and `PyQt5` or above.
+Requires at least `python3.8` or above, and `PyQt5` or above. This installation method is fairly new, so will really appreciate if you let us know if everything is working as intended or not at your end. :)
 
 ## Installation via package managers
 
@@ -31,41 +31,9 @@ Thanks to @yochananmarqos, a package for Arch and derivatives is available in th
 yay -S brightness-controller-git
 ```
 
-## Manual Installation
+## Dev Docs
 
-First, install `QtPy`.
-
-```bash
-sudo apt install python3-qtpy
-```
-
-Sometimes it is not enough to install and integrate `QtPy`, so you might also try installing `QtPy` using `pip3`.
-
-```bash
-pip3 install qtpy
-```
-
-`QtPy` is a wrapper that works by using `PyQt` or `PySide`.
-
-**It needs either of these to work**, and some operating systems come with either of these preinstalled, and some do not.
-
-If your system does not have either of these, you may need to install either `PySide` or `PyQt`. For example, you may have to execute the following:
-
-```bash
-pip install PySide2
-```
-
-Please check [Requirements](#requirements) section for missing dependencies. We prefer using `--user` while installing `QtPy`  (and its other dependencies) using `pip`. Installing it in virtual environment may not work as intended.
-
-Next, download the latest zip file from [here](https://github.com/lordamit/Brightness/archive/master.zip).
-
-Extract it and open a terminal. Change directory to the `Brightness` folder. Next type this command:
-
-```bash
-python3 src/init.py
-```
-
-Achean also created a detailed tutorial on how to install it in Debian based on his experience. You can find it [here](https://github.com/LordAmit/Brightness/issues/98#event-1218811468).
+Want to look at source code? Want to get started? Or want to download the source code and run it from there after building things yourself? Details are available right [here!](brightness-controller-linux/README.md)
 
 ## Features
 
@@ -75,25 +43,16 @@ The following features are implemented:
 1. Saving color profile
 1. Loading color profile
 
-We are working on the following features and plan to release these through version 3:
+Brightness Controller changes Red, Green and Blue color ratios  in the screen through color profile at software level using `xrandr`.
+
+
+We might implement the following features in the future:
 
 1. Rewriting GUI to integrate both Brightness Controller simple and normal
 2. Auto-loading of color and brightness settings based on profile
 3. Checking for update
 
-Brightness Controller changes Red, Green and Blue color ratios in the screen through color profile at software level using `xrandr`.
-
 We work on this in our spare time, so can not really promise when the v3 will be released. The current version available is stable and should work as intended.
-
-## Requirements
-
-There are several requirements:
-
-1. python3
-2. python3-qtpy
-3. xrandr support in your system
-
-`python3-qtpy` is a wrapper around Qt for Python. You will need either PyQt5, PyQt4, or PySide2 installed in your system for it to work.
 
 ## Bugs
 
