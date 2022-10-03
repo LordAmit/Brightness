@@ -58,6 +58,11 @@ We work on this in our spare time, so can not really promise when the v3 will be
 
 Please test v2.4. Reporting bugs is appreciated.
 
+### Wayland Bugs
+
+Wayland does not provide a way to control the brightness of primary/external displays, so Brightness Controller won't work. It has been reported several times, and we are aware about it. Really, it is out of our hands.
+
+
 ## Can I have just brightness sliders - For Controlling Four displays at the same time?
 
 We got you covered! Try version 1.2.8/simpler version of Brightness Controller.
