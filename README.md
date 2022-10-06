@@ -65,7 +65,7 @@ Wayland does not provide a way to control the brightness of primary/external dis
 
 ## Can I have just brightness sliders - For Controlling Four displays at the same time?
 
-We got you covered! Try version 1.2.8/simpler version of Brightness Controller.
+We got you covered! Try version 1.2.8/simpler version of Brightness Controller. It was written in Python2, which has been deprecated, and some of its dependencies (e.g. WxGTK for Python2) are not available in recent versions of Ubuntu. It is only available for Ubuntu 20.04 and previous versions.
 
 ![](img/brightness-controller-1.png)
 
