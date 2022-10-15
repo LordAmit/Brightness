@@ -21,7 +21,7 @@ poetry build
 ### Running Brightness Controller
 
 ```
-poetry run python src/brightness_controller_linux/init.py
+poetry run python brightness_controller_linux/init.py
 ```
 
 ### Testing
