@@ -45,7 +45,6 @@ The following features are implemented:
 
 Brightness Controller changes Red, Green and Blue color ratios  in the screen through color profile at software level using `xrandr`.
 
-
 We might implement the following features in the future:
 
 1. Rewriting GUI to integrate both Brightness Controller simple and normal
@@ -62,10 +61,19 @@ Please test v2.4. Reporting bugs is appreciated.
 
 Wayland does not provide a way to control the brightness of primary/external displays, so Brightness Controller won't work. It has been reported several times, and we are aware about it. Really, it is out of our hands.
 
+### Brightness and/or Color set by Brightness Controller keeps getting reset
+
+This is something [we keep getting notified about](https://github.com/LordAmit/Brightness/issues?q=reset), but do not consider as a bug. Here is why.
+
+Brightness is a shared property that can be accessed by any number of applications e.g., Brightness Controller, Adaptive Brightness of Ubuntu/Linux, Night Shift, f.lux, and looks like Skype too). 
+
+If any of the other, aggressive apps choose not to play nice and override existing brightness settings, Brightness Controller really can not gatekeep them away. Sure, we can think of a way that will result in Brightness Controller forcibly setting Brightness every 5 seconds or so, but that'd just result in a tug of war later on with an arbitrary number of applications trying to control Brightness (with unpredictable side effects). 
+
+The simpler solution is just to disable the brightness resetting function of the aggressive app instead. 
 
 ## Can I have just brightness sliders - For Controlling Four displays at the same time?
 
-We got you covered! Try version 1.2.8/simpler version of Brightness Controller. It was written in Python2, which has been deprecated, and some of its dependencies (e.g. WxGTK for Python2) are not available in recent versions of Ubuntu. It is only available for Ubuntu 20.04 and previous versions.
+Try version 1.2.8/simpler version of Brightness Controller. It was written in Python2, which has been deprecated, and some of its dependencies (e.g. WxGTK for Python2) are not available in recent versions of Ubuntu. It is only available for Ubuntu 20.04 and previous versions.
 
 ![](img/brightness-controller-1.png)
 
