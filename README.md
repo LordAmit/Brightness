@@ -7,6 +7,7 @@ If you like this, do not forget to give us a Star! That's the only way we can es
 ![](img/BrightnessController.gif)
 
 ## Installation via Pip
+First install `ddcutil` and `xrandr` using your distro package manager.
 
 ```sh
 pip install brightness-controller-linux
