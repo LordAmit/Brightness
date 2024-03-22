@@ -20,7 +20,6 @@ import subprocess
 import shlex
 import re
 
-
 def query_xrandr():
     query = "xrandr --query"
     xrandr_output = subprocess.Popen(shlex.split(query), stdout=subprocess.PIPE,
@@ -38,6 +37,77 @@ def extract_displays(output):
     return connected_displays
 
 
+def extract_monitor_name(edid_hex):
+    try:
+        display_name = edid_hex[edid_hex.find('fc00') + 4:]
+        display_name = display_name[:display_name.find('0a')]
+
+        return bytes.fromhex(display_name).decode()
+
+    except Exception as e:
+        print("Error:", e)
+        return None
+
+
+def extract_display_names():
+    xrandr_output = subprocess.check_output(["xrandr", "--verbose"]).decode().splitlines()
+
+    displayVerboseInfo = []
+    display = []
+
+    #get verbose data for displays
+    for line in xrandr_output:
+
+        if line.startswith("Screen"): continue
+
+        if not line.startswith("\t") and "connected" in line:
+            if len(display) > 0: 
+                if "disconnected" not in display[0]: displayVerboseInfo.append(display)
+            display = []
+            display.append(line)
+        else:
+            display.append(line)
+    
+    displays = []
+    for monitor in displayVerboseInfo:
+        monitorInfo = []
+        gettingEDID = False
+        currentEdid = ""
+        for line in monitor:
+
+            if "connected" in line:
+                monitorInfo.append(line[:line.find(' ')])
+
+            if gettingEDID and line.startswith("\t\t"):
+                currentEdid += line[2:]
+            else:
+                gettingEDID = False
+
+            if line == "\tEDID: ":
+                gettingEDID = True
+
+        monitorInfo.append(extract_monitor_name(currentEdid))
+        displays.append(monitorInfo)
+
+    return displays
+            
+            
+def match_ddc_order(monitorNames):
+
+    detectedMonitors = subprocess.check_output(["ddcutil", "detect"]).decode().splitlines()
+
+    reorderedMonitors = []
+
+    for line in detectedMonitors:
+        if "Model" in line:
+            for monitor in monitorNames:
+                if monitor[1] in line:
+                    reorderedMonitors.append(monitor)
+                    break
+
+    return reorderedMonitors
+
+
 def detect_display_devices():
     """
     Detects available displays.
@@ -48,4 +118,5 @@ def detect_display_devices():
 
 
 if __name__ == '__main__':
-    print(detect_display_devices())
+    #print(detect_display_devices())
+    print(len(extract_display_names()))
