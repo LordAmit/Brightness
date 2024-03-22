@@ -154,9 +154,6 @@ class MyApplication(QtWidgets.QMainWindow):
                 self.ui.ddcutilsNotInstalled.setText(
                     "Laptop Displays Not Supported")
 
-        #print(self.displayNames)
-
-        print(self.ddcutil_Installed)
 
         self.canCloseToTray = False
 
