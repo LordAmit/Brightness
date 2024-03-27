@@ -80,13 +80,21 @@ def extract_display_names():
 
             if gettingEDID and line.startswith("\t\t"):
                 currentEdid += line[2:]
+            elif gettingEDID:
+                break
             else:
                 gettingEDID = False
 
             if line == "\tEDID: ":
                 gettingEDID = True
 
-        monitorInfo.append(extract_monitor_name(currentEdid))
+        
+        monitorName = extract_monitor_name(currentEdid)
+        if monitorName:
+            monitorInfo.append(extract_monitor_name(currentEdid))
+        else:
+            monitorInfo.append(monitorInfo[0])
+
         displays.append(monitorInfo)
 
     return displays
