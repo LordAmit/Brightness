@@ -106,3 +106,5 @@ ENV/
 
 # idea
 .idea*
+brightness-controller-linux/test.txt
+brightness-controller-linux/testDdc.txt

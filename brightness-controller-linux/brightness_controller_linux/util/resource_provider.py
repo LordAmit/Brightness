@@ -1,7 +1,7 @@
 from importlib import resources
 from pathlib import Path
 
-import brightness_controller_linux.icons as icons
+import icons as icons
 
 
 def icon_path(module_name=icons):
